@@ -2,11 +2,9 @@ package co.edu.uniquindio.unicine.entidades;
 
 import lombok.*;
 
-import javax.persistence.Entity;
-import javax.persistence.EnumType;
-import javax.persistence.Enumerated;
-import javax.persistence.Id;
+import javax.persistence.*;
 import java.io.Serializable;
+import java.util.List;
 import java.util.Objects;
 
 @Entity
@@ -27,6 +25,12 @@ public class Libro implements Serializable {
 
     @Enumerated(EnumType.STRING)
     private Genero genero;
+
+    @ManyToMany(mappedBy = "libros")
+    private List<Prestamo> prestamos;
+
+    @ManyToMany
+    private List<Autor> autores;
 
 
 }

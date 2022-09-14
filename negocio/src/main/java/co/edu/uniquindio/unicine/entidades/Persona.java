@@ -2,35 +2,24 @@ package co.edu.uniquindio.unicine.entidades;
 
 import lombok.*;
 
-import javax.persistence.Column;
-import javax.persistence.ElementCollection;
-import javax.persistence.Entity;
-import javax.persistence.Id;
+import javax.persistence.*;
 import java.io.Serializable;
-import java.util.List;
-import java.util.Objects;
 
-@Entity
+
+@Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
+@MappedSuperclass
 @Getter
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
-@ToString(onlyExplicitlyIncluded = true)
 public class Persona implements Serializable {
-
     @Id
-    @EqualsAndHashCode.Exclude
-    @ToString.Include
-    @Column(length = 10)
-    private String cedula;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @EqualsAndHashCode.Include
+    private Integer codigo;
 
-    @Column(length = 40, nullable = false)
+    @Column(nullable = false)
     private String nombre;
-    private String email;
-    @ElementCollection
-    private List<String> telefonos;
-
-
 
 }
