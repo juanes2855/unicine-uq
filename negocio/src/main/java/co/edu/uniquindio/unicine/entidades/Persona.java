@@ -11,15 +11,25 @@ import java.io.Serializable;
 @Getter
 @Setter
 @NoArgsConstructor
-@AllArgsConstructor
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
 public class Persona implements Serializable {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @EqualsAndHashCode.Include
-    private Integer codigo;
+    private Integer Cedula;
 
     @Column(nullable = false)
     private String nombre;
 
+    @Column(length = 150, nullable = false, unique = true)
+    private String correo;
+
+    @Column(length = 150, nullable = false)
+    private String password;
+
+    public Persona(Integer cedula, String nombre, String correo, String password) {
+        Cedula = cedula;
+        this.nombre = nombre;
+        this.correo = correo;
+        this.password = password;
+    }
 }

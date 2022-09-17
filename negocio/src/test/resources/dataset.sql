@@ -1,0 +1,1 @@
+insert into Cliente values (1, 2);
