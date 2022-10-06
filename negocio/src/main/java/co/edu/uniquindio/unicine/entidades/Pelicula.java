@@ -36,7 +36,7 @@ public class Pelicula implements Serializable {
     @Column(nullable = false)
     private String reparto;
 
-    //Resolver si es lista de sapos
+    //Resolver si es lista
     @Column(nullable = false)
     private Genero genero;
 
