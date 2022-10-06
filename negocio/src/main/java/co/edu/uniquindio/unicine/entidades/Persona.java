@@ -3,6 +3,7 @@ package co.edu.uniquindio.unicine.entidades;
 import lombok.*;
 
 import javax.persistence.*;
+import javax.validation.constraints.Email;
 import java.io.Serializable;
 
 
@@ -21,7 +22,9 @@ public class Persona implements Serializable {
     private String nombre;
 
     @Column(length = 150, nullable = false, unique = true)
+    @Email
     private String correo;
+
 
     @Column(length = 150, nullable = false)
     private String password;

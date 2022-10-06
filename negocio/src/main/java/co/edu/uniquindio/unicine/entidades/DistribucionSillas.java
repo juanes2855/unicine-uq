@@ -1,9 +1,11 @@
 package co.edu.uniquindio.unicine.entidades;
 
+
 import lombok.*;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.List;
 
 @Entity
 @Getter
@@ -11,22 +13,22 @@ import java.io.Serializable;
 @NoArgsConstructor
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
 @ToString
-public class Funcion implements Serializable {
+public class DistribucionSillas implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @EqualsAndHashCode.Include
     private Integer codigo;
 
-    private Float precio;
+    private Integer totalSillas;
 
-    @ManyToOne
-    private Horario horario;
+    //Revisar si son listas
+    private Integer filas;
 
-    @ManyToOne
-    private Sala sala;
+    private Integer Columnas;
 
-    @ManyToOne
-    private Pelicula pelicula;
+    private String esquema;
 
+    @OneToMany(mappedBy = "distribucionSillas")
+    private List<Sala> salas;
 }

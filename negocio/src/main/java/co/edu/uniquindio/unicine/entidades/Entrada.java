@@ -1,5 +1,6 @@
 package co.edu.uniquindio.unicine.entidades;
 
+
 import lombok.*;
 
 import javax.persistence.*;
@@ -11,7 +12,7 @@ import java.io.Serializable;
 @NoArgsConstructor
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
 @ToString
-public class Funcion implements Serializable {
+public class Entrada implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -20,13 +21,10 @@ public class Funcion implements Serializable {
 
     private Float precio;
 
-    @ManyToOne
-    private Horario horario;
+    private Integer fila;
+
+    private Integer columna;
 
     @ManyToOne
-    private Sala sala;
-
-    @ManyToOne
-    private Pelicula pelicula;
-
+    private Compra compra;
 }

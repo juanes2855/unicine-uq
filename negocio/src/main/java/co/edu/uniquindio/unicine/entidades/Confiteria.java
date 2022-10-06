@@ -2,11 +2,9 @@ package co.edu.uniquindio.unicine.entidades;
 
 import lombok.*;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 import java.io.Serializable;
+import java.util.List;
 
 @Entity
 @Getter
@@ -19,4 +17,13 @@ public class Confiteria  implements Serializable{
         @GeneratedValue(strategy = GenerationType.IDENTITY)
         @EqualsAndHashCode.Include
         private Integer codigo;
+
+        private String nombre;
+
+        private Float precio;
+
+        private String urlImagen;
+
+        @OneToMany(mappedBy = "confiteria")
+        private List<CompraConfiteria> compraConfiterias;
 }

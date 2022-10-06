@@ -27,9 +27,9 @@ public class Cliente extends Persona implements Serializable {
     @OneToMany(mappedBy = "cliente")
     private List<Compra> compras;
 
-    @ToString.Exclude
-    @OneToMany(mappedBy = "cliente")
-    private List<Cupon> cupones;
+
+    @OneToMany(mappedBy = "cedula_cliente")
+    private List<CuponCliente> codigo;
 
     @Builder
 

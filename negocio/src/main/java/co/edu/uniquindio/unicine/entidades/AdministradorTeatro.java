@@ -1,12 +1,10 @@
 package co.edu.uniquindio.unicine.entidades;
 
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
-import lombok.ToString;
+import lombok.*;
 
-import javax.persistence.Entity;
+import javax.persistence.*;
 import java.io.Serializable;
+import java.util.List;
 
 @Entity
 @Getter
@@ -14,5 +12,8 @@ import java.io.Serializable;
 @NoArgsConstructor
 @ToString
 public class AdministradorTeatro extends Persona implements Serializable {
+
+    @OneToMany(mappedBy = "administradorTeatro")
+    private List<Teatro> teatros;
 
 }

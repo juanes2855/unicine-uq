@@ -1,5 +1,6 @@
 package co.edu.uniquindio.unicine.entidades;
 
+
 import lombok.*;
 
 import javax.persistence.*;
@@ -9,24 +10,25 @@ import java.io.Serializable;
 @Getter
 @Setter
 @NoArgsConstructor
-@EqualsAndHashCode(onlyExplicitlyIncluded = true)
 @ToString
-public class Funcion implements Serializable {
+public class CuponCliente implements Serializable {
+
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @EqualsAndHashCode.Include
     private Integer codigo;
 
-    private Float precio;
+
+    private boolean estado;
 
     @ManyToOne
-    private Horario horario;
+    private Cliente cedula_cliente;
 
     @ManyToOne
-    private Sala sala;
+    private Cupon codigo_cupon;
 
-    @ManyToOne
-    private Pelicula pelicula;
 
+    @OneToOne(mappedBy = "cuponCliente")
+    private Compra compra;
 }

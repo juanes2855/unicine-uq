@@ -1,12 +1,12 @@
 package co.edu.uniquindio.unicine.entidades;
 
 import lombok.*;
+import org.springframework.format.annotation.DateTimeFormat;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 import java.io.Serializable;
+import java.time.LocalDateTime;
+import java.util.List;
 
 @Entity
 @Getter
@@ -20,5 +20,20 @@ public class Horario implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @EqualsAndHashCode.Include
     private Integer codigo;
+
+    @Column(nullable = false)
+    private Integer dia;
+
+    @Column(nullable = false)
+    private String hora;
+
+    @Column(nullable = false)
+    private LocalDateTime fechaInicio;
+
+    @Column(nullable = false)
+    private LocalDateTime fechaFin;
+
+    @OneToMany(mappedBy = "horario")
+    private List<Funcion> funciones;
 
 }

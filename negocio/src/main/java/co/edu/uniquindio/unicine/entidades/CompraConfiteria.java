@@ -1,5 +1,4 @@
 package co.edu.uniquindio.unicine.entidades;
-
 import lombok.*;
 
 import javax.persistence.*;
@@ -9,24 +8,23 @@ import java.io.Serializable;
 @Getter
 @Setter
 @NoArgsConstructor
-@EqualsAndHashCode(onlyExplicitlyIncluded = true)
 @ToString
-public class Funcion implements Serializable {
+public class CompraConfiteria implements Serializable{
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @EqualsAndHashCode.Include
     private Integer codigo;
 
-    private Float precio;
+
+    private Float precios;
+
+
+    private Integer unidades;
 
     @ManyToOne
-    private Horario horario;
+    private Compra compra;
 
     @ManyToOne
-    private Sala sala;
-
-    @ManyToOne
-    private Pelicula pelicula;
-
+    private Confiteria confiteria;
 }
