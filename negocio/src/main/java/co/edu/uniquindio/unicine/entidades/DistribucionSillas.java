@@ -29,6 +29,7 @@ public class DistribucionSillas implements Serializable {
     // CONVERTIRLO EN MATRIZ
     private String esquema;
 
+    @ToString.Exclude
     @OneToMany(mappedBy = "distribucionSillas")
     private List<Sala> salas;
 

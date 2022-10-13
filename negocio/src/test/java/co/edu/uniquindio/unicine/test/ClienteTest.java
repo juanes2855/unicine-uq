@@ -24,34 +24,58 @@ public class ClienteTest {
     private ClienteRepo clienteRepo;
 
     @Test
-    public void registrar(){
+    public void registrar() {
 
-        String[] tels = new String[] {"231","323"};
-        Cliente cliente = new Cliente(12345, "pepito","pepito@email.com","1234", "url", Arrays.asList(tels));
+        String[] tels = new String[]{"231", "323"};
+        Cliente cliente = new Cliente(12345, "pepito", "pepito@email.com", "1234", "url", Arrays.asList(tels));
         Cliente guardado = clienteRepo.save(cliente);
         Assertions.assertEquals(guardado.getNombre(), "pepito");
 
     }
 
     @Test
-    public void eliminar(){
-        String[] tels = new String[] {"231","323"};
-        Cliente cliente = new Cliente(12345, "pepito","pepito@email.com","1234", "url", Arrays.asList(tels));
+    public void eliminar() {
+        String[] tels = new String[]{"231", "323"};
+        Cliente cliente = new Cliente(12345, "pepito", "pepito@email.com", "1234", "url", Arrays.asList(tels));
         Cliente guardado = clienteRepo.save(cliente);
         clienteRepo.delete(guardado);
-      //  Optional<Cliente> buscado = clienteRepo.findAllById(12345);
-      //  Assertions.assertNull(buscado.orElse(null));
+        Optional<Cliente> buscado = clienteRepo.findById(12345);
+        Assertions.assertNull(buscado.orElse(null));
     }
-    public void actualizar(){
 
-    }
-    public void obtener(){
+    @Test
+    public void actualizar() {
 
+        String[] tels = new String[]{"231", "323"};
+        Cliente cliente = new Cliente(12345, "pepito", "pepito@email.com", "1234", "url", Arrays.asList(tels));
+        Cliente guardado = clienteRepo.save(cliente);
+        guardado.setCorreo("pepito2@email.com");
+        Cliente nuevo = clienteRepo.save(guardado);
+        Assertions.assertEquals("pepito2@email.com", nuevo.getCorreo());
     }
-    @Sql("classpath:dataset.sql")
-    public void listar(){
+
+    @Test
+    public void obtener() {
+        String[] tels = new String[]{"231", "323"};
+        Cliente cliente = new Cliente(12345, "pepito", "pepito@email.com", "1234", "url", Arrays.asList(tels));
+        clienteRepo.save(cliente);
+
+        Optional<Cliente> buscado = clienteRepo.findById(12345);
+
+        System.out.println(buscado.orElse(null));
+    }
+
+    @Test
+    public void listar() {
+        String[] tels = new String[]{"231", "323"};
+        Cliente cliente = new Cliente(12345, "pepito", "pepito@email.com", "1234", "url", Arrays.asList(tels));
+
+        System.out.println(cliente+"++++++++++++++++++++++++");
+
+        clienteRepo.save(cliente);
+
         List<Cliente> listaClientes = clienteRepo.findAll();
-        System.out.println(listaClientes);
+        System.out.println("-----------------------------------"+listaClientes);
 
     }
 

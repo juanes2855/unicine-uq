@@ -23,6 +23,7 @@ public class Sala implements Serializable {
     @Column(nullable = false)
     private String nombre;
 
+    @ToString.Exclude
     @OneToMany(mappedBy = "sala")
     private List<Funcion> funciones;
 

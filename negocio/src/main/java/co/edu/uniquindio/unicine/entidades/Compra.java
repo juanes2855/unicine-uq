@@ -42,9 +42,11 @@ public class Compra implements Serializable {
     @JoinColumn(nullable = false)
     private Funcion funcion;
 
+    @ToString.Exclude
     @OneToMany(mappedBy = "compra")
     private List<Entrada> entradas;
 
+    @ToString.Exclude
     @OneToMany(mappedBy = "compra")
     private List<CompraConfiteria> compraConfiterias;
 

@@ -11,7 +11,7 @@ import java.util.List;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-@ToString(onlyExplicitlyIncluded = true)
+@ToString(callSuper = true)
 public class Cliente extends Persona implements Serializable {
 
     @Column(nullable = false)
@@ -27,7 +27,7 @@ public class Cliente extends Persona implements Serializable {
     @OneToMany(mappedBy = "cliente")
     private List<Compra> compras;
 
-
+    @ToString.Exclude
     @OneToMany(mappedBy = "cedula_cliente")
     private List<CuponCliente> codigo;
 
