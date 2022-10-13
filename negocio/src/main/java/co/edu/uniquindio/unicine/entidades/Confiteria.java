@@ -11,19 +11,26 @@ import java.util.List;
 @Setter
 @NoArgsConstructor
 @ToString
-public class Confiteria  implements Serializable{
+public class Confiteria implements Serializable {
 
-        @Id
-        @GeneratedValue(strategy = GenerationType.IDENTITY)
-        @EqualsAndHashCode.Include
-        private Integer codigo;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @EqualsAndHashCode.Include
+    private Integer codigo;
 
-        private String nombre;
+    private String nombre;
 
-        private Float precio;
+    private Float precio;
 
-        private String urlImagen;
+    private String urlImagen;
 
-        @OneToMany(mappedBy = "confiteria")
-        private List<CompraConfiteria> compraConfiterias;
+    @OneToMany(mappedBy = "confiteria")
+    private List<CompraConfiteria> compraConfiterias;
+
+    @Builder
+    public Confiteria(String nombre, Float precio, String urlImagen) {
+        this.nombre = nombre;
+        this.precio = precio;
+        this.urlImagen = urlImagen;
+    }
 }

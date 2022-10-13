@@ -26,9 +26,15 @@ public class DistribucionSillas implements Serializable {
     private Integer filas;
 
     private Integer Columnas;
-
+    // CONVERTIRLO EN MATRIZ
     private String esquema;
 
     @OneToMany(mappedBy = "distribucionSillas")
     private List<Sala> salas;
+
+    @Builder
+    public DistribucionSillas(Integer filas, Integer columnas) {
+        this.filas = filas;
+        Columnas = columnas;
+    }
 }

@@ -16,9 +16,7 @@ public class CompraConfiteria implements Serializable{
     @EqualsAndHashCode.Include
     private Integer codigo;
 
-
-    private Float precios;
-
+    private Float precio;
 
     private Integer unidades;
 
@@ -27,4 +25,13 @@ public class CompraConfiteria implements Serializable{
 
     @ManyToOne
     private Confiteria confiteria;
+
+    @Builder
+
+    public CompraConfiteria(Float precio, Integer unidades, Compra compra, Confiteria confiteria) {
+        this.precio = precio;
+        this.unidades = unidades;
+        this.compra = compra;
+        this.confiteria = confiteria;
+    }
 }

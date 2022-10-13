@@ -21,6 +21,8 @@ public class Cupon implements Serializable {
     @EqualsAndHashCode.Include
     private Integer codigo;
 
+    private String descripcion;
+
     @Positive
     @Column(nullable = false)
     private Float descuento;
@@ -28,18 +30,13 @@ public class Cupon implements Serializable {
     @Column(nullable = false)
     private LocalDateTime fechaVencimiento;
 
-    @Column(nullable = false)
-    private Boolean estado;
-
-
     @OneToMany(mappedBy = "codigo_cupon")
     private List<CuponCliente> cuponClientes;
 
     @Builder
-
-    public Cupon(Float descuento, LocalDateTime fechaVencimiento, Boolean estado) {
+    public Cupon(String descripcion, Float descuento, LocalDateTime fechaVencimiento) {
+        this.descripcion = descripcion;
         this.descuento = descuento;
         this.fechaVencimiento = fechaVencimiento;
-        this.estado = estado;
     }
 }

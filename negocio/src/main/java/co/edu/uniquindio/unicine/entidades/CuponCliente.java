@@ -19,8 +19,8 @@ public class CuponCliente implements Serializable {
     @EqualsAndHashCode.Include
     private Integer codigo;
 
-
-    private boolean estado;
+    @Column(nullable = false)
+    private Boolean estado;
 
     @ManyToOne
     private Cliente cedula_cliente;
@@ -31,4 +31,11 @@ public class CuponCliente implements Serializable {
 
     @OneToOne(mappedBy = "cuponCliente")
     private Compra compra;
+
+    @Builder
+    public CuponCliente(Boolean estado, Cliente cedula_cliente, Cupon codigo_cupon) {
+        this.estado = estado;
+        this.cedula_cliente = cedula_cliente;
+        this.codigo_cupon = codigo_cupon;
+    }
 }

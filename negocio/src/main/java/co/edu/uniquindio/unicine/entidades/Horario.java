@@ -36,4 +36,11 @@ public class Horario implements Serializable {
     @OneToMany(mappedBy = "horario")
     private List<Funcion> funciones;
 
+    @Builder
+    public Horario(Integer dia, String hora, LocalDateTime fechaInicio, LocalDateTime fechaFin) {
+        this.dia = dia;
+        this.hora = hora;
+        this.fechaInicio = fechaInicio;
+        this.fechaFin = fechaFin;
+    }
 }

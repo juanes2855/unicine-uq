@@ -29,4 +29,11 @@ public class Funcion implements Serializable {
     @ManyToOne
     private Pelicula pelicula;
 
+    @Builder
+    public Funcion(Float precio, Horario horario, Sala sala, Pelicula pelicula) {
+        this.precio = precio;
+        this.horario = horario;
+        this.sala = sala;
+        this.pelicula = pelicula;
+    }
 }

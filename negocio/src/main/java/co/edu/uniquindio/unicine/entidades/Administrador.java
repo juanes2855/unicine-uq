@@ -13,5 +13,10 @@ import java.util.List;
 @ToString
 public class Administrador extends Persona implements Serializable {
 
+    @Builder
+
+    public Administrador(String correo, String password) {
+        super(correo, password);
+    }
 
 }

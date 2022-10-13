@@ -1,8 +1,7 @@
 package co.edu.uniquindio.unicine.entidades;
 
 public enum MedioPago {
-        TERROR,
-        CIENCIA_FICCION,
-        HISTORIA
-
+    TARJETA_CREDITO,
+    TARJETA_DEBITO,
+    TARJETA_UNICINE
 }

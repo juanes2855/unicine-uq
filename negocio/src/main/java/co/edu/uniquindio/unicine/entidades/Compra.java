@@ -20,7 +20,6 @@ public class Compra implements Serializable {
     @EqualsAndHashCode.Include
     private Integer codigo;
 
-
     @Enumerated(EnumType.STRING)
     @Column(nullable = false, length = 10)
     private MedioPago medioPago;
@@ -31,7 +30,6 @@ public class Compra implements Serializable {
     @Positive
     @Column(nullable = false)
     private Float valorTotal;
-
 
     @OneToOne
     private CuponCliente cuponCliente;

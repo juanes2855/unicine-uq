@@ -16,4 +16,10 @@ public class AdministradorTeatro extends Persona implements Serializable {
     @OneToMany(mappedBy = "administradorTeatro")
     private List<Teatro> teatros;
 
+
+    @Builder
+
+    public AdministradorTeatro(String correo, String password) {
+        super(correo, password);
+    }
 }

@@ -20,6 +20,8 @@ public class Sala implements Serializable {
     @EqualsAndHashCode.Include
     private Integer codigo;
 
+    @Column(nullable = false)
+    private String nombre;
 
     @OneToMany(mappedBy = "sala")
     private List<Funcion> funciones;
@@ -30,6 +32,10 @@ public class Sala implements Serializable {
     @ManyToOne
     private DistribucionSillas distribucionSillas;
 
-
-
+    @Builder
+    public Sala(String nombre, Teatro teatro, DistribucionSillas distribucionSillas) {
+        this.nombre = nombre;
+        this.teatro = teatro;
+        this.distribucionSillas = distribucionSillas;
+    }
 }

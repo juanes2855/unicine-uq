@@ -27,4 +27,11 @@ public class Entrada implements Serializable {
 
     @ManyToOne
     private Compra compra;
+
+    @Builder
+    public Entrada(Float precio, Integer fila, Integer columna) {
+        this.precio = precio;
+        this.fila = fila;
+        this.columna = columna;
+    }
 }

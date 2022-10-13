@@ -4,6 +4,7 @@ import lombok.*;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.List;
 
 @Entity
 @Getter
@@ -36,8 +37,16 @@ public class Pelicula implements Serializable {
     @Column(nullable = false)
     private String reparto;
 
-    //Resolver si es lista
-    @Column(nullable = false)
-    private Genero genero;
+    @ElementCollection
+    private List<Genero> generos;
 
+    @Builder
+    public Pelicula(String nombre, String sinopsis, String urlTrailer, String urlImagen, String reparto, List<Genero> generos) {
+        this.nombre = nombre;
+        this.sinopsis = sinopsis;
+        this.urlTrailer = urlTrailer;
+        this.urlImagen = urlImagen;
+        this.reparto = reparto;
+        this.generos = generos;
+    }
 }
