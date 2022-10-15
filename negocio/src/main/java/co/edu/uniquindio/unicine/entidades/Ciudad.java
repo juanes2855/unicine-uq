@@ -28,6 +28,7 @@ public class Ciudad implements Serializable {
 
     @Builder
     public Ciudad (String nombre){
+
         this.nombre= nombre;
     }
 

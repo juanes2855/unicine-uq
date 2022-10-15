@@ -10,7 +10,7 @@ import java.util.List;
 @Getter
 @Setter
 @NoArgsConstructor
-@ToString
+@ToString(callSuper = true)
 public class AdministradorTeatro extends Persona implements Serializable {
 
     @ToString.Exclude
@@ -19,7 +19,6 @@ public class AdministradorTeatro extends Persona implements Serializable {
 
 
     @Builder
-
     public AdministradorTeatro(Integer cedula, String nombre, String correo, String password) {
         super(cedula,nombre,correo, password);
     }
