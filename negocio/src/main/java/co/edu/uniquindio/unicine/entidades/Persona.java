@@ -37,8 +37,4 @@ public class Persona implements Serializable {
         this.password = password;
     }
 
-    public Persona(String correo, String password) {
-        this.correo = correo;
-        this.password = password;
-    }
 }

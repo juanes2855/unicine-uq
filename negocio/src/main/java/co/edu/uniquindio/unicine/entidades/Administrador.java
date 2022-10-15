@@ -14,9 +14,8 @@ import java.util.List;
 public class Administrador extends Persona implements Serializable {
 
     @Builder
-
-    public Administrador(String correo, String password) {
-        super(correo, password);
+    public Administrador(Integer cedula, String nombre, String correo, String password) {
+        super(cedula,nombre,correo, password);
     }
 
 }

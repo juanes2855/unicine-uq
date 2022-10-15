@@ -1,14 +1,11 @@
 package co.edu.uniquindio.unicine.test;
 
-import co.edu.uniquindio.unicine.entidades.Cliente;
-import co.edu.uniquindio.unicine.entidades.Cupon;
-import co.edu.uniquindio.unicine.repo.ClienteRepo;
-import org.aspectj.apache.bcel.util.ClassPath;
+import co.edu.uniquindio.unicine.entidades.Administrador;
+import co.edu.uniquindio.unicine.repo.AdministradorRepo;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase;
-import org.springframework.boot.test.autoconfigure.orm.jpa.AutoConfigureDataJpa;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.test.context.jdbc.Sql;
 
@@ -18,18 +15,18 @@ import java.util.Optional;
 
 @DataJpaTest
 @AutoConfigureTestDatabase(replace = AutoConfigureTestDatabase.Replace.NONE)
-public class ClienteTest {
+public class AdministradorTest {
 
     @Autowired
-    private ClienteRepo clienteRepo;
+    private AdministradorRepo administradorRepo;
 
     @Test
     @Sql("classpath:dataset.sql")
     public void registrar() {
 
         String[] tels = new String[]{"231", "323"};
-        Cliente cliente = new Cliente(12345, "pepito", "pepito@email.com", "1234", "url", Arrays.asList(tels));
-        Cliente guardado = clienteRepo.save(cliente);
+        Administrador administrador = new Administrador(12345, "pepito", "pepito@email.com", "1234");
+        Administrador guardado = administradorRepo.save(administrador);
         Assertions.assertEquals(guardado.getNombre(), "pepito");
 
     }
@@ -38,18 +35,18 @@ public class ClienteTest {
     @Sql("classpath:dataset.sql")
     public void eliminar() {
 
-        Cliente buscado = clienteRepo.findById(1094899).orElse(null);
-        clienteRepo.delete(buscado);
-        Assertions.assertNull(clienteRepo.findById(1094899).orElse(null));
+        Administrador buscado = administradorRepo.findById(1094899).orElse(null);
+        administradorRepo.delete(buscado);
+        Assertions.assertNull(administradorRepo.findById(1094899).orElse(null));
     }
 
     @Test
     @Sql("classpath:dataset.sql")
     public void actualizar() {
 
-        Cliente guardado = clienteRepo.findById(1094899).orElse(null);
+        Administrador guardado = administradorRepo.findById(1094899).orElse(null);
         guardado.setCorreo("Jfmd@uqvirtual.com");
-        Cliente nuevo = clienteRepo.save(guardado);
+        Administrador nuevo = administradorRepo.save(guardado);
         Assertions.assertEquals("Jfmd@uqvirtual.com", nuevo.getCorreo());
     }
 
@@ -57,7 +54,7 @@ public class ClienteTest {
     @Sql("classpath:dataset.sql")
     public void obtener() {
 
-        Optional<Cliente> buscado = clienteRepo.findById(1094899);
+        Optional<Administrador> buscado = administradorRepo.findById(1094899);
         Assertions.assertNotNull(buscado.orElse(null));
     }
 
@@ -65,9 +62,11 @@ public class ClienteTest {
     @Sql("classpath:dataset.sql")
     public void listar() {
 
-        List<Cliente> listaClientes = clienteRepo.findAll();
+        List<Administrador> listaAdministradores = administradorRepo.findAll();
 
-        listaClientes.forEach(System.out::println);
+        listaAdministradores.forEach(System.out::println);
     }
 
 }
+
+
