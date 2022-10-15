@@ -21,19 +21,19 @@ insert into ciudad values (5,"Filandia");
 
 ----------- Compra -----------------------
 
-insert into compra values (1, 2018-09-08 17:51:04.78,TARJETA_UNICINE, 35000.00,1094899,1,1);
+/*insert into compra values (1, 2018-09-08 17:51:04.78,TARJETA_UNICINE, 35000.00,1094899,1,1);
 insert into compra values (2);
 insert into compra values (3);
 insert into compra values (4);
 insert into compra values (5);
-
+*/
 ----------- Cupon -----------------------
 
-insert into cupon values  (1,"Descuento 10%",0.10,2023-12-24 23:59:59.59);
-insert into cupon values  (2,"Descuento 20%",0.20,2022-12-31 22:25:04.78);
-insert into cupon values  (3,"Descuento 15%",0.15,2024-06-30 18:27:04.78);
-insert into cupon values  (4,"Descuento 15%",0.15,2024-06-30 15:30:04.78);
-insert into cupon values  (5,"Descuento 20%",0.20,2023-12-24 23:59:59.59);
+insert into cupon values  (1,"Descuento 10%",0.10,23/12/24);
+insert into cupon values  (2,"Descuento 20%",0.20,22/12/31);
+insert into cupon values  (3,"Descuento 15%",0.15,24/06/30);
+insert into cupon values  (4,"Descuento 15%",0.15,24/06/30);
+insert into cupon values  (5,"Descuento 20%",0.20,23/12/24);
 
 
 --------- Cliente -------------
