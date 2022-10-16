@@ -38,6 +38,7 @@ public class Pelicula implements Serializable {
     private String reparto;
 
     @ElementCollection
+    @Enumerated(EnumType.STRING)
     private List<Genero> generos;
 
     @Builder
