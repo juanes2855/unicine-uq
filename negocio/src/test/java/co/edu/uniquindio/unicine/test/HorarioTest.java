@@ -24,9 +24,9 @@ public class HorarioTest {
     @Sql("classpath:dataset.sql")
     public void registrar() {
 
-        Horario horario = new Horario(17, "15:30", LocalDateTime.of(2022, 10, 16, 15, 30, 0, 0), LocalDateTime.of(2022, 10, 31, 15, 30, 0, 0));
+        Horario horario = new Horario("VSD", "15:30", LocalDateTime.of(2022, 10, 16, 15, 30, 0, 0), LocalDateTime.of(2022, 10, 31, 15, 30, 0, 0));
         Horario guardado = horarioRepo.save(horario);
-        Assertions.assertEquals(guardado.getDia(), 17);
+        Assertions.assertEquals(guardado.getDia(), "VSD");
 
     }
 
@@ -44,9 +44,9 @@ public class HorarioTest {
     public void actualizar() {
 
         Horario guardado = horarioRepo.findById(1).orElse(null);
-        guardado.setDia(18);
+        guardado.setDia("VSD");
         Horario nuevo = horarioRepo.save(guardado);
-        Assertions.assertEquals(nuevo.getDia(), 18);
+        Assertions.assertEquals(nuevo.getDia(), "VSD");
     }
 
     @Test

@@ -22,7 +22,7 @@ public class Horario implements Serializable {
     private Integer codigo;
 
     @Column(nullable = false)
-    private Integer dia;
+    private String dia;
 
     @Column(nullable = false)
     private String hora;
@@ -38,7 +38,7 @@ public class Horario implements Serializable {
     private List<Funcion> funciones;
 
     @Builder
-    public Horario(Integer dia, String hora, LocalDateTime fechaInicio, LocalDateTime fechaFin) {
+    public Horario(String dia, String hora, LocalDateTime fechaInicio, LocalDateTime fechaFin) {
         this.dia = dia;
         this.hora = hora;
         this.fechaInicio = fechaInicio;

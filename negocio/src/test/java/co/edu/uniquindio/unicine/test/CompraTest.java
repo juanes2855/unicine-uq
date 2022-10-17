@@ -30,7 +30,7 @@ public class CompraTest {
         String[] tels = new String[]{"231", "323"};
         Cliente cliente = new Cliente(12345, "pepito", "pepito@email.com", "1234", "url", Arrays.asList(tels));
 
-        Horario horario = new Horario(17, "15:30", LocalDateTime.of(2022, 10, 16, 15, 30, 0, 0), LocalDateTime.of(2022, 10, 31, 15, 30, 0, 0));
+        Horario horario = new Horario("LMXJVSD", "15:30", LocalDateTime.of(2022, 10, 16, 15, 30, 0, 0), LocalDateTime.of(2022, 10, 31, 15, 30, 0, 0));
         Genero[] generos = new Genero[]{Genero.TERROR};
         Pelicula pelicula = new Pelicula("El sismo", "En cartelera","De la naturaleza nadie se salva", "http:@sismo",
                 "http:@Elsismo.jpj", "Andres Lopez, Esteban Henao", Arrays.asList(generos));

@@ -37,11 +37,11 @@ insert into cliente_telefonos values (1078954, "31143122");
 
 ----------- Cupon -----------------------
 
-insert into cupon values  (1,"Descuento 10%",0.10,current_timestamp());
-insert into cupon values  (2,"Descuento 20%",0.20,current_timestamp());
-insert into cupon values  (3,"Descuento 15%",0.15,current_timestamp());
-insert into cupon values  (4,"Descuento 15%",0.15,current_timestamp());
-insert into cupon values  (5,"Descuento 20%",0.20,current_timestamp());
+insert into cupon values  (1,"Descuento 10%",0.10,"2022-10-10");
+insert into cupon values  (2,"Descuento 20%",0.20,"2022-11-09");
+insert into cupon values  (3,"Descuento 15%",0.15,"2022-11-12");
+insert into cupon values  (4,"Descuento 15%",0.15,"2022-11-25");
+insert into cupon values  (5,"Descuento 20%",0.20,"2022-11-25");
 
 
 ------------ CuponCliente ---------------
@@ -76,11 +76,11 @@ insert into pelicula_generos values (2,"CIENCIA_FICCION");
 insert into pelicula_generos values (5,"NOVELA");
 
 ------------ Horario --------------------
-insert into horario values (1,17,current_timestamp(),current_timestamp(),"15:00");
-insert into horario values (2,18,current_timestamp(),current_timestamp(),"15:00");
-insert into horario values (3,19,current_timestamp(),current_timestamp(),"15:00");
-insert into horario values (4,20,current_timestamp(),current_timestamp(),"15:00");
-insert into horario values (5,21,current_timestamp(),current_timestamp(),"15:00");
+insert into horario values (1,"LMXJVSD","2022-10-06","2022-09-16","15:00");
+insert into horario values (2,"XJVSD","2022-10-06","2022-09-16","15:00");
+insert into horario values (3,"VSD","2022-10-06","2022-09-16","15:00");
+insert into horario values (4,"LMX","2022-09-30","2022-09-10","15:00");
+insert into horario values (5,"MXJ","2022-10-10","2022-09-18","15:00");
 
 ------------ Teatro ---------------------
 
@@ -92,19 +92,19 @@ insert into teatro values (5,"la casa de alguien", "213214",1091899,5);
 
 ------------ DistribucionSillas ---------
 
-insert into distribucion_sillas values (1,4,"esquema",4,16);
-insert into distribucion_sillas values (2,4,"esquema",4,16);
-insert into distribucion_sillas values (3,4,"esquema",4,16);
-insert into distribucion_sillas values (4,4,"esquema",4,16);
-insert into distribucion_sillas values (5,4,"esquema",4,16);
+insert into distribucion_sillas values (1,4,"ruta",4,16);
+insert into distribucion_sillas values (2,4,"ruta",4,16);
+insert into distribucion_sillas values (3,4,"ruta",4,16);
+insert into distribucion_sillas values (4,4,"ruta",4,16);
+insert into distribucion_sillas values (5,4,"ruta",4,16);
 
 ------------ Sala -----------------------
 
-insert into sala values (1,"xd",1,1);
-insert into sala values (2,"xd2",2,2);
-insert into sala values (3,"xd3",3,3);
-insert into sala values (4,"xd4",4,4);
-insert into sala values (5,"xd5",5,5);
+insert into sala values (1,"XD",1,1);
+insert into sala values (2,"XD2",2,2);
+insert into sala values (3,"XD3",3,3);
+insert into sala values (4,"XD4",4,4);
+insert into sala values (5,"XD5",5,5);
 
 ------------ Funcion --------------------
 
@@ -114,16 +114,13 @@ insert into funcion values (3,24000, 3,3,3);
 insert into funcion values (4,24000, 4,4,4);
 insert into funcion values (5,24000, 5,5,5);
 
-
 ----------- Compra ---------------------
 
-insert into compra values (1, current_timestamp(),"TARJETA_UNICINE", 35000,1091003,1,1);
-insert into compra values (2, current_timestamp(),"TARJETA_CREDITO", 35000,1078954,2,2);
-insert into compra values (3, current_timestamp(),"TARJETA_UNICINE", 35000,1094899,3,3);
-insert into compra values (4, current_timestamp(),"TARJETA_CREDITO", 35000,1091003,4,4);
-insert into compra values (5, current_timestamp(),"TARJETA_DEBITO", 35000,1094899,5,5);
-
-
+insert into compra values (1, "2022-09-18","TARJETA_UNICINE", 35000,1091003,1,1);
+insert into compra values (2, "2022-09-10","TARJETA_CREDITO", 35000,1078954,2,2);
+insert into compra values (3, "2022-10-18","TARJETA_UNICINE", 35000,1094899,3,3);
+insert into compra values (4, "2022-10-28","TARJETA_CREDITO", 35000,1091003,4,4);
+insert into compra values (5, "2022-11-08","TARJETA_DEBITO", 35000,1094899,5,5);
 
 ----------- CompraComfiteria ------------
 
@@ -132,7 +129,6 @@ insert into compra_confiteria values  (2,50000,2,2,2);
 insert into compra_confiteria values  (3,30000,2,3,3);
 insert into compra_confiteria values  (4,26000,2,4,4);
 insert into compra_confiteria values  (5,25000,2,5,5);
-
 
 ------------ Entrada --------------------
 
