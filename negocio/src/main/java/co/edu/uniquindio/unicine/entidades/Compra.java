@@ -21,7 +21,7 @@ public class Compra implements Serializable {
     private Integer codigo;
 
     @Enumerated(EnumType.STRING)
-    @Column(nullable = false, length = 10)
+    @Column(nullable = false, length = 50)
     private MedioPago medioPago;
 
     @Column(nullable = false)
@@ -31,15 +31,16 @@ public class Compra implements Serializable {
     @Column(nullable = false)
     private Float valorTotal;
 
+
     @OneToOne
+    @ToString.Exclude
     private CuponCliente cuponCliente;
 
     @ManyToOne
-    @JoinColumn(nullable = false)
+    @ToString.Exclude
     private Cliente cliente;
 
     @ManyToOne
-    @JoinColumn(nullable = false)
     private Funcion funcion;
 
     @ToString.Exclude

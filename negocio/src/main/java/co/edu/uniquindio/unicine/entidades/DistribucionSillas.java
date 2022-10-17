@@ -25,7 +25,7 @@ public class DistribucionSillas implements Serializable {
     //Revisar si son listas
     private Integer filas;
 
-    private Integer Columnas;
+    private Integer columnas;
     // CONVERTIRLO EN MATRIZ
     private String esquema;
 
@@ -36,6 +36,6 @@ public class DistribucionSillas implements Serializable {
     @Builder
     public DistribucionSillas(Integer filas, Integer columnas) {
         this.filas = filas;
-        Columnas = columnas;
+        this.columnas = columnas;
     }
 }

@@ -38,16 +38,18 @@ public class Pelicula implements Serializable {
     private String reparto;
 
     @ElementCollection
+    //@ToString.Exclude
     @Enumerated(EnumType.STRING)
     private List<Genero> generos;
 
     @Builder
-    public Pelicula(String nombre, String sinopsis, String urlTrailer, String urlImagen, String reparto, List<Genero> generos) {
+    public Pelicula(String nombre,String estado, String sinopsis, String urlTrailer, String urlImagen, String reparto, List<Genero> generos) {
         this.nombre = nombre;
         this.sinopsis = sinopsis;
         this.urlTrailer = urlTrailer;
         this.urlImagen = urlImagen;
         this.reparto = reparto;
         this.generos = generos;
+        this.estado = estado;
     }
 }

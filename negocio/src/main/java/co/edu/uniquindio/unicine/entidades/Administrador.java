@@ -11,6 +11,7 @@ import java.util.List;
 @Setter
 @NoArgsConstructor
 @ToString(callSuper = true)
+
 public class Administrador extends Persona implements Serializable {
 
     @Builder

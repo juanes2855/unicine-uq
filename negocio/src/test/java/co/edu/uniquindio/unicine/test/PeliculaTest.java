@@ -1,5 +1,6 @@
 package co.edu.uniquindio.unicine.test;
 
+import co.edu.uniquindio.unicine.entidades.Cliente;
 import co.edu.uniquindio.unicine.entidades.Genero;
 import co.edu.uniquindio.unicine.entidades.Pelicula;
 import co.edu.uniquindio.unicine.repo.PeliculaRepo;
@@ -13,6 +14,7 @@ import org.springframework.test.context.jdbc.Sql;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Optional;
 
 @DataJpaTest
 @AutoConfigureTestDatabase(replace = AutoConfigureTestDatabase.Replace.NONE)
@@ -25,9 +27,8 @@ public class PeliculaTest {
     @Sql("classpath:dataset.sql")
     public void registrar() {
         Genero[] generos = new Genero[]{Genero.TERROR};
-        Pelicula pelicula = new Pelicula("El sismo", "De la naturaleza nadie se salva", "http:@sismo",
+        Pelicula pelicula = new Pelicula("El sismo", "En cartelera","De la naturaleza nadie se salva", "http:@sismo",
                 "http:@Elsismo.jpj", "Andres Lopez, Esteban Henao", Arrays.asList(generos));
-        System.out.println(pelicula.getGeneros()+"++++++++++++++++++++++++++");
         Pelicula guardado = peliculaRepo.save(pelicula);
         Assertions.assertEquals(guardado.getNombre(), "El sismo");
     }
@@ -37,8 +38,26 @@ public class PeliculaTest {
     public void actualizar() {
 
         Pelicula guardado = peliculaRepo.findById(1).orElse(null);
-        guardado.setNombre("Salento");
+        guardado.setNombre("Monster inc");
         Pelicula nuevo = peliculaRepo.save(guardado);
-        Assertions.assertEquals("Salento", nuevo.getNombre());
+        Assertions.assertEquals(nuevo.getNombre(), "Monster inc");
     }
+
+    @Test
+    @Sql("classpath:dataset.sql")
+    public void obtener() {
+
+        Optional<Pelicula> buscado = peliculaRepo.findById(1);
+        Assertions.assertNotNull(buscado.orElse(null));
+    }
+
+    @Test
+    @Sql("classpath:dataset.sql")
+    public void listar() {
+
+        List<Pelicula> listaPeliculas = peliculaRepo.findAll();
+
+        listaPeliculas.forEach(System.out::println);
+    }
+
 }

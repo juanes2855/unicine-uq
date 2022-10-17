@@ -9,6 +9,7 @@ import java.io.Serializable;
 @Setter
 @NoArgsConstructor
 @ToString
+@EqualsAndHashCode(onlyExplicitlyIncluded = true)
 public class CompraConfiteria implements Serializable{
 
     @Id
