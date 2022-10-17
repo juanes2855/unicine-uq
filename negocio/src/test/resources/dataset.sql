@@ -126,7 +126,7 @@ insert into compra values (5, current_timestamp(),"TARJETA_DEBITO", 35000,109489
 
 ----------- CompraComfiteria ------------
 
-
+---
 
 
 
