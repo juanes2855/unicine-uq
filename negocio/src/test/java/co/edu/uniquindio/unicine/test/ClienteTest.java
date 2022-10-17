@@ -1,5 +1,6 @@
 package co.edu.uniquindio.unicine.test;
 
+import ch.qos.logback.core.net.server.Client;
 import co.edu.uniquindio.unicine.entidades.Cliente;
 import co.edu.uniquindio.unicine.entidades.Cupon;
 import co.edu.uniquindio.unicine.repo.ClienteRepo;
@@ -10,6 +11,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase;
 import org.springframework.boot.test.autoconfigure.orm.jpa.AutoConfigureDataJpa;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.test.context.jdbc.Sql;
 
 import java.util.Arrays;
@@ -69,5 +73,46 @@ public class ClienteTest {
 
         listaClientes.forEach(System.out::println);
     }
+
+    @Test
+    @Sql("classpath:dataset.sql")
+    public void obtenerPorEmail() {
+
+        Cliente cliente = clienteRepo.obtener("jf@uqvirtual.co");
+        Assertions.assertNotNull(cliente);
+    }
+
+    @Test
+    @Sql("classpath:dataset.sql")
+    public void comprobarAutenticacion() {
+
+        Cliente cliente = clienteRepo.findByCorreoAndPassword("jf@uqvirtual.co","12345");
+        Assertions.assertNotNull(cliente);
+    }
+
+    @Test
+    @Sql("classpath:dataset.sql")
+    public void paginador() {
+
+        List<Cliente> clientes = clienteRepo.findAll(PageRequest.of(1,2)).toList();
+        clientes.forEach(System.out::println);
+    }
+
+    @Test
+    @Sql("classpath:dataset.sql")
+    public void paginadorEstado() {
+
+        List<Cliente> clientes = clienteRepo.obtenerPorEstado(false, PageRequest.of(0,2));
+        clientes.forEach(System.out::println);
+    }
+
+    @Test
+    @Sql("classpath:dataset.sql")
+    public void ordenarPorNombre() {
+
+        List<Cliente> clientes = clienteRepo.findAll(Sort.by("nombre"));
+        clientes.forEach(System.out::println);
+    }
+
 
 }

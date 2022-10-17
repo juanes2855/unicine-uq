@@ -20,11 +20,12 @@ insert into ciudad values (4,"Montenegro");
 insert into ciudad values (5,"Filandia");
 
 --------- Cliente ------------------------
-insert into cliente values (1094899, "jf@uqvirtual.co", "John", "12345", 0, "http:");
-insert into cliente values (1094599, "Jm@uqvirtual.co", "Julian", "1234", 0, "http:1");
-insert into cliente values (1093845, "Jh@uqvirtual.co", "Juan", "123", 0, "http:2");
-insert into cliente values (1091003, "ch@uqvirtual.co", "Ana", "12345a", 1, "http");
 insert into cliente values (1078954, "chil@uqvirtual.co", "Carolina", "12345b", 0, "http");
+insert into cliente values (1091003, "ch@uqvirtual.co", "Ana", "12345a", 1, "http");
+insert into cliente values (1093845, "Jh@uqvirtual.co", "Juan", "123", 0, "http:2");
+insert into cliente values (1094599, "Jm@uqvirtual.co", "Julian", "1234", 0, "http:1");
+insert into cliente values (1094899, "jf@uqvirtual.co", "John", "12345", 0, "http:");
+
 
 ------------ Cliente_Telefonos ------------
 insert into cliente_telefonos values (1094899, "31143122");
