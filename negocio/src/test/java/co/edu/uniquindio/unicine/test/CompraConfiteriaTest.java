@@ -49,6 +49,14 @@ public class CompraConfiteriaTest {
         CompraConfiteria guardado = compraConfiteriaRepo.save(compraConfiteria);
         Assertions.assertEquals(guardado.getCompra().getCliente().getNombre(), "pepito");
     }
+    @Test
+    @Sql("classpath:dataset.sql")
+    public void eliminar() {
+
+        CompraConfiteria buscado = compraConfiteriaRepo.findById(1).orElse(null);
+        compraConfiteriaRepo.delete(buscado);
+        Assertions.assertNull(compraConfiteriaRepo.findById(1).orElse(null));
+    }
 
     @Test
     @Sql("classpath:dataset.sql")

@@ -1,5 +1,7 @@
 package co.edu.uniquindio.unicine.test;
 
+import co.edu.uniquindio.unicine.entidades.CompraConfiteria;
+import co.edu.uniquindio.unicine.entidades.Cupon;
 import co.edu.uniquindio.unicine.entidades.Genero;
 import co.edu.uniquindio.unicine.entidades.Entrada;
 import co.edu.uniquindio.unicine.repo.EntradaRepo;
@@ -27,6 +29,15 @@ public class EntradaTest {
         Entrada entrada = new Entrada(15000f, 2, 4);
         Entrada guardado = entradaRepo.save(entrada);
         Assertions.assertEquals(guardado.getFila(), 2);
+    }
+
+    @Test
+    @Sql("classpath:dataset.sql")
+    public void eliminar() {
+
+        Entrada buscado = entradaRepo.findById(1).orElse(null);
+        entradaRepo.delete(buscado);
+        Assertions.assertNull(entradaRepo.findById(1).orElse(null));
     }
 
     @Test
