@@ -22,9 +22,9 @@ public class CiudadTest {
     @Sql("classpath:dataset.sql")
     public void registrar() {
 
-        Ciudad ciudad = new Ciudad( "Circacia");
+        Ciudad ciudad = new Ciudad( "Circasia");
         Ciudad guardado = ciudadRepo.save(ciudad);
-        Assertions.assertEquals(guardado.getNombre(), "Circacia");
+        Assertions.assertEquals(guardado.getNombre(), "Circasia");
     }
 
     @Test

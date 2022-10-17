@@ -24,7 +24,7 @@ public class CuponTest {
     public void registrar() {
         Cupon cupon = new Cupon("Descuento 10%",0.10f, LocalDateTime.parse("2007-12-03T10:15:30"));
         Cupon guardado = cuponRepo.save(cupon);
-        Assertions.assertEquals(guardado.getCodigo(), 20);
+        Assertions.assertEquals(guardado.getDescuento(), 0.1f);
     }
 
     @Test

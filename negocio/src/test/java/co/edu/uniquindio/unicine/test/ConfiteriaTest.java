@@ -34,9 +34,9 @@ public class ConfiteriaTest {
     @Sql("classpath:dataset.sql")
     public void eliminar() {
 
-        Confiteria buscado = confiteriaRepo.findById(1094899).orElse(null);
+        Confiteria buscado = confiteriaRepo.findById(1).orElse(null);
         confiteriaRepo.delete(buscado);
-        Assertions.assertNull(confiteriaRepo.findById(1094899).orElse(null));
+        Assertions.assertNull(confiteriaRepo.findById(1).orElse(null));
     }
 
     @Test
@@ -53,7 +53,7 @@ public class ConfiteriaTest {
     @Sql("classpath:dataset.sql")
     public void obtener() {
 
-        Optional<Confiteria> buscado = confiteriaRepo.findById(1094899);
+        Optional<Confiteria> buscado = confiteriaRepo.findById(1);
         Assertions.assertNotNull(buscado.orElse(null));
     }
 

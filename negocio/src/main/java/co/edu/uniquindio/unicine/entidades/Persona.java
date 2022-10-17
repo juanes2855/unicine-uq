@@ -17,7 +17,7 @@ import java.io.Serializable;
 public class Persona implements Serializable {
     @Id
     @EqualsAndHashCode.Include
-    private Integer Cedula;
+    private Integer cedula;
 
     @Column(nullable = false)
     private String nombre;
@@ -31,7 +31,7 @@ public class Persona implements Serializable {
     private String password;
 
     public Persona(Integer cedula, String nombre, String correo, String password) {
-        Cedula = cedula;
+        this.cedula = cedula;
         this.nombre = nombre;
         this.correo = correo;
         this.password = password;

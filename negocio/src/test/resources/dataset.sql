@@ -126,14 +126,20 @@ insert into compra values (5, current_timestamp(),"TARJETA_DEBITO", 35000,109489
 
 ----------- CompraComfiteria ------------
 
----
-
-
+insert into compra_confiteria values  (1,23000,2,1,1);
+insert into compra_confiteria values  (2,50000,2,2,2);
+insert into compra_confiteria values  (3,30000,2,3,3);
+insert into compra_confiteria values  (4,26000,2,4,4);
+insert into compra_confiteria values  (5,25000,2,5,5);
 
 
 ------------ Entrada --------------------
 
-
+insert into entrada values (1,2,3,15000,1);
+insert into entrada values (2,2,3,25000,2);
+insert into entrada values (3,2,3,55000,3);
+insert into entrada values (4,2,3,65000,4);
+insert into entrada values (5,2,3,25000,5);
 
 
 

@@ -31,7 +31,7 @@ public class CuponClienteTest {
         Cupon cupon = new Cupon("Descuento 10%",0.10f, LocalDateTime.parse("2007-12-03T10:15:30"));
         CuponCliente cuponCliente = new CuponCliente(true, cliente, cupon);
         CuponCliente guardado = cuponClienteRepo.save(cuponCliente);
-        Assertions.assertEquals(guardado.getCodigo(), 7);
+        Assertions.assertEquals(guardado.getCedula_cliente().getNombre(), "pepito");
     }
     @Test
     @Sql("classpath:dataset.sql")
