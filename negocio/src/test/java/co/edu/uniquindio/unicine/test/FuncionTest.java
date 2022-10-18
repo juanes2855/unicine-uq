@@ -1,5 +1,6 @@
 package co.edu.uniquindio.unicine.test;
 
+import co.edu.uniquindio.unicine.dto.FuncionDTO;
 import co.edu.uniquindio.unicine.entidades.*;
 import co.edu.uniquindio.unicine.repo.FuncionRepo;
 import org.junit.jupiter.api.Assertions;
@@ -73,4 +74,21 @@ public class FuncionTest {
         listaFunciones.forEach(System.out::println);
     }
 
+    @Test
+    @Sql("classpath:dataset.sql")
+    public void listarPeliculaNombreXFuncion() {
+
+        String peliculaNombre = funcionRepo.obtenerPeliculaNombre(1);
+
+        Assertions.assertEquals(peliculaNombre, "worldwest");
+    }
+
+    @Test
+    @Sql("classpath:dataset.sql")
+    public void listarFuncionesxPelicula() {
+
+        List<FuncionDTO> funciones = funcionRepo.listarFunciones(1);
+        funciones.forEach(System.out::println);
+        Assertions.assertEquals(funciones.size(), 1);
+    }
 }

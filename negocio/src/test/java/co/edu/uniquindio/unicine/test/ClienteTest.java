@@ -2,7 +2,9 @@ package co.edu.uniquindio.unicine.test;
 
 import ch.qos.logback.core.net.server.Client;
 import co.edu.uniquindio.unicine.entidades.Cliente;
+import co.edu.uniquindio.unicine.entidades.Compra;
 import co.edu.uniquindio.unicine.entidades.Cupon;
+import co.edu.uniquindio.unicine.entidades.CuponCliente;
 import co.edu.uniquindio.unicine.repo.ClienteRepo;
 import org.aspectj.apache.bcel.util.ClassPath;
 import org.junit.jupiter.api.Assertions;
@@ -95,7 +97,7 @@ public class ClienteTest {
     public void paginador() {
 
         List<Cliente> clientes = clienteRepo.findAll(PageRequest.of(1,2)).toList();
-        clientes.forEach(System.out::println);
+        Assertions.assertEquals(2, clientes.size());
     }
 
     @Test
@@ -103,7 +105,7 @@ public class ClienteTest {
     public void paginadorEstado() {
 
         List<Cliente> clientes = clienteRepo.obtenerPorEstado(false, PageRequest.of(0,2));
-        clientes.forEach(System.out::println);
+        Assertions.assertEquals(2, clientes.size());
     }
 
     @Test
@@ -111,8 +113,40 @@ public class ClienteTest {
     public void ordenarPorNombre() {
 
         List<Cliente> clientes = clienteRepo.findAll(Sort.by("nombre"));
-        clientes.forEach(System.out::println);
+        Assertions.assertEquals(5, clientes.size());
     }
 
+    @Test
+    @Sql("classpath:dataset.sql")
+    public void listarComprasXCorreo() {
+
+        List<Compra> compras = clienteRepo.obtenerCompras("chil@uqvirtual.co");
+        Assertions.assertEquals(1, compras.size());
+    }
+
+    @Test
+    @Sql("classpath:dataset.sql")
+    public void listarCuponesXCedula() {
+
+        List<Cupon> cupones = clienteRepo.obtenerListaCupones(1094899);
+        Assertions.assertEquals(2, cupones.size());
+    }
+
+    @Test
+    @Sql("classpath:dataset.sql")
+    public void listarComprasXCliente() {
+
+        List<Compra> compras = clienteRepo.obtenerComprasXCliente();
+        Assertions.assertEquals(5, compras.size());
+    }
+    @Test
+    @Sql("classpath:dataset.sql")
+    public void listarComprasCliente() {
+
+        List<Object[]> compras = clienteRepo.obtenerTodasLosClientemasCompras();
+        compras.forEach( o ->
+                System.out.println(o[0] + ", "+ o[1]) );
+        Assertions.assertEquals(7, compras.size());
+    }
 
 }

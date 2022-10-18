@@ -81,8 +81,17 @@ public class CompraTest {
 
         List<Compra> listaCompras = compraRepo.findAll();
 
-        listaCompras.forEach(System.out::println);
+        Assertions.assertEquals(5, listaCompras.size());
     }
+
+    @Test
+    @Sql("classpath:dataset.sql")
+    public void listarEntradas() {
+
+        List<Entrada> listaEntradas = compraRepo.listarEntradas(1);
+        Assertions.assertEquals(1, listaEntradas.size());
+    }
+
 
 
 

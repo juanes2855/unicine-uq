@@ -29,7 +29,7 @@ public class Cliente extends Persona implements Serializable {
 
     @ToString.Exclude
     @OneToMany(mappedBy = "cedula_cliente")
-    private List<CuponCliente> codigo;
+    private List<CuponCliente> codigoCupon;
 
     @Builder
 
