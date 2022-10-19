@@ -4,6 +4,7 @@ import lombok.*;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
+import javax.validation.constraints.Positive;
 import java.io.Serializable;
 import java.time.LocalDateTime;
 import java.util.List;
@@ -23,7 +24,7 @@ public class Horario implements Serializable {
 
     @Column(nullable = false)
     private String dia;
-
+    @Positive
     @Column(nullable = false)
     private String hora;
 

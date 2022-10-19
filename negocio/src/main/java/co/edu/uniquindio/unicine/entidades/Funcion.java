@@ -4,6 +4,7 @@ import lombok.*;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.List;
 
 @Entity
 @Getter
@@ -28,6 +29,10 @@ public class Funcion implements Serializable {
 
     @ManyToOne
     private Pelicula pelicula;
+
+    @ToString.Exclude
+    @OneToMany(mappedBy = "funcion")
+    private List<Compra> compras;
 
     @Builder
     public Funcion(Float precio, Horario horario, Sala sala, Pelicula pelicula) {

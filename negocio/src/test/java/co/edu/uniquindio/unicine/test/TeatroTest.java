@@ -76,4 +76,14 @@ public class TeatroTest {
 
         listaTeatros.forEach(System.out::println);
     }
+
+    @Test
+    @Sql("classpath:dataset.sql")
+    public void listarXTeatrosCiudad() {
+
+        List<Object[]> listaTeatros = teatroRepo.listarTeatros();
+        listaTeatros.forEach(o ->
+                System.out.println(o[0]+ ", "+o[1]));
+        Assertions.assertEquals(5, listaTeatros.size());
+    }
 }

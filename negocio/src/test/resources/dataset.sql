@@ -117,10 +117,10 @@ insert into funcion values (5,24000, 5,5,5);
 ----------- Compra ---------------------
 
 insert into compra values (1, "2022-09-18","TARJETA_UNICINE", 35000,1091003,1,1);
-insert into compra values (2, "2022-09-10","TARJETA_CREDITO", 35000,1078954,2,2);
-insert into compra values (3, "2022-10-18","TARJETA_UNICINE", 35000,1094899,3,3);
-insert into compra values (4, "2022-10-28","TARJETA_CREDITO", 35000,1091003,4,4);
-insert into compra values (5, "2022-11-08","TARJETA_DEBITO", 35000,1094899,5,5);
+insert into compra values (2, "2022-09-10","TARJETA_CREDITO", 34000,1078954,2,2);
+insert into compra values (3, "2022-10-18","TARJETA_UNICINE", 33000,1094899,3,3);
+insert into compra values (4, "2022-10-28","TARJETA_CREDITO", 31000,1091003,4,4);
+insert into compra values (5, "2022-11-08","TARJETA_DEBITO", 30000,1094899,5,5);
 
 ----------- CompraComfiteria ------------
 

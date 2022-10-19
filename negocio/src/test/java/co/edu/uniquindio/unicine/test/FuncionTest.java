@@ -91,4 +91,22 @@ public class FuncionTest {
         funciones.forEach(System.out::println);
         Assertions.assertEquals(funciones.size(), 1);
     }
+
+    @Test
+    @Sql("classpath:dataset.sql")
+    public void listarFuncionesSinCompras() {
+
+        List<Funcion> funciones = funcionRepo.obtenerFuncionesSinCompras(1);
+        funciones.forEach(System.out::println);
+        Assertions.assertEquals(funciones.size(), 0);
+    }
+
+    @Test
+    @Sql("classpath:dataset.sql")
+    public void listarFuncionesTeatro() {
+
+        List<Funcion> funciones = funcionRepo.obtenerFuncionesTeatro(1, LocalDateTime.parse("2022-09-16T10:15:30"), LocalDateTime.parse("2022-10-06T10:15:30"));
+        funciones.forEach(System.out::println);
+        Assertions.assertEquals(funciones.size(), 5);
+    }
 }

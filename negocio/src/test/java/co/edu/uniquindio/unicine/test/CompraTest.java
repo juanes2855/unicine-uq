@@ -1,5 +1,6 @@
 package co.edu.uniquindio.unicine.test;
 
+import co.edu.uniquindio.unicine.dto.InformacionCompraDTO;
 import co.edu.uniquindio.unicine.entidades.*;
 import co.edu.uniquindio.unicine.repo.CompraRepo;
 import org.junit.jupiter.api.Assertions;
@@ -91,9 +92,47 @@ public class CompraTest {
         List<Entrada> listaEntradas = compraRepo.listarEntradas(1);
         Assertions.assertEquals(1, listaEntradas.size());
     }
+    @Test
+    @Sql("classpath:dataset.sql")
+    public void listarCuponesRedimidos() {
 
+        List<Object[]> listaEntradas = compraRepo.contarCuponesRedimidos();
+        Assertions.assertEquals(3, listaEntradas.size());
+    }
+    @Test
+    @Sql("classpath:dataset.sql")
+    public void obtenerValorTotalGastado() {
 
+        Float total = compraRepo.calcularTotalGastado(1094899);
+        Assertions.assertEquals(70000.0f, total);
+    }
 
+    @Test
+    @Sql("classpath:dataset.sql")
+    public void obtenerCompraMasCostosa() {
 
+        List<Object[]> listaEntradas = compraRepo.obtenerCompraMasCostosa();
+        listaEntradas.forEach(o ->
+                System.out.println(o[0]+ ", " + o[1]));
+        Assertions.assertEquals(1, listaEntradas.size());
+    }
+/*    @Test
+    @Sql("classpath:dataset.sql")
+    public void listarInformacionCompras() {
+
+        List<InformacionCompraDTO> listaEntradas = compraRepo.obtenerInformacionCompra(1094899);
+        Assertions.assertEquals(3, listaEntradas.size());
+    }
+*/
+
+    @Test
+    @Sql("classpath:dataset.sql")
+    public void obtenerPeliculaMasVista() {
+
+        List<Object[]> listaEntradas = compraRepo.obtenerPeliculaMasVista(1);
+        listaEntradas.forEach(o ->
+                System.out.println(o[0]+ ", " + o[1]));
+        Assertions.assertEquals(1, listaEntradas.size());
+    }
 
 }

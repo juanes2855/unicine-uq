@@ -1,5 +1,6 @@
 package co.edu.uniquindio.unicine.test;
 
+import co.edu.uniquindio.unicine.dto.HorarioSalaDTO;
 import co.edu.uniquindio.unicine.entidades.*;
 import co.edu.uniquindio.unicine.repo.PeliculaRepo;
 import org.junit.jupiter.api.Assertions;
@@ -65,6 +66,36 @@ public class PeliculaTest {
         List<Pelicula> listaPeliculas = peliculaRepo.findAll();
 
         listaPeliculas.forEach(System.out::println);
+        Assertions.assertEquals(5, listaPeliculas.size());
     }
 
+    @Test
+    @Sql("classpath:dataset.sql")
+    public void buscarPeliculas() {
+
+        List<Pelicula> listaPeliculas = peliculaRepo.buscarPeliculas("Hallow", "En cartelera");
+
+        listaPeliculas.forEach(System.out::println);
+        Assertions.assertEquals(1, listaPeliculas.size());
+    }
+
+    @Test
+    @Sql("classpath:dataset.sql")
+    public void buscarHorariosSala() {
+
+        List<HorarioSalaDTO> listaPeliculas = peliculaRepo.listarHorarios(1,1);
+
+        listaPeliculas.forEach(System.out::println);
+        Assertions.assertEquals(1, listaPeliculas.size());
+    }
+
+    @Test
+    @Sql("classpath:dataset.sql")
+    public void listarPeliculasXGenero() {
+        Genero genero = Genero.TERROR;
+        List<Pelicula> listaPeliculas = peliculaRepo.obtenerGeneroPelicula(genero);
+
+        listaPeliculas.forEach(System.out::println);
+        Assertions.assertEquals(1, listaPeliculas.size());
+    }
 }

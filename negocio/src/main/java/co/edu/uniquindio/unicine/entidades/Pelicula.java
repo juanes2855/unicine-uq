@@ -37,6 +37,10 @@ public class Pelicula implements Serializable {
     @Column(nullable = false)
     private String reparto;
 
+    @ToString.Exclude
+    @OneToMany(mappedBy = "pelicula")
+    private List<Funcion> funciones;
+
     @ElementCollection
     //@ToString.Exclude
     @Enumerated(EnumType.STRING)
