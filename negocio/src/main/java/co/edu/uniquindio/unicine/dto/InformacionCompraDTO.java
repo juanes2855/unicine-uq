@@ -19,6 +19,6 @@ public class InformacionCompraDTO {
     private Float precioTotal;
     private LocalDateTime fecha;
     private Funcion funcion;
-    private Integer precioEntradas;
-    private Integer precioConfiteria;
+    private Double precioEntradas;
+    private Double precioConfiteria;
 }

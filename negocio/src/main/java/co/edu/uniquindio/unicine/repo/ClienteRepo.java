@@ -10,13 +10,19 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
+import java.util.Optional;
 
 @Repository
 public interface ClienteRepo extends JpaRepository<Cliente, Integer> {
     @Query("select c from Cliente c where c.correo = ?1")
     Cliente obtener (String correo);
 
-    Cliente findByCorreo(String correo);
+    @Query("select c from Cliente c where c.cedula = :cedulaCLiente")
+    Cliente obtenerPorCedula (Integer cedulaCLiente);
+
+    Optional<Cliente> findByCedula(Integer cedula);
+
+    Optional<Cliente> findByCorreo(String correo);
 
     @Query("select c from Cliente c where c.correo = :correo and c.password = :password")
     Cliente comprobarAutenticacion(String correo, String password);

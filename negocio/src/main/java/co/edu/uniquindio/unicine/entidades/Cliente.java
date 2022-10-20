@@ -32,7 +32,6 @@ public class Cliente extends Persona implements Serializable {
     private List<CuponCliente> codigoCupon;
 
     @Builder
-
     public Cliente(Integer cedula, String nombre,String correo,String password, String urlFoto, List<String> telefonos) {
         super(cedula,nombre,correo,password);
         this.urlFoto = urlFoto;
