@@ -25,6 +25,7 @@ insert into cliente values (1091003, "ch@uqvirtual.co", "Ana", "12345a", 1, "htt
 insert into cliente values (1093845, "Jh@uqvirtual.co", "Juan", "123", 0, "http:2");
 insert into cliente values (1094599, "Jm@uqvirtual.co", "Julian", "1234", 0, "http:1");
 insert into cliente values (1094899, "jf@uqvirtual.co", "John", "12345", 0, "http:");
+insert into cliente values (1004917021, "juajaja@uqvirtual.co", "Juanes", "12345", 0, "http:");
 
 
 ------------ Cliente_Telefonos ------------
@@ -50,6 +51,7 @@ insert into cupon_cliente values (2,0,1094599, 2);
 insert into cupon_cliente values (3,0,1078954, 3);
 insert into cupon_cliente values (4,0,1094899, 4);
 insert into cupon_cliente values (5,0,1078954, 5);
+
 
 ----------- Comfiteria ------------------
 

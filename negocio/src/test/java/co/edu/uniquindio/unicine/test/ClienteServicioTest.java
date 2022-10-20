@@ -2,6 +2,7 @@ package co.edu.uniquindio.unicine.test;
 
 import co.edu.uniquindio.unicine.entidades.Cliente;
 import co.edu.uniquindio.unicine.servicios.ClienteServicio;
+import co.edu.uniquindio.unicine.servicios.EmailServicio;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,6 +18,9 @@ public class ClienteServicioTest {
 
     @Autowired
     private ClienteServicio clienteServicio;
+
+    @Autowired
+    private EmailServicio emailServicio;
 
     @Test
     @Sql("classpath:dataset.sql")
@@ -51,11 +55,15 @@ public class ClienteServicioTest {
     public void eliminarClienteTest(){
 
         try {
-            clienteServicio.eliminarCliente(1078954);
-            Cliente cliente = clienteServicio.obtenerCliente(1078954);
-            Assertions.assertNotNull(cliente);
+            clienteServicio.eliminarCliente(1004917021);
         } catch (Exception e) {
             Assertions.assertTrue(false);
+        }
+
+        try{
+            Cliente cliente = clienteServicio.obtenerCliente(1004917021);
+        }catch (Exception e){
+            throw new RuntimeException(e);
         }
 
     }
@@ -65,6 +73,12 @@ public class ClienteServicioTest {
 
         List<Cliente> lista = clienteServicio.listarClientes();
         lista.forEach(System.out::println);
+
+    }
+    @Test
+    public void enviarCorreo(){
+        emailServicio.enviarEmail("No me bloquees plox","Esto es una prueba xd pokemon uwu","juanes13916@gmail.com");
+
 
     }
 }

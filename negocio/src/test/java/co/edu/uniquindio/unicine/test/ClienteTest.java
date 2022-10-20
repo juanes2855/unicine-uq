@@ -113,7 +113,7 @@ public class ClienteTest {
     public void ordenarPorNombre() {
 
         List<Cliente> clientes = clienteRepo.findAll(Sort.by("nombre"));
-        Assertions.assertEquals(5, clientes.size());
+        Assertions.assertEquals(6, clientes.size());
     }
 
     @Test
@@ -146,7 +146,7 @@ public class ClienteTest {
         List<Object[]> compras = clienteRepo.obtenerTodasLosClientemasCompras();
         compras.forEach( o ->
                 System.out.println(o[0] + ", "+ o[1]) );
-        Assertions.assertEquals(7, compras.size());
+        Assertions.assertEquals(8, compras.size());
     }
 
 }
