@@ -49,8 +49,8 @@ public class ClienteServicioImpl implements ClienteServicio {
     @Override
     public Cliente registrarCliente(Cliente cliente) throws Exception {
 
+        boolean cedulaExiste = esCedulaRepetida(cliente.getCedula());
         boolean correoExiste = esRepetido(cliente.getCorreo());
-        boolean cedulaExiste = esRepetido(cliente.getCorreo());
 
         if (cedulaExiste) {
             throw new Exception("La cédula ya está registrada");
@@ -70,9 +70,10 @@ public class ClienteServicioImpl implements ClienteServicio {
         return clienteRepo.findByCorreo(correo).orElse(null) != null;
     }
     private boolean esCedulaRepetida(Integer cedula) {
-       return clienteRepo.findByCedula(cedula).orElse(null) != null;
+
+        return clienteRepo.findByCedula(cedula).orElse(null) != null;
     }
-    @Override
+    @Override //ojooooooo revisarrrr
     public Cliente actualizarCliente(Cliente cliente) throws Exception{
 
         Optional<Cliente> guardado = clienteRepo.findById(cliente.getCedula());

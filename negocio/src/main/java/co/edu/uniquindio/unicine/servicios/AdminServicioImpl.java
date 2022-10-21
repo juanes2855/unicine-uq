@@ -10,18 +10,20 @@ import java.util.Optional;
 @Service
 public class AdminServicioImpl implements AdminServicio{
 
+    private final AdministradorRepo administradorRepo;
     private final AdministradorTeatroRepo administradorTeatroRepo;
     private final PeliculaRepo peliculaRepo;
     private final CuponRepo cuponRepo;
     private final CiudadRepo ciudadRepo;
     private final ConfiteriaRepo confiteriaRepo;
 
-    public AdminServicioImpl(AdministradorTeatroRepo administradorTeatroRepo, PeliculaRepo peliculaRepo, CuponRepo cuponRepo, CiudadRepo ciudadRepo, ConfiteriaRepo confiteriaRepo) {
+    public AdminServicioImpl(AdministradorTeatroRepo administradorTeatroRepo, PeliculaRepo peliculaRepo, CuponRepo cuponRepo, CiudadRepo ciudadRepo, ConfiteriaRepo confiteriaRepo, AdministradorRepo administradorRepo) {
         this.administradorTeatroRepo = administradorTeatroRepo;
         this.peliculaRepo = peliculaRepo;
         this.cuponRepo = cuponRepo;
         this.ciudadRepo = ciudadRepo;
         this.confiteriaRepo = confiteriaRepo;
+        this.administradorRepo = administradorRepo;
     }
 
     @Override
@@ -41,62 +43,134 @@ public class AdminServicioImpl implements AdminServicio{
 
     @Override
     public Pelicula crearPelicula(Pelicula pelicula) throws Exception {
-        return null;
+       boolean peliculaExiste = esPeliculaRepetida(pelicula.getCodigo());
+       
+       if (peliculaExiste)
+           throw new Exception("La pelicula ya está registrada");
+       
+       
+        return peliculaRepo.save(pelicula);
+    }
+
+    private boolean esPeliculaRepetida(Integer codigo) {
+        return peliculaRepo.findById(codigo).orElse(null) != null;
     }
 
     @Override
     public Pelicula actualizarPelicula(Pelicula pelicula) throws Exception {
-        return null;
+        Optional<Pelicula> guardado = peliculaRepo.findById(pelicula.getCodigo());
+
+        if (guardado.isEmpty()){
+            throw new Exception("El pelicula no existe");
+        }
+        
+        return peliculaRepo.save(pelicula);
     }
 
     @Override
     public void eliminarPelicula(Integer codigoPelicula) throws Exception {
+        Optional<Pelicula> guardado = peliculaRepo.findById(codigoPelicula);
 
+        if (guardado.isEmpty()){
+            throw new Exception("El pelicula no existe");
+        }
+
+        peliculaRepo.delete(guardado.get());
     }
 
     @Override
     public List<Pelicula> listarPeliculas() {
-        return null;
+        return peliculaRepo.findAll();
     }
 
     @Override
     public Pelicula obtenerPelicula(Integer codigoPelicula) throws Exception {
-        return null;
+        Optional<Pelicula> guardado = peliculaRepo.findById(codigoPelicula);
+        if (guardado.isEmpty())
+            throw new Exception("La pelicula no existe");
+
+        return guardado.get();
+    }
+
+        return peliculaRepo.findById(codigoPelicula).orElse(null);
     }
 
     @Override
     public Cupon crearCupon(Cupon cupon) throws Exception {
-        return null;
+        boolean cuponExiste = esCuponRepetido(cupon.getCodigo());
+        if (cuponExiste) 
+            throw new Exception("El cupon ya está en uso");
+        
+        
+        return cuponRepo.save(cupon);
+    }
+
+    private boolean esCuponRepetido(Integer codigo) {
+        return cuponRepo.findById(codigo).orElse(null ) != null;
     }
 
     @Override
     public Cupon actualizarCupon(Cupon cupon) throws Exception {
-        return null;
+
+        Optional<Cupon> guardado = cuponRepo.findById(cupon.getCodigo());
+
+        if (guardado.isEmpty()){
+            throw new Exception("El cupon no existe");
+        } 
+        
+        return cuponRepo.save(cupon);
     }
 
     @Override
     public void eliminarCupon(Integer codigoCupon) throws Exception {
 
+        Optional<Cupon> guardado = cuponRepo.findById(codigoCupon);
+
+        if (guardado.isEmpty()){
+            throw new Exception("El cupon no existe");
+        }
+
+        cuponRepo.delete(guardado.get());
     }
 
     @Override
     public List<Cupon> listarCupones() {
-        return null;
+        return cuponRepo.findAll();
     }
 
     @Override
     public Cupon obtenerCupon(Integer codigoCupon) throws Exception {
-        return null;
+        Optional<Cupon> guardado = cuponRepo.findById(codigoCupon);
+        if (guardado.isEmpty())
+            throw new Exception("El cupon no existe");
+
+        return guardado.get();
     }
 
     @Override
     public Administrador login(String correo, String password) throws Exception {
-        return null;
+        Administrador administrador = administradorRepo.comprobarAutenticacion(correo, password);
+
+        if(administrador == null)
+            throw new Exception("Los datos de autenticación son incorrectos");
+
+
+        return administrador;
     }
 
     @Override
-    public AdministradorTeatro registrarAdministradorTeatro(AdministradorTeatro cliente) throws Exception {
-        return null;
+    public AdministradorTeatro registrarAdministradorTeatro(AdministradorTeatro administradorTeatro) throws Exception {
+        boolean administradorTeatroExiste = esAdminTeatroRepetido(administradorTeatro.getCedula());
+
+        if (administradorTeatroExiste)
+            throw new Exception("La administrador  ya está registrada");
+
+
+            return administradorTeatroRepo.save(administradorTeatro);
+    }
+
+    private boolean esAdminTeatroRepetido(Integer cedula) {
+        return administradorTeatroRepo.findById(cedula).orElse(null) != null;
     }
 
     @Override
