@@ -92,8 +92,6 @@ public class AdminServicioImpl implements AdminServicio{
         return guardado.get();
     }
 
-        return peliculaRepo.findById(codigoPelicula).orElse(null);
-    }
 
     @Override
     public Cupon crearCupon(Cupon cupon) throws Exception {
