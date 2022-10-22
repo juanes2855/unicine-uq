@@ -1,9 +1,7 @@
 package co.edu.uniquindio.unicine.servicios;
 
-import co.edu.uniquindio.unicine.entidades.Cliente;
-import co.edu.uniquindio.unicine.entidades.Compra;
-import co.edu.uniquindio.unicine.entidades.Pelicula;
-import co.edu.uniquindio.unicine.repo.ClienteRepo;
+import co.edu.uniquindio.unicine.entidades.*;
+import co.edu.uniquindio.unicine.repo.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -16,11 +14,21 @@ public class ClienteServicioImpl implements ClienteServicio {
 
     private ClienteRepo clienteRepo;
     private EmailServicio emailServicio;
+    private PeliculaRepo peliculaRepo;
+    private CompraRepo compraRepo;
+    private ConfiteriaRepo confiteriaRepo;
+    private CompraConfiteriaRepo compraConfiteriaRepo;
+    private EntradaRepo entradaRepo;
 
-    public ClienteServicioImpl(ClienteRepo clienteRepo, EmailServicio emailServicio) {
+    public ClienteServicioImpl(ClienteRepo clienteRepo, EmailServicio emailServicio, PeliculaRepo peliculaRepo, CompraRepo compraRepo, ConfiteriaRepo confiteriaRepo, CompraConfiteriaRepo compraConfiteriaRepo, EntradaRepo entradaRepo) {
 
         this.clienteRepo = clienteRepo;
         this.emailServicio= emailServicio;
+        this.peliculaRepo = peliculaRepo;
+        this.compraRepo = compraRepo;
+        this.confiteriaRepo= confiteriaRepo;
+        this.compraConfiteriaRepo = compraConfiteriaRepo;
+        this.entradaRepo = entradaRepo;
     }
 
     @Override
@@ -103,22 +111,94 @@ public class ClienteServicioImpl implements ClienteServicio {
 
     @Override
     public List<Compra> listarHistorial(Integer cedulaCliente) throws Exception{
-        return null;
+
+        List<Compra> compras = clienteRepo.obtenerCompras(cedulaCliente);
+        return compras;
     }
 
     @Override
     public Compra hacerCompra(Compra compra) throws Exception{
-        return null;
+        Cliente cliente = compra.getCliente();
+        Funcion funcion = compra.getFuncion();
+        cliente.getCompras().add(compra);
+        funcion.getCompras().add(compra);
+        calcularValorTotal(compra);
+        return compraRepo.save(compra);
     }
+
+    public void calcularValorTotal(Compra compra) {
+        float valorTotal, valorConfiteria, valorFuncion, valorEntradas, valorDescuento;
+        valorConfiteria = calcularValorConfiteria(compra);
+        valorFuncion = calcularValorFuncion(compra);
+        valorEntradas = calcularValorEntradas(compra);
+        valorTotal = valorConfiteria + valorFuncion + valorEntradas;
+        valorDescuento = calcularDescuento(compra, valorTotal);
+
+        compra.setValorTotal(valorDescuento);
+
+    }
+
+    private float calcularDescuento(Compra compra, float valorTotal) {
+        if(compra.getCuponCliente() == null){
+            return valorTotal;
+        }
+        float descuento = compra.getCuponCliente().getCodigo_cupon().getDescuento();
+        return valorTotal - (valorTotal*descuento);
+    }
+
+    private float calcularValorEntradas(Compra compra) {
+        float valor= 0;
+        for (Entrada entradas: compra.getEntradas()) {
+            valor += entradas.getPrecio();
+        }
+        return valor;
+    }
+
+    private float calcularValorFuncion(Compra compra) {
+        int cantidadEntradas = compra.getEntradas().size();
+        return compra.getFuncion().getPrecio() * cantidadEntradas;
+    }
+
+    private float calcularValorConfiteria(Compra compra) {
+        float valor = 0;
+
+        for (CompraConfiteria confiteria : compra.getCompraConfiterias()) {
+            valor += confiteria.getConfiteria().getPrecio() * confiteria.getUnidades();
+        }
+
+        return valor;
+    }
+
 
     @Override
     public boolean redimirCupon(Integer codigoCupon) throws Exception{
         return false;
     }
 
+
+
     @Override
     public List<Pelicula> buscarPelicula(String nombre) {
-        return null;
+        List<Pelicula> peliculas = peliculaRepo.buscarPeliculas(nombre);
+        return peliculas;
+    }
+    public CompraConfiteria ingresarConfiteriaCompra(CompraConfiteria confiteria){
+        CompraConfiteria nuevo = compraConfiteriaRepo.save(confiteria);
+        Compra compra = nuevo.getCompra();
+        compra.getCompraConfiterias().add(confiteria);
+        return nuevo;
+    }
+
+    public Entrada comprarEntradas (Entrada entrada){
+        Entrada nuevo = entradaRepo.save(entrada);
+        Compra compra = nuevo.getCompra();
+        compra.getEntradas().add(nuevo);
+        return nuevo;
+    }
+    @Override
+    public List<Confiteria> buscarConfiteria(String nombre){
+        List<Confiteria> confiterias =  confiteriaRepo.buscarConfiteria(nombre);
+        return confiterias;
     }
 
     @Override

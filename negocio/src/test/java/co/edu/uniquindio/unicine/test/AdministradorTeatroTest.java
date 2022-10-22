@@ -1,5 +1,6 @@
 package co.edu.uniquindio.unicine.test;
 
+import co.edu.uniquindio.unicine.entidades.Administrador;
 import co.edu.uniquindio.unicine.entidades.AdministradorTeatro;
 import co.edu.uniquindio.unicine.repo.AdministradorTeatroRepo;
 import org.junit.jupiter.api.Assertions;
@@ -18,6 +19,7 @@ public class AdministradorTeatroTest {
 
     @Autowired
     private AdministradorTeatroRepo administradorTeatroRepo;
+
 
     @Test
     @Sql("classpath:dataset.sql")

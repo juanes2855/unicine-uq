@@ -33,6 +33,8 @@ public interface ClienteRepo extends JpaRepository<Cliente, Integer> {
     List<Cliente> obtenerPorEstado(boolean estado, Pageable paginador);
     @Query("select comp from Cliente cli, in (cli.compras) comp where cli.correo= :correo ")
     List<Compra> obtenerCompras (String correo);
+    @Query("select comp from Cliente  cli, in (cli.compras) comp where cli.cedula= :cedula")
+    List<Compra> obtenerCompras(Integer cedula);
     @Query("select cup.codigo_cupon from Cliente cli join cli.codigoCupon cup where cli.cedula = :cedula")
     List<Cupon> obtenerListaCupones(Integer cedula);
     @Query("select comp from Cliente cli join cli.compras comp")

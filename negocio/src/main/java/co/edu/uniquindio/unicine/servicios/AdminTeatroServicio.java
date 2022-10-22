@@ -10,7 +10,7 @@ public interface AdminTeatroServicio {
     Horario crearHorario(Horario horario) throws Exception;
     void eliminarHorario(Integer codigoHorario) throws Exception;
     List<Horario> listarHorarios();
-    Horario obtenerHorario(Integer codigoHorario) throws Exception;
+    // Horario obtenerHorario(Integer codigoHorario) throws Exception;
 
     Sala crearSala(Sala sala) throws Exception;
     Sala actualizarSala(Sala sala) throws Exception;

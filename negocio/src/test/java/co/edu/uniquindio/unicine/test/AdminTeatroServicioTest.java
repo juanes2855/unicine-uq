@@ -277,4 +277,16 @@ public class AdminTeatroServicioTest {
         List<Funcion> listaFunciones = adminTeatroServicio.listarFunciones();
         listaFunciones.forEach(System.out::println);
     }
+
+    @Test
+    @Sql("classpath:dataset.sql")
+    public void autenticacionAdminTest() {
+        try {
+            AdministradorTeatro administrador = adminTeatroServicio.login("jfmd@uqvirtual.co", "12345a");
+            Assertions.assertNotNull(administrador);
+        }catch (Exception e){
+            throw new RuntimeException(e);
+        }
+
+    }
 }

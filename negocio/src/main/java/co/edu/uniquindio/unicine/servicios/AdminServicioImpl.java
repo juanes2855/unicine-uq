@@ -51,18 +51,8 @@ public class AdminServicioImpl implements AdminServicio{
 
     @Override
     public Pelicula crearPelicula(Pelicula pelicula) throws Exception {
-     /*  boolean peliculaExiste = esPeliculaRepetida(pelicula.getCodigo());
-       
-       if (peliculaExiste)
-           throw new Exception("La pelicula ya está registrada");
-       
-       */
+
         return peliculaRepo.save(pelicula);
-    }
-
-    private boolean esPeliculaRepetida(Integer codigo) {
-
-        return peliculaRepo.findById(codigo).orElse(null) != null;
     }
 
     @Override
@@ -104,17 +94,8 @@ public class AdminServicioImpl implements AdminServicio{
 
     @Override
     public Cupon crearCupon(Cupon cupon) throws Exception {
-     /*   boolean cuponExiste = esCuponRepetido(cupon.getCodigo());
-        if (cuponExiste) 
-            throw new Exception("El cupon ya está en uso");
-        
-       */
+
         return cuponRepo.save(cupon);
-    }
-
-    private boolean esCuponRepetido(Integer codigo) {
-
-        return cuponRepo.findById(codigo).orElse(null ) != null;
     }
 
     @Override
@@ -171,7 +152,7 @@ public class AdminServicioImpl implements AdminServicio{
         boolean administradorTeatroExiste = esAdminTeatroRepetido(administradorTeatro.getCedula());
 
         if (administradorTeatroExiste)
-            throw new Exception("La administrador  ya está registrada");
+            throw new Exception("El administrador  ya está registrado");
 
 
             return administradorTeatroRepo.save(administradorTeatro);
@@ -217,16 +198,16 @@ public class AdminServicioImpl implements AdminServicio{
     @Override
     public Confiteria crearConfiteria(Confiteria confiteria) throws Exception {
 
-    /*    boolean confiteriaExiste = esConfiteriaRepetida(confiteria.getCodigo());
+        boolean confiteriaExiste = esConfiteriaRepetida(confiteria.getNombre());
 
         if (confiteriaExiste)
             throw new Exception("La confiteria ya esta registrada");
-     */
+
         return confiteriaRepo.save(confiteria);
     }
 
-    private boolean esConfiteriaRepetida(Integer codigo) {
-        return confiteriaRepo.findById(codigo).orElse(null ) != null;
+    private boolean esConfiteriaRepetida(String nombre) {
+        return confiteriaRepo.buscarConfiteriaxNombre(nombre).orElse(null ) != null;
     }
 
     @Override

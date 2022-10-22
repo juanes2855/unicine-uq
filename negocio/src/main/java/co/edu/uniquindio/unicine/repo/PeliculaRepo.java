@@ -14,9 +14,11 @@ public interface PeliculaRepo extends JpaRepository<Pelicula, Integer> {
     @Query("select  p from Pelicula p where p.nombre like concat('%', :nombre , '%') and p.estado = :estadoPelicula")
     List<Pelicula> buscarPeliculas(String nombre, String estadoPelicula);
 
+    @Query("select  p from Pelicula p where p.nombre like concat('%', :nombre , '%')")
+    List<Pelicula> buscarPeliculas(String nombre);
 
-      @Query("select new co.edu.uniquindio.unicine.dto.HorarioSalaDTO (f.horario, f.sala)  from Pelicula p join p.funciones f where p.codigo= :codigoPelicula and f.sala.teatro.codigo = :codigoTeatro")
-      List<HorarioSalaDTO> listarHorarios(Integer codigoPelicula, Integer codigoTeatro);
+    @Query("select new co.edu.uniquindio.unicine.dto.HorarioSalaDTO (f.horario, f.sala)  from Pelicula p join p.funciones f where p.codigo= :codigoPelicula and f.sala.teatro.codigo = :codigoTeatro")
+    List<HorarioSalaDTO> listarHorarios(Integer codigoPelicula, Integer codigoTeatro);
 
     @Query("select p from Pelicula p where :genero member of p.generos order by p.nombre asc")
     List<Pelicula> obtenerGeneroPelicula(Genero genero);
