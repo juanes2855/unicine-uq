@@ -28,10 +28,10 @@ public class AdminServicioImpl implements AdminServicio{
 
     @Override
     public Ciudad crearCiudad(Ciudad ciudad) throws Exception {
-        boolean ciudadExiste  = esCiudadRepetida(ciudad.getCodigo());
+    /*    boolean ciudadExiste  = esCiudadRepetida(ciudad.getCodigo());
         if (ciudadExiste)
             throw new Exception("La ciudad ya está registrada");
-
+    */
         return ciudadRepo.save(ciudad);
     }
 
@@ -51,12 +51,12 @@ public class AdminServicioImpl implements AdminServicio{
 
     @Override
     public Pelicula crearPelicula(Pelicula pelicula) throws Exception {
-       boolean peliculaExiste = esPeliculaRepetida(pelicula.getCodigo());
+     /*  boolean peliculaExiste = esPeliculaRepetida(pelicula.getCodigo());
        
        if (peliculaExiste)
            throw new Exception("La pelicula ya está registrada");
        
-       
+       */
         return peliculaRepo.save(pelicula);
     }
 
@@ -104,11 +104,11 @@ public class AdminServicioImpl implements AdminServicio{
 
     @Override
     public Cupon crearCupon(Cupon cupon) throws Exception {
-        boolean cuponExiste = esCuponRepetido(cupon.getCodigo());
+     /*   boolean cuponExiste = esCuponRepetido(cupon.getCodigo());
         if (cuponExiste) 
             throw new Exception("El cupon ya está en uso");
         
-        
+       */
         return cuponRepo.save(cupon);
     }
 
@@ -217,11 +217,11 @@ public class AdminServicioImpl implements AdminServicio{
     @Override
     public Confiteria crearConfiteria(Confiteria confiteria) throws Exception {
 
-        boolean confiteriaExiste = esConfiteriaRepetida(confiteria.getCodigo());
+    /*    boolean confiteriaExiste = esConfiteriaRepetida(confiteria.getCodigo());
 
         if (confiteriaExiste)
             throw new Exception("La confiteria ya esta registrada");
-
+     */
         return confiteriaRepo.save(confiteria);
     }
 

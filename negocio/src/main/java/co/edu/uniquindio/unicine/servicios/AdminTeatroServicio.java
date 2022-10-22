@@ -8,25 +8,25 @@ import java.util.List;
 public interface AdminTeatroServicio {
 
     Horario crearHorario(Horario horario) throws Exception;
-    void eliminarHorario(Horario codigoHorario) throws Exception;
+    void eliminarHorario(Integer codigoHorario) throws Exception;
     List<Horario> listarHorarios();
     Horario obtenerHorario(Integer codigoHorario) throws Exception;
 
     Sala crearSala(Sala sala) throws Exception;
     Sala actualizarSala(Sala sala) throws Exception;
-    void eliminarSala(Sala codigoSala) throws Exception;
+    void eliminarSala(Integer codigoSala) throws Exception;
     List<Sala> listarSalas();
     Sala obtenerSala(Integer codigoSala) throws Exception;
 
     Funcion crearFuncion(Funcion funcion) throws Exception;
     Funcion actualizarFuncion(Funcion funcion) throws Exception;
-    void eliminarFuncion(Funcion codigoFuncion) throws Exception;
+    void eliminarFuncion(Integer codigoFuncion) throws Exception;
     List<Funcion> listarFunciones();
     Funcion obtenerFuncion(Integer codigoFuncion) throws Exception;
 
     Teatro crearTeatro(Teatro teatro) throws Exception;
     Teatro actualizarTeatro(Teatro teatro) throws Exception;
-    void eliminarTeatro(Teatro codigoTeatro) throws Exception;
+    void eliminarTeatro(Integer codigoTeatro) throws Exception;
     List<Teatro> listarTeatros();
     Teatro obtenerTeatro(Integer codigoTeatro) throws Exception;
 
@@ -37,4 +37,12 @@ public interface AdminTeatroServicio {
     boolean esHorarioValido(Horario horario) throws Exception;
 
     boolean validarRangoFechas(LocalDateTime fechaInicio, LocalDateTime fechaFin);
+
+    DistribucionSillas registrarDistribucionSilla(DistribucionSillas distribucionSillas) throws Exception;
+
+    void eliminarDistribucionSillas(Integer codigoDistribucion)throws Exception;
+
+    List<DistribucionSillas> listarDistribuciones();
+
+    DistribucionSillas obtenerDistribucionSillas(Integer codigoDistribucion) throws Exception;
 }

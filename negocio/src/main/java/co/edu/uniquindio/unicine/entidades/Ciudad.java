@@ -4,6 +4,7 @@ import lombok.*;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -27,9 +28,9 @@ public class Ciudad implements Serializable {
     private List<Teatro> teatros;
 
     @Builder
-    public Ciudad (String nombre){
+    public Ciudad (String nombre) {
 
-        this.nombre= nombre;
+        this.nombre = nombre;
+        teatros = new ArrayList<Teatro>();
     }
-
 }
