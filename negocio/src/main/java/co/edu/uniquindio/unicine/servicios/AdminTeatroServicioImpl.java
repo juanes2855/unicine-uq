@@ -96,7 +96,8 @@ public class AdminTeatroServicioImpl implements AdminTeatroServicio{
         boolean salaExiste = esSalaRepetida(sala.getNombre());
         if (salaExiste)
             throw new Exception("El cupon ya está en uso");
-
+        Teatro teatro = sala.getTeatro();
+        teatro.getSalas().add(sala);
         return salaRepo.save(sala);
 
     }
