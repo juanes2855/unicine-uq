@@ -5,6 +5,7 @@ import lombok.*;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -22,11 +23,10 @@ public class DistribucionSillas implements Serializable {
 
     private Integer totalSillas;
 
-    //Revisar si son listas
     private Integer filas;
 
     private Integer columnas;
-    // CONVERTIRLO EN MATRIZ
+
     private String esquema;
 
     @ToString.Exclude
@@ -37,5 +37,6 @@ public class DistribucionSillas implements Serializable {
     public DistribucionSillas(Integer filas, Integer columnas) {
         this.filas = filas;
         this.columnas = columnas;
+        salas = new ArrayList<Sala>();
     }
 }

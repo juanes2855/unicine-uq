@@ -4,6 +4,7 @@ import lombok.*;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
@@ -38,5 +39,6 @@ public class Sala implements Serializable {
         this.nombre = nombre;
         this.teatro = teatro;
         this.distribucionSillas = distribucionSillas;
+        funciones = new ArrayList<Funcion>();
     }
 }

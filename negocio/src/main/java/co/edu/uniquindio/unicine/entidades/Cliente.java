@@ -4,6 +4,7 @@ import lombok.*;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -37,5 +38,7 @@ public class Cliente extends Persona implements Serializable {
         this.urlFoto = urlFoto;
         this.estado = false;
         this.telefonos = telefonos;
+        compras = new ArrayList<Compra>();
+        codigoCupon = new ArrayList<CuponCliente>();
     }
 }

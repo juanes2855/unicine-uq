@@ -4,6 +4,7 @@ import lombok.*;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -42,7 +43,6 @@ public class Pelicula implements Serializable {
     private List<Funcion> funciones;
 
     @ElementCollection
-    //@ToString.Exclude
     @Enumerated(EnumType.STRING)
     private List<Genero> generos;
 
@@ -55,5 +55,8 @@ public class Pelicula implements Serializable {
         this.reparto = reparto;
         this.generos = generos;
         this.estado = estado;
+        generos = new ArrayList<Genero>();
+        funciones = new ArrayList<Funcion>();
+
     }
 }

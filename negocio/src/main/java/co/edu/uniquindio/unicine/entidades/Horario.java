@@ -7,6 +7,7 @@ import javax.persistence.*;
 import javax.validation.constraints.Positive;
 import java.io.Serializable;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -24,7 +25,7 @@ public class Horario implements Serializable {
 
     @Column(nullable = false)
     private String dia;
-    @Positive
+
     @Column(nullable = false)
     private String hora;
 
@@ -44,5 +45,6 @@ public class Horario implements Serializable {
         this.hora = hora;
         this.fechaInicio = fechaInicio;
         this.fechaFin = fechaFin;
+        funciones = new ArrayList<Funcion>();
     }
 }

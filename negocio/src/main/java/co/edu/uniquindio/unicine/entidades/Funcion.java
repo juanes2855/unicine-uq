@@ -4,6 +4,7 @@ import lombok.*;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -40,5 +41,6 @@ public class Funcion implements Serializable {
         this.horario = horario;
         this.sala = sala;
         this.pelicula = pelicula;
+        compras = new ArrayList<Compra>();
     }
 }

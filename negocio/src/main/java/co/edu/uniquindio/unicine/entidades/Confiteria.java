@@ -4,6 +4,7 @@ import lombok.*;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -34,5 +35,6 @@ public class Confiteria implements Serializable {
         this.nombre = nombre;
         this.precio = precio;
         this.urlImagen = urlImagen;
+        compraConfiterias = new ArrayList<CompraConfiteria>();
     }
 }

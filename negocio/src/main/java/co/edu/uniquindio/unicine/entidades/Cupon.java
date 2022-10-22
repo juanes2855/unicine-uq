@@ -6,6 +6,7 @@ import javax.persistence.*;
 import javax.validation.constraints.Positive;
 import java.io.Serializable;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -39,5 +40,6 @@ public class Cupon implements Serializable {
         this.descripcion = descripcion;
         this.descuento = descuento;
         this.fechaVencimiento = fechaVencimiento;
+        cuponClientes = new ArrayList<CuponCliente>();
     }
 }

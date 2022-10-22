@@ -11,6 +11,7 @@ import org.springframework.test.context.jdbc.Sql;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDateTime;
+import java.util.Arrays;
 import java.util.List;
 
 @Transactional
@@ -191,5 +192,89 @@ public class AdminTeatroServicioTest {
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
+    }
+    @Test
+    @Sql("classpath:dataset.sql")
+    public void eliminarDistribucionTest(){
+
+        try {
+            adminTeatroServicio.eliminarDistribucionSillas(1);
+        } catch (Exception e) {
+            Assertions.assertTrue(false);
+        }
+
+        try{
+            //DistribucionSillas distribucionSillas= adminTeatroServicio.obtenerDistribucionSillas(1);
+        }catch (Exception e){
+            throw new RuntimeException(e);
+        }
+
+    }
+    @Test
+    @Sql("classpath:dataset.sql")
+    public void listarDistribucionTest() {
+        List<DistribucionSillas> listaDistribuciones = adminTeatroServicio.listarDistribuciones();
+        listaDistribuciones.forEach(System.out::println);
+    }
+    @Test
+    @Sql("classpath:dataset.sql")
+    public  void  obtenerDistribucionTest() throws Exception {
+        DistribucionSillas obtener = adminTeatroServicio.obtenerDistribucionSillas(1);
+        Assertions.assertNotNull(obtener);
+    }
+    @Test
+    @Sql("classpath:dataset.sql")
+    public void registrarFuncionTest() {
+        try {
+            Horario horario = new Horario("LMXJVSD", "15:30", LocalDateTime.of(2022, 10, 16, 15, 30, 0, 0), LocalDateTime.of(2022, 10, 31, 15, 30, 0, 0));
+            Genero[] generos = new Genero[]{Genero.TERROR};
+            Pelicula pelicula = new Pelicula("El sismo", "En cartelera","De la naturaleza nadie se salva", "http:@sismo",
+                    "http:@Elsismo.jpj", "Andres Lopez, Esteban Henao", Arrays.asList(generos));
+            Ciudad ciudad = new Ciudad("Barrancabermeja");
+            Teatro teatro = new Teatro("mi casa", "1231232", ciudad);
+            DistribucionSillas distribucionSillas = new DistribucionSillas(4,4);
+            Sala sala = new Sala("Cine xd", teatro, distribucionSillas);
+            Funcion funcion = new Funcion(24000f, horario, sala, pelicula);
+            Funcion nuevo = adminTeatroServicio.crearFuncion(funcion);
+
+            Assertions.assertNotNull(nuevo);
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+    }
+    @Test
+    @Sql("classpath:dataset.sql")
+    public void actualizarFuncionTest() {
+
+        try {
+            Funcion funcion= adminTeatroServicio.obtenerFuncion(1);
+            funcion.setPrecio(30000f);
+            Funcion nuevo = adminTeatroServicio.actualizarFuncion(funcion);
+            Assertions.assertEquals(30000f, nuevo.getPrecio());
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+    }
+    @Test
+    @Sql("classpath:dataset.sql")
+    public void eliminarFuncionTest(){
+
+        try {
+            adminTeatroServicio.eliminarFuncion(1);
+        } catch (Exception e) {
+            Assertions.assertTrue(false);
+        }
+
+        try{
+             //Funcion funcion= adminTeatroServicio.obtenerFuncion(1);
+        }catch (Exception e){
+            throw new RuntimeException(e);
+        }
+    }
+    @Test
+    @Sql("classpath:dataset.sql")
+    public void listarFuncionesTest() {
+        List<Funcion> listaFunciones = adminTeatroServicio.listarFunciones();
+        listaFunciones.forEach(System.out::println);
     }
 }

@@ -6,6 +6,7 @@ import javax.persistence.*;
 import javax.validation.constraints.Positive;
 import java.io.Serializable;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -57,5 +58,7 @@ public class Compra implements Serializable {
         this.fecha = LocalDateTime.now();
         this.cliente = cliente;
         this.funcion = funcion;
+        entradas = new ArrayList<Entrada>();
+        compraConfiterias = new ArrayList<CompraConfiteria>();
     }
 }

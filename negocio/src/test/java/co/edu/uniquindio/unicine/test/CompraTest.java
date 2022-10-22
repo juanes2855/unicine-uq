@@ -104,7 +104,7 @@ public class CompraTest {
     public void obtenerValorTotalGastado() {
 
         Float total = compraRepo.calcularTotalGastado(1094899);
-        Assertions.assertEquals(70000.0f, total);
+        Assertions.assertEquals(63000.0f, total);
     }
 
     @Test
@@ -116,14 +116,14 @@ public class CompraTest {
                 System.out.println(o[0]+ ", " + o[1]));
         Assertions.assertEquals(1, listaEntradas.size());
     }
-/*    @Test
+   @Test
     @Sql("classpath:dataset.sql")
     public void listarInformacionCompras() {
 
         List<InformacionCompraDTO> listaEntradas = compraRepo.obtenerInformacionCompra(1094899);
-        Assertions.assertEquals(3, listaEntradas.size());
+        Assertions.assertEquals(2, listaEntradas.size());
     }
-*/
+
 
     @Test
     @Sql("classpath:dataset.sql")

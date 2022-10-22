@@ -32,10 +32,10 @@ public class AdminTeatroServicioImpl implements AdminTeatroServicio{
 
     @Override
     public Horario crearHorario(Horario horario) throws Exception {
-     /*   boolean horarioExiste = esHorarioValido(horario);
+        boolean horarioExiste = esHorarioValido(horario);
         if (horarioExiste)
             throw new Exception("El  horario ya existe");
-*/
+
         return horarioRepo.save(horario);
     }
     @Override
@@ -56,6 +56,43 @@ public class AdminTeatroServicioImpl implements AdminTeatroServicio{
     public boolean validarRangoFechas(LocalDateTime fechaInicio, LocalDateTime fechaFin) {
         return (fechaInicio.isBefore(fechaFin))? true : false;
     }
+
+    @Override
+    public boolean validarHora(String hora) throws Exception {
+        String horaHorario = hora.split(":")[0];
+        String minHorario = hora.split(":")[1];
+
+        return (minHorario.equals("00") || minHorario.equals("30")) ? true : false;
+
+    }
+
+    @Override
+    public void eliminarHorario(Integer horario) throws Exception {
+
+        Optional<Horario> guardado = horarioRepo.findById(horario);
+
+        if (guardado.isEmpty()) {
+            throw new Exception("El pelicula no existe");
+        }
+
+        horarioRepo.delete(guardado.get());
+    }
+
+
+    @Override
+    public List<Horario> listarHorarios() {
+        return horarioRepo.findAll();
+    }
+
+    @Override
+    public Horario obtenerHorario(Integer codigoHorario) throws Exception {
+        Optional<Horario> guardado = horarioRepo.findById(codigoHorario);
+        if (guardado.isEmpty())
+            throw new Exception("El cupon no existe");
+
+        return guardado.get();
+    }
+
 
     @Override
     public DistribucionSillas registrarDistribucionSilla(DistribucionSillas distribucionSillas) throws Exception {
@@ -90,42 +127,6 @@ public class AdminTeatroServicioImpl implements AdminTeatroServicio{
     }
 
     @Override
-    public boolean validarHora(String hora) throws Exception {
-       String horaHorario = hora.split(":")[0];
-       String minHorario = hora.split(":")[1];
-
-       return (minHorario.equals("00") || minHorario.equals("30")) ? true : false;
-
-    }
-
-    @Override
-    public void eliminarHorario(Integer horario) throws Exception {
-
-        Optional<Horario> guardado = horarioRepo.findById(horario);
-
-        if (guardado.isEmpty()) {
-            throw new Exception("El pelicula no existe");
-        }
-
-        horarioRepo.delete(guardado.get());
-    }
-
-
-    @Override
-    public List<Horario> listarHorarios() {
-        return horarioRepo.findAll();
-    }
-
-    @Override
-    public Horario obtenerHorario(Integer codigoHorario) throws Exception {
-        Optional<Horario> guardado = horarioRepo.findById(codigoHorario);
-        if (guardado.isEmpty())
-            throw new Exception("El cupon no existe");
-
-        return guardado.get();
-    }
-
-    @Override
     public Sala crearSala(Sala sala) throws Exception {
         Sala nuevo = salaRepo.save(sala);
         Teatro teatro = nuevo.getTeatro();
@@ -134,17 +135,12 @@ public class AdminTeatroServicioImpl implements AdminTeatroServicio{
 
     }
 
-    private boolean esSalaRepetida(String nombre) {
-        Sala sala = salaRepo.findByNombre(nombre);
-        return (sala != null)? true : false;
-    }
-
     @Override
     public Sala actualizarSala(Sala sala) throws Exception {
         Optional<Sala> guardado = salaRepo.findById(sala.getCodigo());
 
         if (guardado.isEmpty()){
-            throw new Exception("El cupon no existe");
+            throw new Exception("La sala no existe");
         }
 
         return salaRepo.save(sala);

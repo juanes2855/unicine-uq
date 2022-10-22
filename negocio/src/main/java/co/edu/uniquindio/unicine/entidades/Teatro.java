@@ -4,6 +4,7 @@ import lombok.*;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -38,5 +39,6 @@ public class Teatro implements Serializable {
         this.direccion = direccion;
         this.telefono = telefono;
         this.ciudad = ciudad;
+        salas = new ArrayList<Sala>();
     }
 }

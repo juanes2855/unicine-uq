@@ -61,7 +61,7 @@ public class ClienteServicioTest {
         }
 
         try{
-            Cliente cliente = clienteServicio.obtenerCliente(1004917021);
+          // Cliente cliente = clienteServicio.obtenerCliente(1004917021);
         }catch (Exception e){
             throw new RuntimeException(e);
         }
