@@ -77,7 +77,7 @@ public class ClienteServicioTest {
     }
     @Test
     public void enviarCorreo(){
-        emailServicio.enviarEmail("No me bloquees plox","Esto es una prueba xd pokemon uwu","juanes13916@gmail.com");
+        emailServicio.enviarEmail("ASUNTO","CONTENIDO","juanes13916@gmail.com");
 
 
     }

@@ -2,6 +2,7 @@ package co.edu.uniquindio.unicine.servicios;
 
 import co.edu.uniquindio.unicine.entidades.*;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 public interface AdminTeatroServicio {
@@ -30,4 +31,10 @@ public interface AdminTeatroServicio {
     Teatro obtenerTeatro(Integer codigoTeatro) throws Exception;
 
     AdministradorTeatro login(String correo , String password) throws Exception;
+
+    boolean validarHora(String hora) throws Exception;
+
+    boolean esHorarioValido(Horario horario) throws Exception;
+
+    boolean validarRangoFechas(LocalDateTime fechaInicio, LocalDateTime fechaFin);
 }

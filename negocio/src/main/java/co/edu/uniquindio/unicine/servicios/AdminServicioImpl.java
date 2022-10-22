@@ -28,7 +28,15 @@ public class AdminServicioImpl implements AdminServicio{
 
     @Override
     public Ciudad crearCiudad(Ciudad ciudad) throws Exception {
+        boolean ciudadExiste  = esCiudadRepetida(ciudad.getCodigo());
+        if (ciudadExiste)
+            throw new Exception("La ciudad ya está registrada");
+
         return ciudadRepo.save(ciudad);
+    }
+
+    private boolean esCiudadRepetida(Integer codigo) {
+        return peliculaRepo.findById(codigo).orElse(null) != null;
     }
 
     @Override
@@ -53,6 +61,7 @@ public class AdminServicioImpl implements AdminServicio{
     }
 
     private boolean esPeliculaRepetida(Integer codigo) {
+
         return peliculaRepo.findById(codigo).orElse(null) != null;
     }
 
@@ -104,6 +113,7 @@ public class AdminServicioImpl implements AdminServicio{
     }
 
     private boolean esCuponRepetido(Integer codigo) {
+
         return cuponRepo.findById(codigo).orElse(null ) != null;
     }
 
@@ -172,47 +182,82 @@ public class AdminServicioImpl implements AdminServicio{
     }
 
     @Override
-    public AdministradorTeatro actualizarAdministradorTeatro(AdministradorTeatro cliente) throws Exception {
-        return null;
+    public AdministradorTeatro actualizarAdministradorTeatro(AdministradorTeatro administradorTeatro) throws Exception {
+       Optional<AdministradorTeatro> guardado = administradorTeatroRepo.findById(administradorTeatro.getCedula());
+        if (guardado.isEmpty())
+            throw new Exception("El administrador teatro no existe");
+
+
+        return administradorTeatroRepo.save(administradorTeatro);
     }
 
     @Override
     public void eliminarAdministradorTeatro(Integer cedulaAdministradorTeatro) throws Exception {
+        Optional<AdministradorTeatro> guardado = administradorTeatroRepo.findById(cedulaAdministradorTeatro);
+        if (guardado.isEmpty())
+            throw new Exception("El administrador teatro no existe");
 
+        administradorTeatroRepo.delete(guardado.get());
     }
 
     @Override
     public List<AdministradorTeatro> listarAdministradorTeatro() {
-        return null;
+        return administradorTeatroRepo.findAll();
     }
 
     @Override
-    public AdministradorTeatro obtenerAdministradorTeatro(Integer cedula) throws Exception {
-        return null;
+    public AdministradorTeatro obtenerAdministradorTeatro(Integer cedulaAdministradorTeatro) throws Exception {
+        Optional<AdministradorTeatro> guardado = administradorTeatroRepo.findById(cedulaAdministradorTeatro);
+        if (guardado.isEmpty())
+            throw new Exception("El administrador teatro no existe");
+
+        return guardado.get();
     }
 
     @Override
     public Confiteria crearConfiteria(Confiteria confiteria) throws Exception {
-        return null;
+
+        boolean confiteriaExiste = esConfiteriaRepetida(confiteria.getCodigo());
+
+        if (confiteriaExiste)
+            throw new Exception("La confiteria ya esta registrada");
+
+        return confiteriaRepo.save(confiteria);
+    }
+
+    private boolean esConfiteriaRepetida(Integer codigo) {
+        return confiteriaRepo.findById(codigo).orElse(null ) != null;
     }
 
     @Override
     public Confiteria actualizarConfiteria(Confiteria confiteria) throws Exception {
-        return null;
+        Optional<Confiteria> guardado = confiteriaRepo.findById(confiteria.getCodigo());
+        if (guardado.isEmpty())
+            throw new Exception("La confiteria no existe");
+
+        return confiteriaRepo.save(confiteria);
     }
 
     @Override
     public void eliminarConfiteria(Integer codigoConfiteria) throws Exception {
+        Optional<Confiteria> guardado = confiteriaRepo.findById(codigoConfiteria);
+        if (guardado.isEmpty())
+            throw new Exception("La confiteria no existe");
 
+        confiteriaRepo.delete(guardado.get());
     }
 
     @Override
     public List<Confiteria> listarConfiterias() {
-        return null;
+        return confiteriaRepo.findAll();
     }
 
     @Override
     public Confiteria obtenerConfiteria(Integer codigoConfiteria) throws Exception {
-        return null;
+        Optional<Confiteria> guardado = confiteriaRepo.findById(codigoConfiteria);
+        if (guardado.isEmpty())
+            throw new Exception("La confiteria no existe");
+
+        return guardado.get();
     }
 }

@@ -6,4 +6,6 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface SalaRepo extends JpaRepository<Sala, Integer> {
+
+    Sala findByNombre(String nombre);
 }
