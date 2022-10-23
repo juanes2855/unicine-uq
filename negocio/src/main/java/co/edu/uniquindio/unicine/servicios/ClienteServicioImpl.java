@@ -2,9 +2,9 @@ package co.edu.uniquindio.unicine.servicios;
 
 import co.edu.uniquindio.unicine.entidades.*;
 import co.edu.uniquindio.unicine.repo.*;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import javax.swing.*;
 import java.util.List;
 import java.util.Optional;
 
@@ -19,8 +19,11 @@ public class ClienteServicioImpl implements ClienteServicio {
     private ConfiteriaRepo confiteriaRepo;
     private CompraConfiteriaRepo compraConfiteriaRepo;
     private EntradaRepo entradaRepo;
+    private CuponRepo cuponRepo;
 
-    public ClienteServicioImpl(ClienteRepo clienteRepo, EmailServicio emailServicio, PeliculaRepo peliculaRepo, CompraRepo compraRepo, ConfiteriaRepo confiteriaRepo, CompraConfiteriaRepo compraConfiteriaRepo, EntradaRepo entradaRepo) {
+    private int codigoVerificacion = 0;
+
+    public ClienteServicioImpl(ClienteRepo clienteRepo, EmailServicio emailServicio, PeliculaRepo peliculaRepo, CompraRepo compraRepo, ConfiteriaRepo confiteriaRepo, CompraConfiteriaRepo compraConfiteriaRepo, EntradaRepo entradaRepo,CuponRepo cuponRepo) {
 
         this.clienteRepo = clienteRepo;
         this.emailServicio= emailServicio;
@@ -29,6 +32,10 @@ public class ClienteServicioImpl implements ClienteServicio {
         this.confiteriaRepo= confiteriaRepo;
         this.compraConfiteriaRepo = compraConfiteriaRepo;
         this.entradaRepo = entradaRepo;
+        this.cuponRepo = cuponRepo;
+    }
+
+    public ClienteServicioImpl() {
     }
 
     @Override
@@ -43,15 +50,44 @@ public class ClienteServicioImpl implements ClienteServicio {
          return guardado.get();
     }
 
-    @Override
-    public Cliente login(String correo, String password) throws Exception {
-        Cliente cliente = clienteRepo.comprobarAutenticacion(correo, password);
+    public Cliente obtenerClienteXCorreo(String correo) throws Exception {
 
-        if (cliente == null) {
-            throw new Exception("Los datos de autenticación son incorrectos");
+        Optional<Cliente> guardado = clienteRepo.findByCorreo(correo);
+
+        if (guardado.isEmpty()) {
+            throw new Exception("El cliente no existe");
         }
 
-        return cliente;
+        return guardado.get();
+    }
+
+    @Override
+    public Cliente login(String correo, String password) throws Exception {
+
+        Cliente cliente = obtenerClienteXCorreo(correo);
+
+        if (cliente.getEstado()) {
+
+            cliente = clienteRepo.comprobarAutenticacion(correo, password);
+            if (cliente == null) {
+                throw new Exception("Los datos de autenticación son incorrectos");
+            }
+            return cliente;
+        }
+        throw new Exception("Por favor active su cuenta");
+
+    }
+    @Override
+    public void validarEstadoCuenta(Cliente cliente) throws Exception{
+
+        String codigo =JOptionPane.showInputDialog("Ingrese el codigo de verificacion que llego a su correo");
+
+
+        if (codigo.equals(codigoVerificacion)) {
+            cliente.setEstado(true);
+            clienteRepo.save(cliente);
+        }
+        throw new Exception("El codigo de verificacion es incorrecto");
     }
 
     @Override
@@ -68,9 +104,24 @@ public class ClienteServicioImpl implements ClienteServicio {
             throw new Exception("El correo ya está en uso");
         }
 
-        emailServicio.enviarEmail("Registro en unicine", "Hola ingrese a ese link para validar acceso", cliente.getCorreo());
+        asignarCuponRegistro(cliente);
+        enviarCorreo(cliente);
+
 
         return clienteRepo.save(cliente);
+    }
+
+    private void asignarCuponRegistro(Cliente cliente) {
+        Cupon cupon = cuponRepo.findByDescripcion("Descuento 15%");
+        CuponCliente cuponCliente = new CuponCliente(true,cliente,cupon);
+        cliente.getCodigoCupon().add(cuponCliente);
+    }
+
+    @Override
+    public void enviarCorreo(Cliente cliente) {
+        codigoVerificacion= (int) Math.floor(Math.random()*(111111-999999+1)+999999);
+        System.out.println(codigoVerificacion);
+        emailServicio.enviarEmail("Registro en unicine", "Hola ingrese este codigo para validar acceso :"+codigoVerificacion, cliente.getCorreo());
     }
 
     private boolean esRepetido(String correo) {
@@ -118,12 +169,21 @@ public class ClienteServicioImpl implements ClienteServicio {
 
     @Override
     public Compra hacerCompra(Compra compra) throws Exception{
+        if (listarHistorial(compra.getCliente().getCedula()).isEmpty()) {
+            asignarCuponPrimeraCompra(compra.getCliente());
+        }
         Cliente cliente = compra.getCliente();
         Funcion funcion = compra.getFuncion();
         cliente.getCompras().add(compra);
         funcion.getCompras().add(compra);
         calcularValorTotal(compra);
         return compraRepo.save(compra);
+    }
+
+    private void asignarCuponPrimeraCompra(Cliente cliente) {
+        Cupon cupon = cuponRepo.findByDescripcion("Descuento 10%");
+        CuponCliente cuponCliente = new CuponCliente(true,cliente,cupon);
+        cliente.getCodigoCupon().add(cuponCliente);
     }
 
     public void calcularValorTotal(Compra compra) {
@@ -138,11 +198,21 @@ public class ClienteServicioImpl implements ClienteServicio {
 
     }
 
+//    private float calcularDescuento(Compra compra, float valorTotal) {
+//        if(compra.getCuponCliente() == null){
+//            return valorTotal;
+//        }
+//        float descuento = compra.getCuponCliente().getCodigo_cupon().getDescuento();
+//
+//        return valorTotal - (valorTotal*descuento);
+//    }
     private float calcularDescuento(Compra compra, float valorTotal) {
-        if(compra.getCuponCliente() == null){
+        if(compra.getCliente().getCodigoCupon() == null){
             return valorTotal;
         }
+
         float descuento = compra.getCuponCliente().getCodigo_cupon().getDescuento();
+
         return valorTotal - (valorTotal*descuento);
     }
 
@@ -171,8 +241,20 @@ public class ClienteServicioImpl implements ClienteServicio {
 
 
     @Override
-    public boolean redimirCupon(Integer codigoCupon) throws Exception{
-        return false;
+    public boolean redimirCupon(Cliente cliente,Compra compra,Integer codigoCupon) throws Exception{
+
+        Optional<Cupon> cupon = cuponRepo.findById(codigoCupon);
+
+        if (cupon != null) {
+            CuponCliente cuponCliente = new CuponCliente(false,cliente,cupon.get());
+            if (!cuponCliente.getEstado()) {
+                compra.setCuponCliente(cuponCliente);
+                cuponCliente.setCompra(compra);
+                cliente.getCodigoCupon().add(cuponCliente);
+                return true;
+            }
+        }
+        throw new Exception("El cupo no existe");
     }
 
 

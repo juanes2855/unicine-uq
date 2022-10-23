@@ -84,14 +84,14 @@ public class AdminTeatroServicioImpl implements AdminTeatroServicio{
         return horarioRepo.findAll();
     }
 
-    @Override
-    public Horario obtenerHorario(Integer codigoHorario) throws Exception {
-        Optional<Horario> guardado = horarioRepo.findById(codigoHorario);
-        if (guardado.isEmpty())
-            throw new Exception("El cupon no existe");
-
-        return guardado.get();
-    }
+//    @Override
+//    public Horario obtenerHorario(Integer codigoHorario) throws Exception {
+//        Optional<Horario> guardado = horarioRepo.findById(codigoHorario);
+//        if (guardado.isEmpty())
+//            throw new Exception("El cupon no existe");
+//
+//        return guardado.get();
+//    }
 
 
     @Override

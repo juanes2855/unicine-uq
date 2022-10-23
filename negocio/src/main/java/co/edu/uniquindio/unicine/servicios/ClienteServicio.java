@@ -22,7 +22,7 @@ public interface ClienteServicio {
 
     Compra hacerCompra(Compra compra) throws Exception;
 
-    boolean redimirCupon(Integer codigoCupon) throws Exception;
+    boolean redimirCupon(Cliente cliente,Compra compra,Integer codigoCupon) throws Exception;
 
     List<Pelicula> buscarPelicula (String nombre);
 
@@ -31,4 +31,7 @@ public interface ClienteServicio {
     Entrada comprarEntradas (Entrada entrada);
 
     boolean cambiarPassword(Integer cedula) throws Exception;
+    void enviarCorreo(Cliente cliente);
+
+    void validarEstadoCuenta(Cliente cliente) throws Exception;
 }

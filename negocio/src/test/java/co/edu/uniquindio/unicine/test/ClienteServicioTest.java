@@ -26,7 +26,7 @@ public class ClienteServicioTest {
 
     @Test
     @Sql("classpath:dataset.sql")
-    public void registrarClienteTest(){
+    public void registrarClienteTest() {
 
         Cliente cliente = Cliente.builder().cedula(123456).nombre("Juanito").password("123a").correo("juanito@email.com").urlFoto("http...").build();
 
@@ -38,9 +38,26 @@ public class ClienteServicioTest {
         }
 
     }
+
+//    @Test
+//    @Sql("classpath:dataset.sql")
+//    public void validarEstadoCuenta() {
+//
+//        Cliente cliente = Cliente.builder().cedula(123456).nombre("Juanito").password("123a").correo("juanes13916@gmail.com").urlFoto("http...").build();
+//
+//        try {
+//            Cliente nuevo = clienteServicio.registrarCliente(cliente);
+//            clienteServicio.validarEstadoCuenta(nuevo);
+//            Assertions.assertNotNull(nuevo);
+//        } catch (Exception e) {
+//            Assertions.assertTrue(false);
+//        }
+//
+//    }
+
     @Test
     @Sql("classpath:dataset.sql")
-    public void actualizarClienteTest(){
+    public void actualizarClienteTest() {
 
         try {
             Cliente cliente = clienteServicio.obtenerCliente(1078954);
@@ -52,9 +69,10 @@ public class ClienteServicioTest {
         }
 
     }
+
     @Test
     @Sql("classpath:dataset.sql")
-    public void eliminarClienteTest(){
+    public void eliminarClienteTest() {
 
         try {
             clienteServicio.eliminarCliente(1004917021);
@@ -62,29 +80,38 @@ public class ClienteServicioTest {
             Assertions.assertTrue(false);
         }
 
-        try{
-          // Cliente cliente = clienteServicio.obtenerCliente(1004917021);
-        }catch (Exception e){
+        try {
+            // Cliente cliente = clienteServicio.obtenerCliente(1004917021);
+        } catch (Exception e) {
             throw new RuntimeException(e);
         }
 
     }
+
     @Test
     @Sql("classpath:dataset.sql")
-    public void listarClienteTest(){
+    public void listarClienteTest() {
 
         List<Cliente> lista = clienteServicio.listarClientes();
         lista.forEach(System.out::println);
 
     }
+
     @Test
-    public void enviarCorreo(){
-        emailServicio.enviarEmail("ASUNTO","CONTENIDO","juanes13916@gmail.com");
+    public void enviarCorreo() {
+        emailServicio.enviarEmail("ASUNTO", "CONTENIDO", "juanes13916@gmail.com");
     }
+    @Test
+    public void enviarCorreoCliente() {
+        String[] tels = new String[]{"231", "323"};
+        Cliente cliente = new Cliente(12345, "pepito", "pepito@email.com", "1234", "url", Arrays.asList(tels));
+       clienteServicio.enviarCorreo(cliente);
+    }
+
 
     @Test
     @Sql("classpath:dataset.sql")
-    public void agregarEntrada(){
+    public void agregarEntrada() {
         MedioPago medioPago = MedioPago.TARJETA_UNICINE;
 
 
@@ -93,11 +120,11 @@ public class ClienteServicioTest {
 
         Horario horario = new Horario("LMXJVSD", "15:30", LocalDateTime.of(2022, 10, 16, 15, 30, 0, 0), LocalDateTime.of(2022, 10, 31, 15, 30, 0, 0));
         Genero[] generos = new Genero[]{Genero.TERROR};
-        Pelicula pelicula = new Pelicula("El sismo", "En cartelera","De la naturaleza nadie se salva", "http:@sismo",
+        Pelicula pelicula = new Pelicula("El sismo", "En cartelera", "De la naturaleza nadie se salva", "http:@sismo",
                 "http:@Elsismo.jpj", "Andres Lopez, Esteban Henao", Arrays.asList(generos));
         Ciudad ciudad = new Ciudad("Barrancabermeja");
         Teatro teatro = new Teatro("mi casa", "1231232", ciudad);
-        DistribucionSillas distribucionSillas = new DistribucionSillas(4,4);
+        DistribucionSillas distribucionSillas = new DistribucionSillas(4, 4);
         Sala sala = new Sala("Cine xd", teatro, distribucionSillas);
         Funcion funcion = new Funcion(24000f, horario, sala, pelicula);
 
@@ -113,9 +140,10 @@ public class ClienteServicioTest {
         }
 
     }
+
     @Test
     @Sql("classpath:dataset.sql")
-    public void realizarCompra(){
+    public void realizarCompra() {
         MedioPago medioPago = MedioPago.TARJETA_UNICINE;
 
 
@@ -124,11 +152,11 @@ public class ClienteServicioTest {
 
         Horario horario = new Horario("LMXJVSD", "15:30", LocalDateTime.of(2022, 10, 16, 15, 30, 0, 0), LocalDateTime.of(2022, 10, 31, 15, 30, 0, 0));
         Genero[] generos = new Genero[]{Genero.TERROR};
-        Pelicula pelicula = new Pelicula("El sismo", "En cartelera","De la naturaleza nadie se salva", "http:@sismo",
+        Pelicula pelicula = new Pelicula("El sismo", "En cartelera", "De la naturaleza nadie se salva", "http:@sismo",
                 "http:@Elsismo.jpj", "Andres Lopez, Esteban Henao", Arrays.asList(generos));
         Ciudad ciudad = new Ciudad("Barrancabermeja");
         Teatro teatro = new Teatro("mi casa", "1231232", ciudad);
-        DistribucionSillas distribucionSillas = new DistribucionSillas(4,4);
+        DistribucionSillas distribucionSillas = new DistribucionSillas(4, 4);
         Sala sala = new Sala("Cine xd", teatro, distribucionSillas);
         Funcion funcion = new Funcion(24000f, horario, sala, pelicula);
 
@@ -140,11 +168,29 @@ public class ClienteServicioTest {
         compra.getEntradas().add(entrada);
         compra.getCompraConfiterias().add(compraConfiteria);
         try {
-           Compra nuevo = clienteServicio.hacerCompra(compra);
+            Compra nuevo = clienteServicio.hacerCompra(compra);
             Assertions.assertNotNull(nuevo);
         } catch (Exception e) {
             Assertions.assertTrue(false);
         }
+
+    }
+
+    @Test
+    @Sql("classpath:dataset.sql")
+    public void buscarPeliculaTest() {
+
+        List<Pelicula> lista = clienteServicio.buscarPelicula("we");
+        lista.forEach(System.out::println);
+
+    }
+
+    @Test
+    @Sql("classpath:dataset.sql")
+    public void listarHistorialTest() throws Exception {
+
+        List<Compra> lista = clienteServicio.listarHistorial(1091003);
+        lista.forEach(System.out::println);
 
     }
 
