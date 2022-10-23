@@ -75,7 +75,7 @@ public class ClienteTest {
     @Sql("classpath:dataset.sql")
     public void obtenerPorEmail() {
 
-        Cliente cliente = clienteRepo.obtener("jf@uqvirtual.co");
+        Cliente cliente = clienteRepo.obtener("chil@uqvirtual.co");
         Assertions.assertNotNull(cliente);
     }
 
@@ -83,7 +83,7 @@ public class ClienteTest {
     @Sql("classpath:dataset.sql")
     public void comprobarAutenticacion() {
 
-        Cliente cliente = clienteRepo.findByCorreoAndPassword("jf@uqvirtual.co","12345");
+        Cliente cliente = clienteRepo.findByCorreoAndPassword("chil@uqvirtual.co","12345b");
         Assertions.assertNotNull(cliente);
     }
 

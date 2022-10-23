@@ -23,19 +23,16 @@ public class ClienteServicioImpl implements ClienteServicio {
 
     private int codigoVerificacion = 0;
 
-    public ClienteServicioImpl(ClienteRepo clienteRepo, EmailServicio emailServicio, PeliculaRepo peliculaRepo, CompraRepo compraRepo, ConfiteriaRepo confiteriaRepo, CompraConfiteriaRepo compraConfiteriaRepo, EntradaRepo entradaRepo,CuponRepo cuponRepo) {
+    public ClienteServicioImpl(ClienteRepo clienteRepo, EmailServicio emailServicio, PeliculaRepo peliculaRepo, CompraRepo compraRepo, ConfiteriaRepo confiteriaRepo, CompraConfiteriaRepo compraConfiteriaRepo, EntradaRepo entradaRepo, CuponRepo cuponRepo) {
 
         this.clienteRepo = clienteRepo;
-        this.emailServicio= emailServicio;
+        this.emailServicio = emailServicio;
         this.peliculaRepo = peliculaRepo;
         this.compraRepo = compraRepo;
-        this.confiteriaRepo= confiteriaRepo;
+        this.confiteriaRepo = confiteriaRepo;
         this.compraConfiteriaRepo = compraConfiteriaRepo;
         this.entradaRepo = entradaRepo;
         this.cuponRepo = cuponRepo;
-    }
-
-    public ClienteServicioImpl() {
     }
 
     @Override
@@ -47,7 +44,7 @@ public class ClienteServicioImpl implements ClienteServicio {
             throw new Exception("El cliente no existe");
         }
 
-         return guardado.get();
+        return guardado.get();
     }
 
     public Cliente obtenerClienteXCorreo(String correo) throws Exception {
@@ -77,10 +74,11 @@ public class ClienteServicioImpl implements ClienteServicio {
         throw new Exception("Por favor active su cuenta");
 
     }
-    @Override
-    public void validarEstadoCuenta(Cliente cliente) throws Exception{
 
-        String codigo =JOptionPane.showInputDialog("Ingrese el codigo de verificacion que llego a su correo");
+    @Override
+    public void validarEstadoCuenta(Cliente cliente) throws Exception {
+
+        String codigo = JOptionPane.showInputDialog("Ingrese el codigo de verificacion que llego a su correo");
 
 
         if (codigo.equals(codigoVerificacion)) {
@@ -113,31 +111,33 @@ public class ClienteServicioImpl implements ClienteServicio {
 
     private void asignarCuponRegistro(Cliente cliente) {
         Cupon cupon = cuponRepo.findByDescripcion("Descuento 15%");
-        CuponCliente cuponCliente = new CuponCliente(true,cliente,cupon);
+        CuponCliente cuponCliente = new CuponCliente(true, cliente, cupon);
         cliente.getCodigoCupon().add(cuponCliente);
     }
 
     @Override
     public void enviarCorreo(Cliente cliente) {
-        codigoVerificacion= (int) Math.floor(Math.random()*(111111-999999+1)+999999);
+        codigoVerificacion = (int) Math.floor(Math.random() * (111111 - 999999 + 1) + 999999);
         System.out.println(codigoVerificacion);
-        emailServicio.enviarEmail("Registro en unicine", "Hola ingrese este codigo para validar acceso :"+codigoVerificacion, cliente.getCorreo());
+        emailServicio.enviarEmail("Registro en unicine", "Hola ingrese este codigo para validar acceso :" + codigoVerificacion, cliente.getCorreo());
     }
 
     private boolean esRepetido(String correo) {
         //Si es null retornar False
         return clienteRepo.findByCorreo(correo).orElse(null) != null;
     }
+
     private boolean esCedulaRepetida(Integer cedula) {
 
         return clienteRepo.findByCedula(cedula).orElse(null) != null;
     }
+
     @Override //ojooooooo revisarrrr
-    public Cliente actualizarCliente(Cliente cliente) throws Exception{
+    public Cliente actualizarCliente(Cliente cliente) throws Exception {
 
         Optional<Cliente> guardado = clienteRepo.findById(cliente.getCedula());
 
-        if (guardado.isEmpty()){
+        if (guardado.isEmpty()) {
             throw new Exception("El cliente no existe");
         }
 
@@ -145,14 +145,14 @@ public class ClienteServicioImpl implements ClienteServicio {
     }
 
     @Override
-    public void eliminarCliente(Integer cedulaCliente) throws Exception{
+    public void eliminarCliente(Integer cedulaCliente) throws Exception {
         Optional<Cliente> guardado = clienteRepo.findById(cedulaCliente);
 
-        if (guardado.isEmpty()){
+        if (guardado.isEmpty()) {
             throw new Exception("El cliente no existe");
         }
 
-      clienteRepo.delete(guardado.get());
+        clienteRepo.delete(guardado.get());
     }
 
     @Override
@@ -161,14 +161,14 @@ public class ClienteServicioImpl implements ClienteServicio {
     }
 
     @Override
-    public List<Compra> listarHistorial(Integer cedulaCliente) throws Exception{
+    public List<Compra> listarHistorial(Integer cedulaCliente) throws Exception {
 
         List<Compra> compras = clienteRepo.obtenerCompras(cedulaCliente);
         return compras;
     }
 
     @Override
-    public Compra hacerCompra(Compra compra) throws Exception{
+    public Compra hacerCompra(Compra compra) throws Exception {
         if (listarHistorial(compra.getCliente().getCedula()).isEmpty()) {
             asignarCuponPrimeraCompra(compra.getCliente());
         }
@@ -177,12 +177,18 @@ public class ClienteServicioImpl implements ClienteServicio {
         cliente.getCompras().add(compra);
         funcion.getCompras().add(compra);
         calcularValorTotal(compra);
+        enviarCorreoDetalleCompra(compra);
         return compraRepo.save(compra);
+    }
+
+    @Override
+    public void enviarCorreoDetalleCompra(Compra compra) {
+        emailServicio.enviarEmail("Factura compra numero "+compra.getCodigo(), "Este es un resumen de la compra realizada :"+"\n"+"Fecha: "+compra.getFecha()+"\n"+" Pelicula: "+compra.getFuncion().getPelicula()+"\n"+"Total factura: "+compra.getValorTotal() + codigoVerificacion, compra.getCliente().getCorreo());
     }
 
     private void asignarCuponPrimeraCompra(Cliente cliente) {
         Cupon cupon = cuponRepo.findByDescripcion("Descuento 10%");
-        CuponCliente cuponCliente = new CuponCliente(true,cliente,cupon);
+        CuponCliente cuponCliente = new CuponCliente(true, cliente, cupon);
         cliente.getCodigoCupon().add(cuponCliente);
     }
 
@@ -198,7 +204,7 @@ public class ClienteServicioImpl implements ClienteServicio {
 
     }
 
-//    private float calcularDescuento(Compra compra, float valorTotal) {
+    //    private float calcularDescuento(Compra compra, float valorTotal) {
 //        if(compra.getCuponCliente() == null){
 //            return valorTotal;
 //        }
@@ -207,18 +213,19 @@ public class ClienteServicioImpl implements ClienteServicio {
 //        return valorTotal - (valorTotal*descuento);
 //    }
     private float calcularDescuento(Compra compra, float valorTotal) {
-        if(compra.getCliente().getCodigoCupon() == null){
+        if (compra.getCliente().getCodigoCupon() == null) {
             return valorTotal;
         }
 
+        compra.setCuponCliente(compra.getCliente().getCodigoCupon().get(0));
         float descuento = compra.getCuponCliente().getCodigo_cupon().getDescuento();
 
-        return valorTotal - (valorTotal*descuento);
+        return valorTotal - (valorTotal * descuento);
     }
 
     private float calcularValorEntradas(Compra compra) {
-        float valor= 0;
-        for (Entrada entradas: compra.getEntradas()) {
+        float valor = 0;
+        for (Entrada entradas : compra.getEntradas()) {
             valor += entradas.getPrecio();
         }
         return valor;
@@ -241,12 +248,12 @@ public class ClienteServicioImpl implements ClienteServicio {
 
 
     @Override
-    public boolean redimirCupon(Cliente cliente,Compra compra,Integer codigoCupon) throws Exception{
+    public boolean redimirCupon(Cliente cliente, Compra compra, Integer codigoCupon) throws Exception {
 
         Optional<Cupon> cupon = cuponRepo.findById(codigoCupon);
 
         if (cupon != null) {
-            CuponCliente cuponCliente = new CuponCliente(false,cliente,cupon.get());
+            CuponCliente cuponCliente = new CuponCliente(false, cliente, cupon.get());
             if (!cuponCliente.getEstado()) {
                 compra.setCuponCliente(cuponCliente);
                 cuponCliente.setCompra(compra);
@@ -258,33 +265,43 @@ public class ClienteServicioImpl implements ClienteServicio {
     }
 
 
-
     @Override
     public List<Pelicula> buscarPelicula(String nombre) {
         List<Pelicula> peliculas = peliculaRepo.buscarPeliculas(nombre);
         return peliculas;
     }
-    public CompraConfiteria ingresarConfiteriaCompra(CompraConfiteria confiteria){
+
+    public CompraConfiteria ingresarConfiteriaCompra(CompraConfiteria confiteria) {
         CompraConfiteria nuevo = compraConfiteriaRepo.save(confiteria);
         Compra compra = nuevo.getCompra();
         compra.getCompraConfiterias().add(confiteria);
         return nuevo;
     }
 
-    public Entrada comprarEntradas (Entrada entrada){
+    public Entrada comprarEntradas(Entrada entrada) {
         Entrada nuevo = entradaRepo.save(entrada);
         Compra compra = nuevo.getCompra();
         compra.getEntradas().add(nuevo);
         return nuevo;
     }
+
     @Override
-    public List<Confiteria> buscarConfiteria(String nombre){
-        List<Confiteria> confiterias =  confiteriaRepo.buscarConfiteria(nombre);
+    public List<Confiteria> buscarConfiteria(String nombre) {
+        List<Confiteria> confiterias = confiteriaRepo.buscarConfiteria(nombre);
         return confiterias;
     }
 
     @Override
-    public boolean cambiarPassword(Integer cedula) throws Exception {
-        return false;
+    public boolean cambiarPassword(String correo) throws Exception {
+        Optional<Cliente> cliente = clienteRepo.findByCorreo(correo);
+        enviarCorreoContraNueva(cliente.get());
+        return true;
+    }
+
+    @Override
+    public void enviarCorreoContraNueva(Cliente cliente) {
+        codigoVerificacion = (int) Math.floor(Math.random() * (111111 - 999999 + 1) + 999999);
+        cliente.setPassword(String.valueOf(codigoVerificacion));
+        emailServicio.enviarEmail("Nueva contraseña", "Hola ingrese esta contraseña para validar acceso :" + codigoVerificacion, cliente.getCorreo());
     }
 }

@@ -30,8 +30,11 @@ public interface ClienteServicio {
 
     Entrada comprarEntradas (Entrada entrada);
 
-    boolean cambiarPassword(Integer cedula) throws Exception;
+    boolean cambiarPassword(String correo) throws Exception;
     void enviarCorreo(Cliente cliente);
 
     void validarEstadoCuenta(Cliente cliente) throws Exception;
+
+    void enviarCorreoDetalleCompra(Compra compra);
+    void enviarCorreoContraNueva(Cliente cliente);
 }

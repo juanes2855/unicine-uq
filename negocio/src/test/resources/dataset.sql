@@ -24,7 +24,7 @@ insert into cliente values (1078954, "chil@uqvirtual.co", "Carolina", "12345b", 
 insert into cliente values (1091003, "ch@uqvirtual.co", "Ana", "12345a", 1, "http");
 insert into cliente values (1093845, "Jh@uqvirtual.co", "Juan", "123", 0, "http:2");
 insert into cliente values (1094599, "Jm@uqvirtual.co", "Julian", "1234", 0, "http:1");
-insert into cliente values (1094899, "jf@uqvirtual.co", "John", "12345", 0, "http:");
+insert into cliente values (1094899, "jfmunozd@uqvirtual.edu.co", "John", "12345", 0, "http:");
 insert into cliente values (1004917021, "juajaja@uqvirtual.co", "Juanes", "12345", 0, "http:");
 
 
@@ -41,8 +41,8 @@ insert into cliente_telefonos values (1078954, "31143122");
 insert into cupon values  (1,"Descuento 10%",0.10,"2022-10-10");
 insert into cupon values  (2,"Descuento 20%",0.20,"2022-11-09");
 insert into cupon values  (3,"Descuento 15%",0.15,"2022-11-12");
-insert into cupon values  (4,"Descuento 15%",0.15,"2022-11-25");
-insert into cupon values  (5,"Descuento 20%",0.20,"2022-11-25");
+insert into cupon values  (4,"Descuento 18%",0.15,"2022-11-25");
+insert into cupon values  (5,"Descuento 21%",0.20,"2022-11-25");
 
 
 ------------ CuponCliente ---------------

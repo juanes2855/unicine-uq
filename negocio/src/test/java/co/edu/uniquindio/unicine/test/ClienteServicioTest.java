@@ -101,11 +101,12 @@ public class ClienteServicioTest {
     public void enviarCorreo() {
         emailServicio.enviarEmail("ASUNTO", "CONTENIDO", "juanes13916@gmail.com");
     }
+
     @Test
     public void enviarCorreoCliente() {
         String[] tels = new String[]{"231", "323"};
         Cliente cliente = new Cliente(12345, "pepito", "pepito@email.com", "1234", "url", Arrays.asList(tels));
-       clienteServicio.enviarCorreo(cliente);
+        clienteServicio.enviarCorreo(cliente);
     }
 
 
@@ -148,7 +149,7 @@ public class ClienteServicioTest {
 
 
         String[] tels = new String[]{"231", "323"};
-        Cliente cliente = new Cliente(12345, "pepito", "pepito@email.com", "1234", "url", Arrays.asList(tels));
+        Cliente cliente = new Cliente(12345, "pepito", "jfmunozd@uqvirtual.edu.co", "1234", "url", Arrays.asList(tels));
 
         Horario horario = new Horario("LMXJVSD", "15:30", LocalDateTime.of(2022, 10, 16, 15, 30, 0, 0), LocalDateTime.of(2022, 10, 31, 15, 30, 0, 0));
         Genero[] generos = new Genero[]{Genero.TERROR};
@@ -193,5 +194,16 @@ public class ClienteServicioTest {
         lista.forEach(System.out::println);
 
     }
+
+    @Test
+    @Sql("classpath:dataset.sql")
+    public void cambiarPassword() throws Exception {
+
+        Boolean cambio = clienteServicio.cambiarPassword("jfmunozd@uqvirtual.edu.co");
+
+        Assertions.assertTrue(cambio);
+
+    }
+
 
 }
