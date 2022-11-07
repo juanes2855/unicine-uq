@@ -172,13 +172,10 @@ public class AdminTeatroServicioImpl implements AdminTeatroServicio{
 
     @Override
     public Funcion crearFuncion(Funcion funcion) throws Exception {
-        Pelicula pelicula = funcion.getPelicula();
-        Horario horario = funcion.getHorario();
-        Sala sala = funcion.getSala();
-
-        horario.getFunciones().add(funcion);
-        pelicula.getFunciones().add(funcion);
-        sala.getFunciones().add(funcion);
+        //validar los horarios
+//        horario.getFunciones().add(funcion);
+//        pelicula.getFunciones().add(funcion);
+//        sala.getFunciones().add(funcion);
         return funcionRepo.save(funcion);
     }
 
@@ -221,8 +218,7 @@ public class AdminTeatroServicioImpl implements AdminTeatroServicio{
     @Override
     public Teatro crearTeatro(Teatro teatro) throws Exception {
         Teatro nuevoTeatro = teatroRepo.save(teatro);
-        Ciudad ciudad = teatro.getCiudad();
-        ciudad.getTeatros().add(nuevoTeatro);
+
         return nuevoTeatro;
     }
 

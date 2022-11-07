@@ -21,9 +21,11 @@ public class ClienteServicioImpl implements ClienteServicio {
     private EntradaRepo entradaRepo;
     private CuponRepo cuponRepo;
 
+    private CuponClienteRepo cuponClienteRepo;
+
     private int codigoVerificacion = 0;
 
-    public ClienteServicioImpl(ClienteRepo clienteRepo, EmailServicio emailServicio, PeliculaRepo peliculaRepo, CompraRepo compraRepo, ConfiteriaRepo confiteriaRepo, CompraConfiteriaRepo compraConfiteriaRepo, EntradaRepo entradaRepo, CuponRepo cuponRepo) {
+    public ClienteServicioImpl(ClienteRepo clienteRepo, EmailServicio emailServicio, PeliculaRepo peliculaRepo, CompraRepo compraRepo, ConfiteriaRepo confiteriaRepo, CompraConfiteriaRepo compraConfiteriaRepo, EntradaRepo entradaRepo, CuponRepo cuponRepo, CuponClienteRepo cuponClienteRepo) {
 
         this.clienteRepo = clienteRepo;
         this.emailServicio = emailServicio;
@@ -33,6 +35,7 @@ public class ClienteServicioImpl implements ClienteServicio {
         this.compraConfiteriaRepo = compraConfiteriaRepo;
         this.entradaRepo = entradaRepo;
         this.cuponRepo = cuponRepo;
+        this.cuponClienteRepo = cuponClienteRepo;
     }
 
     @Override
@@ -61,25 +64,23 @@ public class ClienteServicioImpl implements ClienteServicio {
     @Override
     public Cliente login(String correo, String password) throws Exception {
 
-        Cliente cliente = obtenerClienteXCorreo(correo);
+        Cliente cliente = clienteRepo.comprobarAutenticacion(correo, password);
 
-        if (cliente.getEstado()) {
-
-            cliente = clienteRepo.comprobarAutenticacion(correo, password);
-            if (cliente == null) {
-                throw new Exception("Los datos de autenticación son incorrectos");
+        if (cliente != null) {
+            if (cliente.getEstado()) {
+                return cliente;
+            }else{
+                throw new Exception("Por favor active su cuenta");
             }
-            return cliente;
+        }else{
+            throw new Exception("Los datos de autenticación son incorrectos");
         }
-        throw new Exception("Por favor active su cuenta");
+
 
     }
 
     @Override
-    public void validarEstadoCuenta(Cliente cliente) throws Exception {
-
-        String codigo = JOptionPane.showInputDialog("Ingrese el codigo de verificacion que llego a su correo");
-
+    public void validarEstadoCuenta(Cliente cliente, String codigo) throws Exception {
 
         if (codigo.equals(codigoVerificacion)) {
             cliente.setEstado(true);
@@ -101,7 +102,7 @@ public class ClienteServicioImpl implements ClienteServicio {
         if (correoExiste) {
             throw new Exception("El correo ya está en uso");
         }
-
+        cliente.setEstado(false);
         asignarCuponRegistro(cliente);
         enviarCorreo(cliente);
 
@@ -112,7 +113,7 @@ public class ClienteServicioImpl implements ClienteServicio {
     private void asignarCuponRegistro(Cliente cliente) {
         Cupon cupon = cuponRepo.findByDescripcion("Descuento 15%");
         CuponCliente cuponCliente = new CuponCliente(true, cliente, cupon);
-        cliente.getCodigoCupon().add(cuponCliente);
+        cuponClienteRepo.save(cuponCliente);
     }
 
     @Override
@@ -132,7 +133,7 @@ public class ClienteServicioImpl implements ClienteServicio {
         return clienteRepo.findByCedula(cedula).orElse(null) != null;
     }
 
-    @Override //ojooooooo revisarrrr
+    @Override
     public Cliente actualizarCliente(Cliente cliente) throws Exception {
 
         Optional<Cliente> guardado = clienteRepo.findById(cliente.getCedula());
@@ -172,10 +173,11 @@ public class ClienteServicioImpl implements ClienteServicio {
         if (listarHistorial(compra.getCliente().getCedula()).isEmpty()) {
             asignarCuponPrimeraCompra(compra.getCliente());
         }
-        Cliente cliente = compra.getCliente();
-        Funcion funcion = compra.getFuncion();
-        cliente.getCompras().add(compra);
-        funcion.getCompras().add(compra);
+
+        for(Entrada e: compra.getEntradas()){
+            e.setPrecio( compra.getFuncion().getPrecio() );
+        }
+
         calcularValorTotal(compra);
         enviarCorreoDetalleCompra(compra);
         return compraRepo.save(compra);
@@ -189,15 +191,17 @@ public class ClienteServicioImpl implements ClienteServicio {
     private void asignarCuponPrimeraCompra(Cliente cliente) {
         Cupon cupon = cuponRepo.findByDescripcion("Descuento 10%");
         CuponCliente cuponCliente = new CuponCliente(true, cliente, cupon);
-        cliente.getCodigoCupon().add(cuponCliente);
+        //cliente.getCodigoCupon().add(cuponCliente);
+        //se guarda el cupon repo creado ???
+        cuponClienteRepo.save(cuponCliente);
     }
 
     public void calcularValorTotal(Compra compra) {
         float valorTotal, valorConfiteria, valorFuncion, valorEntradas, valorDescuento;
         valorConfiteria = calcularValorConfiteria(compra);
-        valorFuncion = calcularValorFuncion(compra);
+        //valorFuncion = calcularValorFuncion(compra);
         valorEntradas = calcularValorEntradas(compra);
-        valorTotal = valorConfiteria + valorFuncion + valorEntradas;
+        valorTotal = valorConfiteria + valorEntradas;
         valorDescuento = calcularDescuento(compra, valorTotal);
 
         compra.setValorTotal(valorDescuento);
@@ -217,8 +221,12 @@ public class ClienteServicioImpl implements ClienteServicio {
             return valorTotal;
         }
 
-        compra.setCuponCliente(compra.getCliente().getCodigoCupon().get(0));
-        float descuento = compra.getCuponCliente().getCodigo_cupon().getDescuento();
+        //compra.setCuponCliente(compra.getCuponCliente() ); es oneTo Many como se relaciona entocnes?
+
+       // System.out.println(compra.getCuponCliente().getCodigo_cupon().getDescuento());
+
+        //float descuento = compra.getCuponCliente().getCodigo_cupon().getDescuento();
+        float descuento = 0f;
 
         return valorTotal - (valorTotal * descuento);
     }

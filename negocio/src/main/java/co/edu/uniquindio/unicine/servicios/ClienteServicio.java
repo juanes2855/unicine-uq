@@ -33,7 +33,7 @@ public interface ClienteServicio {
     boolean cambiarPassword(String correo) throws Exception;
     void enviarCorreo(Cliente cliente);
 
-    void validarEstadoCuenta(Cliente cliente) throws Exception;
+    void validarEstadoCuenta(Cliente cliente, String codigo) throws Exception;
 
     void enviarCorreoDetalleCompra(Compra compra);
     void enviarCorreoContraNueva(Cliente cliente);
