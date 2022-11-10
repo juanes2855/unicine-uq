@@ -276,6 +276,7 @@ public class ClienteServicioImpl implements ClienteServicio {
     public List<Pelicula> buscarPelicula(String nombre) {
         List<Pelicula> peliculas = peliculaRepo.buscarPeliculas(nombre);
         return peliculas;
+        //holi
     }
 
     public CompraConfiteria ingresarConfiteriaCompra(CompraConfiteria confiteria) {
