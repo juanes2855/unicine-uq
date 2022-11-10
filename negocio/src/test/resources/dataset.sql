@@ -63,11 +63,11 @@ insert into confiteria values (5,"Papas", 15000, "url");
 
 ----------- Pelicula ------------------
 
-insert into pelicula values  (1,"En cartelera","worldwest","Evan Rachel Wood, Jeffrey Wright", "Experimentar el Viejo Oeste","http:@oeste","https://www.youtube.com/watch?v=VyX0gMULtLM");
-insert into pelicula values  (2,"En cartelera","Halloween: La Noche Final","Jamie Lee Curtis, James Jude Courtney", "Halloween Kills: La Noche Aún No Termina","http:@halloween","https://www.cinecolombia.com/bogota/peliculas/halloween-la-noche-final");
-insert into pelicula values  (3,"En estreno","Black Adam","Dwayne Johnson, Sarah Shahi", "años después de haber sido dotado de los poderes omnipotentes de los antiguos dioses","http:@black.adam","https://www.cinecolombia.com/bogota/peliculas/black-adam");
-insert into pelicula values  (4,"En estreno","Fobias","Hana Mae Lee, Leo Nam", "Cinco pacientes peligrosos, que sufren de fobias extremas, son sometidos a prueba","http:@fobias","https://www.cinecolombia.com/bogota/peliculas/fobias");
-insert into pelicula values  (5,"En cartelera","Vértigo","Grace Caroline Currey, Virginia Gardner", " Consiste en conquistar los miedos y superar los límites.","http:@Vertigo","https://www.cinecolombia.com/bogota/peliculas/vertigo");
+insert into pelicula values  (1,"CARTELERA","worldwest","Evan Rachel Wood, Jeffrey Wright", "Experimentar el Viejo Oeste","http:@oeste","https://www.youtube.com/watch?v=VyX0gMULtLM");
+insert into pelicula values  (2,"CARTELERA","Halloween: La Noche Final","Jamie Lee Curtis, James Jude Courtney", "Halloween Kills: La Noche Aún No Termina","http:@halloween","https://www.cinecolombia.com/bogota/peliculas/halloween-la-noche-final");
+insert into pelicula values  (3,"CARTELERA","Black Adam","Dwayne Johnson, Sarah Shahi", "años después de haber sido dotado de los poderes omnipotentes de los antiguos dioses","http:@black.adam","https://www.cinecolombia.com/bogota/peliculas/black-adam");
+insert into pelicula values  (4,"CARTELERA","Fobias","Hana Mae Lee, Leo Nam", "Cinco pacientes peligrosos, que sufren de fobias extremas, son sometidos a prueba","http:@fobias","https://www.cinecolombia.com/bogota/peliculas/fobias");
+insert into pelicula values  (5,"CARTELERA","Vértigo","Grace Caroline Currey, Virginia Gardner", " Consiste en conquistar los miedos y superar los límites.","http:@Vertigo","https://www.cinecolombia.com/bogota/peliculas/vertigo");
 
 ----------- Pelicula Genero ---------------------
 

@@ -39,7 +39,8 @@ public class AdminServicioTest {
     @Sql("classpath:dataset.sql")
     public void registrarPeliculaTest() {
         Genero[] generos = new Genero[]{Genero.TERROR};
-        Pelicula pelicula = new Pelicula("El sismo", "En cartelera","De la naturaleza nadie se salva", "http:@sismo",
+        EstadoPelicula estadoPelicula = EstadoPelicula.CARTELERA;
+        Pelicula pelicula = new Pelicula("El sismo", estadoPelicula,"De la naturaleza nadie se salva", "http:@sismo",
                 "http:@Elsismo.jpj", "Andres Lopez, Esteban Henao", Arrays.asList(generos));
         pelicula.setCodigo(8);
         try {

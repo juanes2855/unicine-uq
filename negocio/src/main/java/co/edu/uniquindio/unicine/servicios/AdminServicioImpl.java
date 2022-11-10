@@ -51,7 +51,7 @@ public class AdminServicioImpl implements AdminServicio{
 
     @Override
     public Pelicula crearPelicula(Pelicula pelicula) throws Exception {
-
+            // verificar si necesita validacion
         return peliculaRepo.save(pelicula);
     }
 

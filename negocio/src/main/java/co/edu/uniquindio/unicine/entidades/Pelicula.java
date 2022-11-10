@@ -22,7 +22,7 @@ public class Pelicula implements Serializable {
 
     @Column(nullable = false)
     private String nombre;
-
+    @Lob
     @Column(nullable = false)
     private String sinopsis;
 
@@ -31,10 +31,10 @@ public class Pelicula implements Serializable {
 
     @Column(nullable = false)
     private String urlImagen;
-
+    @Enumerated(EnumType.STRING)
     @Column(nullable = false)
-    private String estado;
-
+    private EstadoPelicula estado;
+    @Lob
     @Column(nullable = false)
     private String reparto;
 
@@ -47,7 +47,7 @@ public class Pelicula implements Serializable {
     private List<Genero> generos;
 
     @Builder
-    public Pelicula(String nombre,String estado, String sinopsis, String urlTrailer, String urlImagen, String reparto, List<Genero> generos) {
+    public Pelicula(String nombre,EstadoPelicula estado, String sinopsis, String urlTrailer, String urlImagen, String reparto, List<Genero> generos) {
         this.nombre = nombre;
         this.sinopsis = sinopsis;
         this.urlTrailer = urlTrailer;

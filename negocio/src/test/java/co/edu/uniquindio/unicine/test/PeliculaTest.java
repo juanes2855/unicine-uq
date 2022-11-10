@@ -26,7 +26,7 @@ public class PeliculaTest {
     @Sql("classpath:dataset.sql")
     public void registrar() {
         Genero[] generos = new Genero[]{Genero.TERROR};
-        Pelicula pelicula = new Pelicula("El sismo", "En cartelera","De la naturaleza nadie se salva", "http:@sismo",
+        Pelicula pelicula = new Pelicula("El sismo", EstadoPelicula.CARTELERA,"De la naturaleza nadie se salva", "http:@sismo",
                 "http:@Elsismo.jpj", "Andres Lopez, Esteban Henao", Arrays.asList(generos));
         Pelicula guardado = peliculaRepo.save(pelicula);
         Assertions.assertEquals(guardado.getNombre(), "El sismo");
