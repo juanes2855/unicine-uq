@@ -102,12 +102,13 @@ public class ClienteServicioImpl implements ClienteServicio {
         if (correoExiste) {
             throw new Exception("El correo ya está en uso");
         }
+
+        Cliente registro = clienteRepo.save(cliente);
         cliente.setEstado(false);
         asignarCuponRegistro(cliente);
         enviarCorreo(cliente);
 
-
-        return clienteRepo.save(cliente);
+        return registro;
     }
 
     private void asignarCuponRegistro(Cliente cliente) {
@@ -119,7 +120,6 @@ public class ClienteServicioImpl implements ClienteServicio {
     @Override
     public void enviarCorreo(Cliente cliente) {
         codigoVerificacion = (int) Math.floor(Math.random() * (111111 - 999999 + 1) + 999999);
-        System.out.println(codigoVerificacion);
         emailServicio.enviarEmail("Registro en unicine", "Hola ingrese este codigo para validar acceso :" + codigoVerificacion, cliente.getCorreo());
     }
 
@@ -179,8 +179,9 @@ public class ClienteServicioImpl implements ClienteServicio {
         }
 
         calcularValorTotal(compra);
+        Compra registro = compraRepo.save(compra);
         enviarCorreoDetalleCompra(compra);
-        return compraRepo.save(compra);
+        return registro;
     }
 
     @Override
@@ -191,8 +192,6 @@ public class ClienteServicioImpl implements ClienteServicio {
     private void asignarCuponPrimeraCompra(Cliente cliente) {
         Cupon cupon = cuponRepo.findByDescripcion("Descuento 10%");
         CuponCliente cuponCliente = new CuponCliente(true, cliente, cupon);
-        //cliente.getCodigoCupon().add(cuponCliente);
-        //se guarda el cupon repo creado ???
         cuponClienteRepo.save(cuponCliente);
     }
 

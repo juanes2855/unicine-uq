@@ -1,6 +1,7 @@
 package co.edu.uniquindio.unicine.entidades;
 
 import lombok.*;
+import org.hibernate.validator.constraints.Length;
 
 import javax.persistence.*;
 import java.io.Serializable;
@@ -16,10 +17,11 @@ import java.util.List;
 public class Cliente extends Persona implements Serializable {
 
     @Column(nullable = false)
-    private Boolean estado;
+    private Boolean estado = false;
 
+    @Length(max = 200)
     @Column(nullable = false, length = 200)
-    private String urlFoto;
+    private String urlFoto = "";
 
     @ElementCollection
     private List<String> telefonos;
