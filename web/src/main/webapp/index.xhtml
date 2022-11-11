@@ -21,7 +21,12 @@
             <li> <a href="/admin/crear_sala.xhtml">Crear Sala</a> </li>
             <li> <a href="/admin_teatro/crear_teatro.xhtml">Crear Teatro</a> </li>
         </ul>
-
     </div>
+    <h:form>
+        <div class="input-search ui-inputgroup">
+            <p:inputText placeholder="¿Qué película está buscando?" required="true" value="#{busquedaBean.busqueda}" />
+            <p:commandButton update="@form" icon="pi pi-search" action="#{busquedaBean.buscar}" />
+        </div>
+    </h:form>
 </h:body>
 </html>

@@ -1,5 +1,6 @@
 package co.edu.uniquindio.unicine.servicios;
 
+import co.edu.uniquindio.unicine.dto.PeliculaFuncionDTO;
 import co.edu.uniquindio.unicine.entidades.*;
 
 import java.util.List;
@@ -29,6 +30,8 @@ public interface ClienteServicio {
     List<Confiteria> buscarConfiteria(String nombre);
 
     Entrada comprarEntradas (Entrada entrada);
+
+    List<PeliculaFuncionDTO> buscarPeliculasConDTO(String nombre);
 
     boolean cambiarPassword(String correo) throws Exception;
     void enviarCorreo(Cliente cliente);
