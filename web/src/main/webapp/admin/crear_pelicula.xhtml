@@ -38,6 +38,14 @@
                 <p:inputText id="url_trailer" value="#{peliculaBean.pelicula.urlTrailer}" required="true"/>
                 <p:message for="url_trailer"/>
 
+                <p:outputLabel for="generos_pelis" value="Generos: "/>
+                <p:selectManyCheckbox id="generos_pelis" value="#{peliculaBean.pelicula.generos}" layout="grid" columns="3">
+                    <f:selectItems value="#{peliculaBean.generos}" var="genero" itemLabel="#{genero}" itemValue="#{genero}" />
+
+                </p:selectManyCheckbox>
+                <p:message for="generos_pelis"/>
+
+
 
             </h:panelGrid>
             <p:commandButton value="Crear pelicula" action="#{peliculaBean.crearPelicula}" icon="pi pi-plus-circle" update="@form"/>

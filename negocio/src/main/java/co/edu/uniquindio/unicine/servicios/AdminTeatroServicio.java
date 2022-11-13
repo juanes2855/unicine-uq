@@ -22,6 +22,9 @@ public interface AdminTeatroServicio {
     Funcion actualizarFuncion(Funcion funcion) throws Exception;
     void eliminarFuncion(Integer codigoFuncion) throws Exception;
     List<Funcion> listarFunciones();
+    List<Funcion> listarFuncionesCiudad(Integer codigoCiudad);
+
+    List<Funcion> listarFuncionesTeatro(Integer codigoTeatro);
     Funcion obtenerFuncion(Integer codigoFuncion) throws Exception;
 
     Teatro crearTeatro(Teatro teatro) throws Exception;

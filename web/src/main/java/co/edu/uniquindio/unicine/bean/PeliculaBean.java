@@ -1,6 +1,7 @@
 package co.edu.uniquindio.unicine.bean;
 
 import co.edu.uniquindio.unicine.entidades.EstadoPelicula;
+import co.edu.uniquindio.unicine.entidades.Genero;
 import co.edu.uniquindio.unicine.entidades.Pelicula;
 import co.edu.uniquindio.unicine.servicios.AdminServicio;
 import lombok.Getter;
@@ -13,6 +14,8 @@ import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
 import javax.faces.view.ViewScoped;
 import java.io.Serializable;
+import java.util.Arrays;
+import java.util.List;
 
 @Component
 @ViewScoped
@@ -21,6 +24,8 @@ public class PeliculaBean implements Serializable {
 
     @Getter @Setter
     private Pelicula pelicula;
+    @Getter @Setter
+    private List<Genero> generos;
 
     @Autowired
     private AdminServicio adminServicio;
@@ -28,6 +33,7 @@ public class PeliculaBean implements Serializable {
     @PostConstruct
     public void init(){
         pelicula = new Pelicula();
+        generos = Arrays.asList(Genero.values());
     }
 
     public String crearPelicula(){

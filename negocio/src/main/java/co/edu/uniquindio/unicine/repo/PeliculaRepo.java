@@ -2,12 +2,14 @@ package co.edu.uniquindio.unicine.repo;
 
 import co.edu.uniquindio.unicine.dto.HorarioSalaDTO;
 import co.edu.uniquindio.unicine.dto.PeliculaFuncionDTO;
+import co.edu.uniquindio.unicine.entidades.EstadoPelicula;
 import co.edu.uniquindio.unicine.entidades.Genero;
 import co.edu.uniquindio.unicine.entidades.Pelicula;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
+import javax.persistence.criteria.CriteriaBuilder;
 import java.util.List;
 
 @Repository
@@ -26,4 +28,6 @@ public interface PeliculaRepo extends JpaRepository<Pelicula, Integer> {
 
     @Query("select p from Pelicula p where :genero member of p.generos order by p.nombre asc")
     List<Pelicula> obtenerGeneroPelicula(Genero genero);
+
+
 }

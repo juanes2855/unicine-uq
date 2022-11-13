@@ -9,6 +9,7 @@ public interface AdminServicio {
     Ciudad crearCiudad(Ciudad ciudad) throws Exception;
     Ciudad obtenerCiudad(Integer codigoCiudad) throws Exception;
 
+    List<Ciudad> listarCiudades();
     Pelicula crearPelicula(Pelicula pelicula) throws Exception;
     Pelicula actualizarPelicula(Pelicula pelicula) throws Exception;
     void eliminarPelicula(Integer codigoPelicula) throws Exception;

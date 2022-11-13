@@ -2,5 +2,5 @@
 /negocio/build/
 *.class
 /.gradle
-/web/src/main/resources/application.properties
-/negocio/src/main/resources/application.properties
+/web/src/main/resources/
+/negocio/src/main/resources/

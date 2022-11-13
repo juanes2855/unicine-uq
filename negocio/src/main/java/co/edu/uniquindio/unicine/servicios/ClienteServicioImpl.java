@@ -22,11 +22,16 @@ public class ClienteServicioImpl implements ClienteServicio {
     private EntradaRepo entradaRepo;
     private CuponRepo cuponRepo;
 
+    private FuncionRepo funcionRepo;
+
     private CuponClienteRepo cuponClienteRepo;
 
     private int codigoVerificacion = 0;
 
-    public ClienteServicioImpl(ClienteRepo clienteRepo, EmailServicio emailServicio, PeliculaRepo peliculaRepo, CompraRepo compraRepo, ConfiteriaRepo confiteriaRepo, CompraConfiteriaRepo compraConfiteriaRepo, EntradaRepo entradaRepo, CuponRepo cuponRepo, CuponClienteRepo cuponClienteRepo) {
+    public ClienteServicioImpl(ClienteRepo clienteRepo, EmailServicio emailServicio, PeliculaRepo peliculaRepo,
+                               CompraRepo compraRepo, ConfiteriaRepo confiteriaRepo, CompraConfiteriaRepo compraConfiteriaRepo,
+                               EntradaRepo entradaRepo, CuponRepo cuponRepo, CuponClienteRepo cuponClienteRepo,
+                                FuncionRepo funcionRepo) {
 
         this.clienteRepo = clienteRepo;
         this.emailServicio = emailServicio;
@@ -37,6 +42,7 @@ public class ClienteServicioImpl implements ClienteServicio {
         this.entradaRepo = entradaRepo;
         this.cuponRepo = cuponRepo;
         this.cuponClienteRepo = cuponClienteRepo;
+        this.funcionRepo = funcionRepo;
     }
 
     @Override
@@ -279,6 +285,19 @@ public class ClienteServicioImpl implements ClienteServicio {
         return peliculas;
 
     }
+
+    @Override
+    public List<Pelicula> listarPorEstadoCiudad(EstadoPelicula estadoPelicula, Integer codigoCiudad) throws Exception {
+        List<Pelicula> peliculas = funcionRepo.buscarPeliculaEstadoCiudad(estadoPelicula, codigoCiudad);
+        return peliculas;
+    }
+
+    @Override
+    public List<Pelicula> listarPorEstado(EstadoPelicula estadoPelicula) throws Exception {
+        List<Pelicula> peliculas = funcionRepo.buscarPeliculaEstado(estadoPelicula);
+        return peliculas;
+    }
+
     @Override
     public List<PeliculaFuncionDTO> buscarPeliculasConDTO(String nombre){
         List<PeliculaFuncionDTO> peliculas = peliculaRepo.buscarPeliculasConDTO(nombre);

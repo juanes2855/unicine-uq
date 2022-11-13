@@ -172,10 +172,11 @@ public class AdminTeatroServicioImpl implements AdminTeatroServicio{
 
     @Override
     public Funcion crearFuncion(Funcion funcion) throws Exception {
-        //validar los horarios
-//        horario.getFunciones().add(funcion);
-//        pelicula.getFunciones().add(funcion);
-//        sala.getFunciones().add(funcion);
+        List<Funcion> funciones = funcionRepo.obtenerFuncionesSala(funcion.getHorario(), funcion.getSala().getCodigo());
+
+        if (!funciones.isEmpty()){
+            throw new Exception("Ya hay una funcion en esa sala a esa hora");
+        }
         return funcionRepo.save(funcion);
     }
 
@@ -204,6 +205,16 @@ public class AdminTeatroServicioImpl implements AdminTeatroServicio{
     @Override
     public List<Funcion> listarFunciones() {
         return funcionRepo.findAll();
+    }
+
+    @Override
+    public List<Funcion> listarFuncionesCiudad(Integer codigoCiudad) {
+        return funcionRepo.listarFuncionesCiudad(codigoCiudad);
+    }
+
+    @Override
+    public List<Funcion> listarFuncionesTeatro(Integer codigoTeatro) {
+        return funcionRepo.listarFuncionesTeatro(codigoTeatro);
     }
 
     @Override

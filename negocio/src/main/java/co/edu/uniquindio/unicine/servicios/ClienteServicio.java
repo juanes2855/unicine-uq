@@ -27,6 +27,9 @@ public interface ClienteServicio {
 
     List<Pelicula> buscarPelicula (String nombre);
 
+    List<Pelicula> listarPorEstadoCiudad(EstadoPelicula estadoPelicula, Integer codigoCiudad) throws Exception;
+    List<Pelicula> listarPorEstado(EstadoPelicula estadoPelicula) throws Exception;
+
     List<Confiteria> buscarConfiteria(String nombre);
 
     Entrada comprarEntradas (Entrada entrada);
