@@ -29,27 +29,33 @@
 
                             <ul class="nav col-12 col-md-auto mb-2 justify-content-center mb-md-0">
                                 <li>
-                                    <a href="index.xhtml" class="nav-link text-secondary" >
-
+                                    <a href="index.xhtml" class="nav-link text-secondary text-center" >
+                                        <i class="pi pi-home"/> <br/>
                                         Inicio
                                     </a>
                                 </li>
                                 <li>
-                                    <a href="/admin/crear_pelicula.xhtml" class="nav-link text-white">
-
+                                    <a href="/admin/crear_pelicula.xhtml" class="nav-link text-white text-center">
+                                        <i class="pi pi-image"/> <br/>
                                         Crear Pelicula
                                     </a>
                                 </li>
                                 <li>
-                                    <a href="/admin_teatro/crear_sala.xhtml" class="nav-link text-white">
-
+                                    <a href="/admin_teatro/crear_sala.xhtml" class="nav-link text-white text-center">
+                                        <i class="pi pi-pencil"/> <br/>
                                         Crear Sala
                                     </a>
                                 </li>
                                 <li>
-                                    <a href="/admin/crear_teatro.xhtml" class="nav-link text-white">
-
+                                    <a href="/admin/crear_teatro.xhtml" class="nav-link text-white text-center">
+                                        <i class="pi pi-box"/> <br/>
                                         Gestionar teatros
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="#" class="nav-link text-white text-center">
+                                        <i class="pi pi-user"/> <br/>
+                                        Perfil
                                     </a>
                                 </li>
                             </ul>
@@ -74,6 +80,13 @@
                 </div>
         </header>
     </div>
+
+    <p:carousel value="#{inicioBean.imagenes}" var="img" numVisible="1" numScroll="1" styleClass="item_carrusel">
+        <div >
+            <h1>Item #</h1>
+        </div>
+    </p:carousel>
+
     <div class="cuerpo_pagina" >
         <div jsf:id="listas_peliculas" class="container" >
 
@@ -84,20 +97,20 @@
                         <div class="col-md-6">
                             <div class="row g-0 border rounded overflow-hidden flex-md-row mb-4 shadow-sm h-md-250 position-relative item-pelicula">
                                 <div class="col p-4 d-flex flex-column position-static">
-                                    <strong class="d-inline-block mb-2 text-primary">#{pelicula.generos}</strong>
+                                    <div class="d-inline-block mb-2 "><p:repeat value="#{pelicula.generos}" var="genero">
+                                        <p:chip label="#{genero}" styleClass="me-2" /> </p:repeat></div>
                                     <h3 class="mb-0">#{pelicula.nombre}</h3>
                                     <p class="card-text mb-auto">#{pelicula.sinopsis}</p>
-                                    <a href="#" class="stretched-link">Continue reading</a>
                                 </div>
-                                <div class="col-auto d-none d-lg-block">
-                                    <svg class="bd-placeholder-img" width="200" height="250" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: Thumbnail" preserveAspectRatio="xMidYMid slice" focusable="false"><title>Placeholder</title><rect width="100%" height="100%" fill="#55595c"/><text x="50%" y="50%" fill="#eceeef" dy=".3em">Thumbnail</text></svg>
-
+                                <div class="col-auto d-none d-lg-block imagen-pelicula">
+                                  <img src="#{pelicula.obtenerImagenPrincipal}" alt="#{pelicula.nombre}" />
                                 </div>
                             </div>
                         </div>
                     </p:repeat>
                 </div>
             </div>
+            <hr class="mt-5" />
             <div class="preventa">
                 <div class="row">
                     <h2 class="mt-5 mb-5">Proximamente </h2>
@@ -105,14 +118,13 @@
                         <div class="col-md-6">
                             <div class="row g-0 border rounded overflow-hidden flex-md-row mb-4 shadow-sm h-md-250 position-relative item-pelicula">
                                 <div class="col p-4 d-flex flex-column position-static">
-                                    <strong class="d-inline-block mb-2 text-primary">#{pelicula.generos}</strong>
+                                    <div class="d-inline-block mb-2 "><p:repeat value="#{pelicula.generos}" var="genero">
+                                        <p:chip label="#{genero}" styleClass="me-2" /> </p:repeat></div>
                                     <h3 class="mb-0">#{pelicula.nombre}</h3>
                                     <p class="card-text mb-auto">#{pelicula.sinopsis}</p>
-                                    <a href="#" class="stretched-link">Continue reading</a>
                                 </div>
-                                <div class="col-auto d-none d-lg-block">
-                                    <svg class="bd-placeholder-img" width="200" height="250" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: Thumbnail" preserveAspectRatio="xMidYMid slice" focusable="false"><title>Placeholder</title><rect width="100%" height="100%" fill="#55595c"/><text x="50%" y="50%" fill="#eceeef" dy=".3em">Thumbnail</text></svg>
-
+                                <div class="col-auto d-none d-lg-block imagen-pelicula">
+                                    <img src="#{pelicula.obtenerImagenPrincipal}" alt="#{pelicula.nombre}" />
                                 </div>
                             </div>
                         </div>

@@ -13,7 +13,6 @@ public class FuncionDTO {
 
     private String nombrePelicula;
     private EstadoPelicula estadoPelicula;
-    private String urlImagenPelicula;
     private Integer codigoSala;
     private String direccionTeatro;
     private String nombreCiudad;

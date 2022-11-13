@@ -33,6 +33,8 @@ public class InicioBean implements Serializable {
     private List<Pelicula> peliculasProximas;
 
     @Getter @Setter
+    private List<String> imagenes;
+    @Getter @Setter
     private List<Ciudad> ciudades;
 
     @Getter @Setter
@@ -42,6 +44,10 @@ public class InicioBean implements Serializable {
     public void init() {
 
         try {
+            imagenes = new ArrayList<>();
+            imagenes.add("");
+            imagenes.add("");
+            imagenes.add("");
             peliculasCartelera = clienteServicio.listarPorEstado(EstadoPelicula.CARTELERA);
             peliculasProximas = clienteServicio.listarPorEstado(EstadoPelicula.PREVENTA);
             ciudades = adminServicio.listarCiudades();

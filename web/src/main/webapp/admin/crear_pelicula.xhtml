@@ -30,9 +30,12 @@
                 <p:inputTextarea id="reparto_pelicula" rows="6"  value="#{peliculaBean.pelicula.reparto}" required="true"/>
                 <p:message for="reparto_pelicula"/>
 
-                <p:outputLabel for="url_imagen" value="Url imagen: "/>
-                <p:inputText id="url_imagen" value="#{peliculaBean.pelicula.urlImagen}" required="true"/>
-                <p:message for="url_imagen"/>
+                <p:outputLabel for="imagen_pelicula" value="Imagenes: "/>
+                <p:fileUpload id="imagen_pelicula" listener="#{peliculaBean.subirImagenes}" mode="advanced" multiple="true"
+                  sizeLimit="1000000" fileLimit="2" allowTypes="/(\.|\/)(gif|jpe?g|png)$/" required="true" />
+
+
+                <p:message for="imagen_pelicula"/>
 
                 <p:outputLabel for="url_trailer" value="Url trailer: "/>
                 <p:inputText id="url_trailer" value="#{peliculaBean.pelicula.urlTrailer}" required="true"/>

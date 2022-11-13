@@ -17,3 +17,14 @@
 .item-pelicula{
     background: white;
 }
+.item_carrusel{
+    background: #bdbdbd;
+}
+
+.imagen-pelicula {
+    width: 200px;
+}
+.imagen-pelicula img{
+    width: 100%;
+    height: auto;
+}

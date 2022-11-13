@@ -6,6 +6,7 @@ import javax.persistence.*;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 @Entity
 @Getter
@@ -29,8 +30,10 @@ public class Pelicula implements Serializable {
     @Column(nullable = false)
     private String urlTrailer;
 
+    @ElementCollection
     @Column(nullable = false)
-    private String urlImagen;
+    private Map<String, String> imagenes;
+
     @Enumerated(EnumType.STRING)
     @Column(nullable = false)
     private EstadoPelicula estado;
@@ -47,16 +50,22 @@ public class Pelicula implements Serializable {
     private List<Genero> generos;
 
     @Builder
-    public Pelicula(String nombre,EstadoPelicula estado, String sinopsis, String urlTrailer, String urlImagen, String reparto, List<Genero> generos) {
+    public Pelicula(String nombre,EstadoPelicula estado, String sinopsis, String urlTrailer,  String reparto, List<Genero> generos) {
         this.nombre = nombre;
         this.sinopsis = sinopsis;
         this.urlTrailer = urlTrailer;
-        this.urlImagen = urlImagen;
         this.reparto = reparto;
         this.generos = generos;
         this.estado = estado;
-        generos = new ArrayList<Genero>();
-        funciones = new ArrayList<Funcion>();
+
+    }
+
+    public String getObtenerImagenPrincipal(){
+        if(!imagenes.isEmpty()){
+            String primera = imagenes.keySet().toArray()[0].toString();
+            return imagenes.get(primera);
+        }
+        return "";
 
     }
 }
