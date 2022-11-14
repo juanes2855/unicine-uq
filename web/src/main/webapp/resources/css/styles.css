@@ -28,3 +28,23 @@
     width: 100%;
     height: auto;
 }
+.container{
+    max-width: 1320px;
+}
+.poster-peli  {
+    width: 340px;
+
+}
+.poster-peli img {
+    width: 100%;
+    height: auto;
+}
+
+.detalle-infopelicula{
+    width: 400px;
+    height: auto;
+}
+.video-tamano{
+    width: 810px;
+    height: 450px;
+}

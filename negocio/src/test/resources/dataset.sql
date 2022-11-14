@@ -68,12 +68,17 @@ insert into pelicula values  (2,"CARTELERA","Halloween: La Noche Final","Jamie L
 insert into pelicula values  (3,"CARTELERA","Black Adam","Dwayne Johnson, Sarah Shahi", "años después de haber sido dotado de los poderes omnipotentes de los antiguos dioses","https://www.cinecolombia.com/bogota/peliculas/black-adam");
 insert into pelicula values  (4,"CARTELERA","Fobias","Hana Mae Lee, Leo Nam", "Cinco pacientes peligrosos, que sufren de fobias extremas, son sometidos a prueba","https://www.cinecolombia.com/bogota/peliculas/fobias");
 insert into pelicula values  (5,"CARTELERA","Vértigo","Grace Caroline Currey, Virginia Gardner", " Consiste en conquistar los miedos y superar los límites.","https://www.cinecolombia.com/bogota/peliculas/vertigo");
+insert into pelicula values  (6,"CARTELERA","Black Adam","Grace Caroline Currey, Virginia Gardner", " Consiste en conquistar los miedos y superar los límites.","https://www.cinecolombia.com/bogota/peliculas/vertigo");
+insert into pelicula values  (7,"PREVENTA","Vértigo","Grace Caroline Currey, Virginia Gardner", " Consiste en conquistar los miedos y superar los límites.","https://www.cinecolombia.com/bogota/peliculas/vertigo");
+
 
 insert into pelicula_imagenes values (1, "http://res.cloudinary.com/dmlzu0bmr/image/upload/v1668369227/unicine/peliculas/w9mchj4mp6hb8jklfq23.jpg", "unicine/peliculas/w9mchj4mp6hb8jklfq23");
 insert into pelicula_imagenes values (2, "http://res.cloudinary.com/dmlzu0bmr/image/upload/v1668369227/unicine/peliculas/w9mchj4mp6hb8jklfq23.jpg", "unicine/peliculas/w9mchj4mp6hb8jklfq23");
 insert into pelicula_imagenes values (3, "http://res.cloudinary.com/dmlzu0bmr/image/upload/v1668369227/unicine/peliculas/w9mchj4mp6hb8jklfq23.jpg", "unicine/peliculas/w9mchj4mp6hb8jklfq23");
 insert into pelicula_imagenes values (4, "http://res.cloudinary.com/dmlzu0bmr/image/upload/v1668369227/unicine/peliculas/w9mchj4mp6hb8jklfq23.jpg", "unicine/peliculas/w9mchj4mp6hb8jklfq23");
 insert into pelicula_imagenes values (5, "http://res.cloudinary.com/dmlzu0bmr/image/upload/v1668369227/unicine/peliculas/w9mchj4mp6hb8jklfq23.jpg", "unicine/peliculas/w9mchj4mp6hb8jklfq23");
+insert into pelicula_imagenes values (6, "http://res.cloudinary.com/dmlzu0bmr/image/upload/v1668369227/unicine/peliculas/w9mchj4mp6hb8jklfq23.jpg", "unicine/peliculas/w9mchj4mp6hb8jklfq23");
+insert into pelicula_imagenes values (7, "http://res.cloudinary.com/dmlzu0bmr/image/upload/v1668369227/unicine/peliculas/w9mchj4mp6hb8jklfq23.jpg", "unicine/peliculas/w9mchj4mp6hb8jklfq23");
 
 
 
@@ -82,8 +87,11 @@ insert into pelicula_generos values (1,"TERROR");
 insert into pelicula_generos values (1,"CIENCIA_FICCION");
 insert into pelicula_generos values (1,"ROMANCE");
 insert into pelicula_generos values (2,"CIENCIA_FICCION");
+insert into pelicula_generos values (3,"NOVELA");
+insert into pelicula_generos values (4,"CIENCIA_FICCION");
 insert into pelicula_generos values (5,"NOVELA");
-
+insert into pelicula_generos values (6,"CIENCIA_FICCION");
+insert into pelicula_generos values (7,"NOVELA");
 
 insert into horario values (1,"LMXJVSD","2022-10-06","2022-09-16","15:00");
 insert into horario values (2,"XJVSD","2022-10-06","2022-09-16","15:00");
