@@ -48,30 +48,3 @@
     width: 810px;
     height: 450px;
 }
-.detalle-infopelicula .shadow, .funciones-peli .shadow{
-    background: white;
-}
-
-.silla-elegida{
-    background: red;
-    color: white;
-}
-.item-silla{
-    padding: 7px 20px;
-    border: 1px solid black;
-    border-radius: 2px;
-    cursor: pointer;
-    margin-bottom: 3px;
-}
-.item-fun{
-    background: #f8f9fa;
-}
-.item-confite img{
-    max-width: 100%;
-}
-#sillas .ui-widget-content.ui-datatable-even, #sillas .ui-widget-content.ui-datatable-add, #sillas td{
-    border: 0 solid;
-}
-#sillas td table{
-    border: 1px solid;
-}

@@ -5,5 +5,7 @@ dependencies {
     implementation project(":negocio")
     implementation 'org.joinfaces:jsf-spring-boot-starter'
     implementation 'org.springframework.boot:spring-boot-starter-web'
-    implementation 'org.primefaces:primefaces:11.0.0'
+    implementation 'org.primefaces:primefaces:12.0.0'
+    implementation 'io.nayuki:qrcodegen:1.8.0'
+
 }

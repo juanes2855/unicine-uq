@@ -7,218 +7,114 @@
       xmlns:p="http://primefaces.org/ui"
       xmlns:f="http://xmlns.jcp.org/jsf/core"
       xmlns:jsf="http://xmlns.jcp.org/jsf">
-<h:head>
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-    <h:outputStylesheet name="bootstrap.min.css" library="css"/>
-    <h:outputScript name="bootstrap.bundle.min.js" library="js" />
-    <h:outputStylesheet name="styles.css" library="css"/>
-    <h:outputStylesheet name="carousel.css" library="css" />
-    <title>Página de Inicio</title>
-</h:head>
-<h:body>
-    <div id="barra_nav">
 
-        <header>
-            <div class="text-bg-dark">
-                <div class="container">
-                    <div class="d-flex flex-wrap align-items-center justify-content-center justify-content-md-between py-3">
-                        <a href="/" class="d-flex align-items-center col-md-3 mb-2 mb-md-0 text-white text-decoration-none">
-                            <h:graphicImage library="img" name="filmicon.png" styleClass="img_icon me-3"  />
-                            <span class="fs-4">Unicine</span>
-                        </a>
 
-                        <ul class="nav col-12 col-md-auto mb-2 justify-content-center mb-md-0">
-                            <li>
-                                <a href="index.xhtml" class="nav-link text-secondary text-center" >
-                                    <i class="pi pi-home"/> <br/>
-                                    Inicio
-                                </a>
-                            </li>
-                            <li>
-                                <a href="/admin/crear_pelicula.xhtml" class="nav-link text-white text-center">
-                                    <i class="pi pi-image"/> <br/>
-                                    Crear Pelicula
-                                </a>
-                            </li>
-                            <li>
-                                <a href="/admin_teatro/crear_sala.xhtml" class="nav-link text-white text-center">
-                                    <i class="pi pi-pencil"/> <br/>
-                                    Crear Sala
-                                </a>
-                            </li>
-                            <li>
-                                <a href="/admin/crear_teatro.xhtml" class="nav-link text-white text-center">
-                                    <i class="pi pi-box"/> <br/>
-                                    Gestionar teatros
-                                </a>
-                            </li>
-                            <li>
-                                <a href="#" class="nav-link text-white text-center">
-                                    <i class="pi pi-user"/> <br/>
-                                    Perfil
-                                </a>
-                            </li>
-                        </ul>
+    <ui:composition template="/WEB-INF/template.xhtml">
+        <ui:define name="content">
+            <div class="imagenes-inicio">
+                <div id="myCarousel" class="carousel slide" data-bs-ride="carousel">
+                    <div class="carousel-indicators">
+                        <p:repeat value="#{inicioBean.imagenes}" var="imagen" varStatus="i">
+                            <button type="button" data-bs-target="#myCarousel" data-bs-slide-to="#{i.index}" class="#{i.index == 0 ? 'active' : ''}" aria-current="true" aria-label="LABEL 1"></button>
+                        </p:repeat>
                     </div>
-                </div>
-            </div>
-            <div class="px-3 py-2 border-bottom mb-3">
-                <div class="container d-flex flex-wrap justify-content-center">
+                    <div class="carousel-inner">
+                        <p:repeat value="#{inicioBean.imagenes}" var="imagen" varStatus="i">
+                            <div class="carousel-item #{i.index == 0 ? 'active' : ''}" >
+                                <img class="bd-placeholder-img img-carousel" src="#{imagen}" alt="Imagen"/>
 
-                    <h:form styleClass="col-12 col-lg-auto mb-2 mb-lg-0 me-lg-auto" >
-                        <div class="input-search ui-inputgroup">
-                            <p:inputText placeholder="¿Qué película está buscando?" required="true" value="#{busquedaBean.busqueda}" styleClass="form_busqueda"/>
-                            <p:commandButton update="@form" icon="pi pi-search" action="#{busquedaBean.buscar}" />
-                        </div>
-                    </h:form>
-
-                    <div class="text-end">
-                        <button type="button" class="btn btn-light text-dark me-2">Login</button>
-                        <p:linkButton value="Registrarse" href="registro.xhtml"/>
-                    </div>
-                </div>
-            </div>
-        </header>
-    </div>
-
-    <div id="myCarousel" class="carousel slide" data-bs-ride="carousel">
-        <div class="carousel-indicators">
-            <button type="button" data-bs-target="#myCarousel" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
-            <button type="button" data-bs-target="#myCarousel" data-bs-slide-to="1" aria-label="Slide 2"></button>
-            <button type="button" data-bs-target="#myCarousel" data-bs-slide-to="2" aria-label="Slide 3"></button>
-        </div>
-        <div class="carousel-inner">
-            <div class="carousel-item active">
-                <svg class="bd-placeholder-img" width="100%" height="100%" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" preserveAspectRatio="xMidYMid slice" focusable="false"><rect width="100%" height="100%" fill="#777"/></svg>
-
-                <div class="container">
-                    <div class="carousel-caption text-start">
-                        <h1>Example headline.</h1>
-                        <p>Some representative placeholder content for the first slide of the carousel.</p>
-                        <p><a class="btn btn-lg btn-primary" href="#">Sign up today</a></p>
-                    </div>
-                </div>
-            </div>
-            <div class="carousel-item">
-                <svg class="bd-placeholder-img" width="100%" height="100%" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" preserveAspectRatio="xMidYMid slice" focusable="false"><rect width="100%" height="100%" fill="#777"/></svg>
-
-                <div class="container">
-                    <div class="carousel-caption">
-                        <h1>Another example headline.</h1>
-                        <p>Some representative placeholder content for the second slide of the carousel.</p>
-                        <p><a class="btn btn-lg btn-primary" href="#">Learn more</a></p>
-                    </div>
-                </div>
-            </div>
-            <div class="carousel-item">
-                <svg class="bd-placeholder-img" width="100%" height="100%" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" preserveAspectRatio="xMidYMid slice" focusable="false"><rect width="100%" height="100%" fill="#777"/></svg>
-
-                <div class="container">
-                    <div class="carousel-caption text-end">
-                        <h1>One more for good measure.</h1>
-                        <p>Some representative placeholder content for the third slide of this carousel.</p>
-                        <p><a class="btn btn-lg btn-primary" href="#">Browse gallery</a></p>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <button class="carousel-control-prev" type="button" data-bs-target="#myCarousel" data-bs-slide="prev">
-            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-            <span class="visually-hidden">Previous</span>
-        </button>
-        <button class="carousel-control-next" type="button" data-bs-target="#myCarousel" data-bs-slide="next">
-            <span class="carousel-control-next-icon" aria-hidden="true"></span>
-            <span class="visually-hidden">Next</span>
-        </button>
-    </div>
-
-
-    <div class="cuerpo_pagina" >
-        <div jsf:id="listas_peliculas" class="container" >
-
-            <div class="cartelera">
-                <h2 class="mt-5 mb-5">En cartelera </h2>
-                <div class="row">
-                    <p:repeat  value="#{inicioBean.peliculasCartelera}" var="pelicula" >
-                        <div class="col-md-6">
-                            <a href="/detalle_pelicula.xhtml?pelicula_id=#{pelicula.codigo}" class="text-decoration-none">
-                                <div class="row g-0 border rounded overflow-hidden flex-md-row mb-4 shadow-sm h-md-250 posiion-relative item-pelicula">
-                                    <div class="col p-4 d-flex flex-column position-static">
-                                        <div class="d-inline-block mb-2 "><p:repeat value="#{pelicula.generos}" var="genero">
-                                            <p:chip label="#{genero}" styleClass="me-2" /> </p:repeat></div>
-                                        <h3 class="mb-0">#{pelicula.nombre}</h3>
-                                        <p class="card-text mb-auto">#{pelicula.sinopsis}</p>
-                                    </div>
-                                    <div class="col-auto d-none d-lg-block imagen-pelicula">
-                                        <img src="#{pelicula.obtenerImagenPrincipal}" alt="#{pelicula.nombre}" />
+                                <div class="container">
+                                    <div class="carousel-caption text-start">
+                                        <h1>Example headline.</h1>
+                                        <p>Some representative placeholder content for the first slide of the carousel.</p>
+                                        <p><a class="btn btn-lg btn-primary" href="#">Sign up today</a></p>
                                     </div>
                                 </div>
-                            </a>
-                        </div>
-                    </p:repeat>
+                            </div>
+                        </p:repeat>
+                    </div>
+                    <button class="carousel-control-prev" type="button" data-bs-target="#myCarousel" daba-bs-slide="prev">
+                        <span class="carousel-control-prev-icon" aria-hidden ="true"></span>
+                        <span class="visually-hidden">Previus</span>
+                    </button>
+                    <button class="carousel-control-next" type="button" data-bs-target="#myCarousel" daba-bs-slide="next">
+                        <span class="carousel-control-next-icon" aria-hidden ="true"></span>
+                        <span class="visually-hidden">Next</span>
+                    </button>
                 </div>
             </div>
-            <hr class="mt-5" />
-            <div class="preventa">
-                <div class="row">
-                    <h2 class="mt-5 mb-5">Proximamente </h2>
-                    <p:repeat value="#{inicioBean.peliculasProximas}" var="pelicula" >
-                        <div class="col-md-6">
-                            <a href="/detalle_pelicula.xhtml?pelicula_id=#{pelicula.codigo}" class="text-decoration-none">
-                                <div class="row g-0 border rounded overflow-hidden flex-md-row mb-4 shadow-sm h-md-250 position-relative item-pelicula">
-                                    <div class="col p-4 d-flex flex-column position-static">
-                                        <div class="d-inline-block mb-2 "><p:repeat value="#{pelicula.generos}" var="genero">
-                                            <p:chip label="#{genero}" styleClass="me-2" /> </p:repeat></div>
-                                        <h3 class="mb-0">#{pelicula.nombre}</h3>
-                                        <p class="card-text mb-auto">#{pelicula.sinopsis}</p>
-                                    </div>
-                                    <div class="col-auto d-none d-lg-block imagen-pelicula">
-                                        <img src="#{pelicula.obtenerImagenPrincipal}" alt="#{pelicula.nombre}" />
-                                    </div>
+
+            <div >
+                <div jsf:id="listas_peliculas" class="container" >
+
+                    <div class="cartelera">
+                        <h2 class="mt-5 mb-5 text-black">En cartelera </h2>
+                        <div class="row">
+                            <p:repeat  value="#{inicioBean.peliculasCartelera}" var="pelicula" >
+                                <div class="col-md-6">
+                                    <a href="/detalle_pelicula.xhtml?pelicula_id=#{pelicula.codigo}" class="text-decoration-none text-black">
+                                        <div class="row g-0 border rounded overflow-hidden flex-md-row mb-4 shadow-sm h-md-250 position-relative item-pelicula">
+                                            <div class="col p-4 d-flex flex-column position-static">
+                                                <div class="d-inline-block mb-2 "><p:repeat value="#{pelicula.generos}" var="genero">
+                                                    <p:chip label="#{genero}" styleClass="me-2" /> </p:repeat></div>
+                                                <h3 class="mb-3">#{pelicula.nombre}</h3>
+                                                <p class="card-text mb-auto">#{pelicula.sinopsis}</p>
+                                            </div>
+                                            <div class="col-auto d-none d-lg-block imagen-pelicula">
+                                                <img src="#{pelicula.obtenerImagenPrincipal}" alt="#{pelicula.nombre}" />
+                                            </div>
+                                        </div>
+                                    </a>
                                 </div>
-                            </a>
+                            </p:repeat>
                         </div>
-                    </p:repeat>
+                    </div>
+                    <hr class="mt-5" />
+                    <div class="preventa">
+                        <h2 class="mt-5 mb-5 text-black">Proximamente </h2>
+                        <div class="row">
+
+                            <p:repeat value="#{inicioBean.peliculasProximas}" var="pelicula" >
+                                <div class="col-md-6">
+                                    <a href="/detalle_pelicula.xhtml?pelicula_id=#{pelicula.codigo}" class="text-decoration-none text-black">
+                                        <div class="row g-0 border rounded overflow-hidden flex-md-row mb-4 shadow-sm h-md-250 position-relative item-pelicula">
+                                            <div class="col p-4 d-flex flex-column position-static">
+                                                <div class="d-inline-block mb-2 "><p:repeat value="#{pelicula.generos}" var="genero">
+                                                    <p:chip label="#{genero}" styleClass="me-2" /> </p:repeat></div>
+                                                <h3 class="mb-0">#{pelicula.nombre}</h3>
+                                                <p class="card-text mb-auto">#{pelicula.sinopsis}</p>
+                                            </div>
+                                            <div class="col-auto d-none d-lg-block imagen-pelicula">
+                                                <img src="#{pelicula.obtenerImagenPrincipal}" alt="#{pelicula.nombre}" />
+                                            </div>
+                                        </div>
+                                    </a>
+                                </div>
+                            </p:repeat>
+                        </div>
+                    </div>
                 </div>
             </div>
-        </div>
-    </div>
-    <div class="container">
-        <footer class="d-flex flex-wrap justify-content-between align-items-center py-3 my-4 border-top">
-            <div class="col-md-4 d-flex align-items-center">
-                <a href="/" class="mb-3 me-2 mb-md-0 text-muted text-decoration-none lh-1">
-                    <h:graphicImage library="img" name="filmicon.png" styleClass="img_icon me-3"  />
-                </a>
-                <span class="mb-3 mb-md-0 text-muted">&copy; 2022 Company, Inc</span>
-            </div>
-
-            <ul class="nav col-md-4 justify-content-end list-unstyled d-flex">
-                <li class="ms-3"><a class="text-muted" href="#"> <i class="pi pi-facebook"/> </a></li>
-                <li class="ms-3"><a class="text-muted" href="#"><i class="pi pi-twitter"/></a></li>
-                <li class="ms-3"><a class="text-muted" href="#"><i class="pi pi-instagram"/></a></li>
-            </ul>
-        </footer>
-    </div>
 
 
-    <p:dialog id="dialogo_ciudad" widgetVar="dialogo_ciudad" modal="true" visible="true" header="Seleccionar Ciudad" >
-        <h:form>
-            <h:panelGrid columns="3" cellpadding="5">
+            <p:dialog id="dialogo_ciudad" widgetVar="dialogo_ciudad" modal="true" visible="true" header="Seleccionar Ciudad" >
+                <h:form>
+                    <h:panelGrid columns="3" cellpadding="5">
 
 
-                <p:outputLabel for="ciudad_origen" value="Ciudad: "/>
+                        <p:outputLabel for="ciudad_origen" value="Ciudad: "/>
 
-                <p:selectOneMenu id="ciudad_origen" value="#{inicioBean.ciudad}" converter="#{ciudadConverter}" >
-                    <f:selectItem itemLabel="Seleccione una ciudad" noSelectionOption="true" itemValue="#{null}"/>
-                    <f:selectItems value="#{inicioBean.ciudades}" var="ciudad" itemLabel="#{ciudad.nombre}" itemValue="#{ciudad}" />
-                </p:selectOneMenu>
-                <p:message for="ciudad_origen" />
+                        <p:selectOneMenu id="ciudad_origen" value="#{inicioBean.ciudad}" converter="#{ciudadConverter}" >
+                            <f:selectItem itemLabel="Seleccione una ciudad" noSelectionOption="true" itemValue="#{null}"/>
+                            <f:selectItems value="#{inicioBean.ciudades}" var="ciudad" itemLabel="#{ciudad.nombre}" itemValue="#{ciudad}" />
+                        </p:selectOneMenu>
+                        <p:message for="ciudad_origen" />
 
-            </h:panelGrid>
-            <p:commandButton value="Seleccionar ciudad" action="#{inicioBean.elegirCiudad}" styleClass="mt-4" icon="pi pi-check" update="@form, listas_peliculas" oncomplete="PF('dialogo_ciudad').hide()" />
-            <p:growl for="mensaje_bean"  showDetail="true"/>
-        </h:form>
-    </p:dialog>
-</h:body>
+                    </h:panelGrid>
+                    <p:commandButton value="Seleccionar ciudad" action="#{inicioBean.elegirCiudad}" styleClass="mt-4" icon="pi pi-check" update="@form, listas_peliculas" oncomplete="PF('dialogo_ciudad').hide()" />
+                    <p:growl for="mensaje_bean"  showDetail="true"/>
+                </h:form>
+            </p:dialog>
+        </ui:define>
+    </ui:composition>
 </html>

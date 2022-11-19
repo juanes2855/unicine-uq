@@ -45,13 +45,13 @@ public class InicioBean implements Serializable {
 
         try {
             imagenes = new ArrayList<>();
-            imagenes.add("");
-            imagenes.add("");
+            imagenes.add("https://images8.alphacoders.com/128/thumbbig-1280286.webp");
+            imagenes.add("https://image.api.playstation.com/vulcan/img/rnd/202011/0204/jvMomz0n9Be5mRKU8VP9Jl2A.png?w=1920&thumb=false");
             imagenes.add("");
             peliculasCartelera = clienteServicio.listarPorEstado(EstadoPelicula.CARTELERA);
             peliculasProximas = clienteServicio.listarPorEstado(EstadoPelicula.PREVENTA);
             ciudades = adminServicio.listarCiudades();
-            System.out.println(peliculasProximas);
+
         }catch (Exception e){
             throw  new RuntimeException(e);
         }

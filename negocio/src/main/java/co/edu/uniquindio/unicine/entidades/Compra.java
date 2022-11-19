@@ -28,6 +28,9 @@ public class Compra implements Serializable {
     @Column(nullable = false)
     private LocalDateTime fecha;
 
+    @Column(nullable = false)
+    private LocalDateTime fechaPelicula;
+
     @Positive
     @Column(nullable = false)
     private Float valorTotal;

@@ -1,0 +1,130 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:jsf="http://xmlns.jcp.org/jsf" >
+
+
+<ui:composition template="/WEB-INF/template.xhtml">
+    <ui:define name="title">Proceso compra</ui:define>
+    <ui:define name="content">
+        <div class="container mt-4 mb-4">
+
+            <p:panel header="Seleccionar sillas">
+                <h:form id="sillas">
+
+                    <div class="text-center"> <h5>Pantalla</h5></div>
+
+                    <p:dataTable id="mat-sillas" value="#{compraBean.filas}" var="fila" rows="#{compraBean.distribucionSillas.filas}" editable="true" editMode="cell" ></p:dataTable>
+
+                    <p:columns id="columna" var="col" value="#{compraBean.columnas}" >
+                        <h:panelGrid id="item-sillas" columns="1" styleClass="ui-noborder text-center #{compraBean.buscar(fila, col)} eq 'true' ? 'silla-elegida'">
+                            <p:ajax event="click" listener="#{compraBean.seleccionarSilla(fila,col)}" update="sillas:mat-sillas:#{fila}:columnas:#{col}:"></p:ajax>
+                            <p class="mb-0">#{fila}#{col}</p>
+                            <i class="pi pi-box"/>
+                        </h:panelGrid>
+                    </p:columns>
+                </h:form>
+            </p:panel>
+
+            <p:panel header="Elije los snacks" styleClass="mt-3">
+                <div class="row">
+                    <p:repeat value="#{compraBean.confiteriasFormulario}" var="confite" varStatus="c">
+                        <div class="item-confite col-3 mb-3">
+                            <div class="shadow-sm p-3">
+                                <h:form id="form_confite">
+                                    <img src="/resources/img/crispetas.png" alt="Imagen"/>
+                                    <p>#{confite.precio}</p>
+                                    <div class="text-center">
+                                        <div class="d-inline-flex">
+                                            <p:commandButton icon="pi pi-minus" styleClass="rounded-button ui-button-outlined" action="#{compraBean.restarUnidades(cantidad)}" ></p:commandButton>
+                                            <p jsf:id="cantidad" class="mb-0 ms-3 mt-2">#{confite.unidades}</p>
+                                            <p:commandButton icon="pi pi-plus" styleClass="rounded-button ui-button-outlined" action="#{compraBean.sumarUnidades(cantidad)}" ></p:commandButton>
+                                        </div>
+                                    </div>
+                                </h:form>
+                            </div>
+                        </div>
+                    </p:repeat>
+                </div>
+            </p:panel>
+            <p:panel id="detalle_compra" header="Detalle de la compra" styleClass="mt-3">
+                <div>
+                    <div>
+                        <strong class="d-inline-block me-2">Pelicula: </strong> <p:outputLabel value="#{compraBean.funcion.pelicula.nombre}"></p:outputLabel>
+                    </div>
+                    <div>
+                        <strong class="d-inline-block me-2">Horario: </strong> <p:outputLabel value="#{compraBean.funcion.horario.hora}"></p:outputLabel>
+                    </div>
+                    <div>
+                        <strong class="d-inline-block me-2">Sala: </strong> <p:outputLabel value="#{compraBean.funcion.sala.nombre}"></p:outputLabel>
+                    </div>
+                    <hr />
+                    <div>
+                        <strong> Entrada: </strong>
+                        <p:repeat value="#{compraBean.entradas}" var="entrada">
+                            <div >
+                                <p:outputLabel styleClass="d-inline-block me-3" value="#{entrada.fila}-#{entrada.columna}" />
+                                <p:outputLabel styleClass="d-inline-block" value="$#{compraBean.funcion.precio}"/>
+                            </div>
+                        </p:repeat>
+                    </div>
+                    <hr />
+                    <div class="mt-3">
+                        <strong> Confiteria</strong>
+                        <p:repeat value="#{compraBean.confiteriasFormulario}" var="confite"  >
+                            <div jsf:rendered="#{confite.unidades > 0}" >
+                                <p:outputLabel styleClass="d-inline-block me-3" value="#{confite.confiteria.nombre}" />
+                                <p:outputLabel styleClass="d-inline-block" value="$#{confite.unidades} X #{confite.confiteria.precio}"/>
+                            </div>
+                        </p:repeat>
+                    </div>
+                    <hr />
+                    <h4 class="mt-3" >Total: #{compraBean.precioCompra}</h4>
+                </div>
+            </p:panel>
+
+            <p:panel>
+                <p:panel header="Finalizar la compra" styleClass="mt-3">
+
+                    <h:form>
+                        <h:form>
+                            <h:panelGrid columns="3" cellpadding="5">
+
+                                <p:outputLabel for="nombre_cliente" value="Nombre: " />
+                                <p:inputText id="nombre_cliente" value="#{compraBean.cliente.nombre}" required="true" disabled="true" />
+                                <p:message for="nombre_cliente" />
+
+                                <p:outputLabel for="correo_cliente" value="Correo: " />
+                                <p:inputText id="correo_cliente" value="#{compraBean.cliente.correo}" required="true" disabled="true" />
+                                <p:message for="correo_cliente" />
+
+                                <p:outputLabel for="medio_pago" value="Medio pago: " />
+                                <p:selectOneMenu id="medio_pago" value="#{compraBean.medioPagoSeleccionado}" >
+                                    <f:selectItems value="#{compraBean.medioPagos}" />
+                                </p:selectOneMenu>
+                                <p:message for="medio_pago" />
+
+                                <p:outputLabel for="cupon_cliente" value="Redimir cupón: " />
+                                <p:inputText id="cupon_cliente" value="#{compraBean}" />
+                                <p:message for="cupon_cliente" />
+
+                            </h:panelGrid>
+                            <p:commandButton action="#{compraBean.hacerCompra}" icon="pi pi check" value="Finalizar compra" styleClass="mt-3" update="@form" />
+                            <p:growl for="msj_bean" showDetail="true" />
+                        </h:form>
+
+                    </h:form>
+                </p:panel>
+            </p:panel>
+
+
+        </div>
+    </ui:define>
+</ui:composition>
+
+</html>

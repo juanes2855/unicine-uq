@@ -33,7 +33,7 @@ public class CompraTest {
 
         Horario horario = new Horario("LMXJVSD", "15:30", LocalDateTime.of(2022, 10, 16, 15, 30, 0, 0), LocalDateTime.of(2022, 10, 31, 15, 30, 0, 0));
         Genero[] generos = new Genero[]{Genero.TERROR};
-        Pelicula pelicula = new Pelicula("El sismo", EstadoPelicula.CARTELERA,"De la naturaleza nadie se salva", "http:@sismo",
+        Pelicula pelicula = new Pelicula("El sismo", EstadoPelicula.CARTELERA,"De la naturaleza nadie se salva",
                 "http:@Elsismo.jpj", "Andres Lopez, Esteban Henao", Arrays.asList(generos));
         Ciudad ciudad = new Ciudad("Barrancabermeja");
         Teatro teatro = new Teatro("mi casa", "1231232", ciudad);
@@ -69,7 +69,6 @@ public class CompraTest {
     }
 
     @Test
-    @Sql("classpath:dataset.sql")
     public void obtener() {
 
         Optional<Compra> buscado = compraRepo.findById(1);
@@ -77,7 +76,6 @@ public class CompraTest {
     }
 
     @Test
-    @Sql("classpath:dataset.sql")
     public void listar() {
 
         List<Compra> listaCompras = compraRepo.findAll();

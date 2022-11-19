@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:jsf="http://xmlns.jcp.org/jsf">
+<h:head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <h:outputStylesheet name="bootstrap.min.css" library="css"/>
+    <h:outputScript name="bootstrap.bundle.min.js" library="js" />
+    <h:outputStylesheet name="styles.css" library="css"/>
+    <h:outputStylesheet name="carousel.css" library="css" />
+    <title>Unicine | <ui:insert name="title">Inicio</ui:insert></title>
+</h:head>
+<h:body>
+    <div id="barra_nav">
+
+        <header>
+            <div class="text-bg-dark">
+                <div class="container">
+                    <div class="d-flex flex-wrap align-items-center justify-content-center justify-content-md-between py-3">
+                        <a href="/" class="d-flex align-items-center col-md-3  mb-md-0 text-white text-decoration-none">
+                            <h:graphicImage library="img" name="filmicon.png" styleClass="img_icon me-3"  />
+                            <span class="fs-4">Unicine</span>
+                        </a>
+
+                        <ul class="nav col-12 col-md-auto mb-2 justify-content-center mb-md-0">
+                            <li>
+                                <a href="/" class="nav-link text-secondary text-center" >
+                                    <i class="pi pi-home"/> <br/>
+                                    Inicio
+                                </a>
+                            </li>
+                            <li>
+                                <a href="/admin/crear_pelicula.xhtml" class="nav-link text-white text-center">
+                                    <i class="pi pi-image"/> <br/>
+                                    Crear Pelicula
+                                </a>
+                            </li>
+                            <li>
+                                <a href="/admin_teatro/crear_sala.xhtml" class="nav-link text-white text-center">
+                                    <i class="pi pi-pencil"/> <br/>
+                                    Crear Sala
+                                </a>
+                            </li>
+                            <li>
+                                <a href="/admin/gestionar_teatro.xhtml" class="nav-link text-white text-center">
+                                    <i class="pi pi-box"/> <br/>
+                                    Gestionar teatros
+                                </a>
+                            </li>
+                            <li>
+                                <a href="#" class="nav-link text-white text-center">
+                                    <i class="pi pi-user"/> <br/>
+                                    Perfil
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="px-3 py-2 border-bottom mb-3">
+                <div class="container d-flex flex-wrap justify-content-center">
+
+                    <h:form styleClass="col-12 col-lg-auto mb-2 mb-lg-0 me-lg-auto" >
+                        <div class="input-search ui-inputgroup">
+                            <p:inputText placeholder="¿Qué película está buscando?" required="true" value="#{busquedaBean.busqueda}" styleClass="form_busqueda"/>
+                            <p:commandButton update="@form" icon="pi pi-search" action="#{busquedaBean.buscar}" />
+                        </div>
+                    </h:form>
+
+                    <div class="text-end">
+
+                        <p:linkButton styleClass="me-3" value="Login" href="/cliente/login.xhtml"/>
+                        <p:linkButton value="Registrarse" href="registro.xhtml"/>
+                    </div>
+                </div>
+            </div>
+        </header>
+    </div>
+
+    <div id="contenido" class="cuerpo_pagina">
+        <ui:insert name="content"></ui:insert>
+    </div>
+
+    <div class="container">
+        <footer class="d-flex flex-wrap justify-content-between align-items-center py-3 my-4 border-top">
+            <div class="col-md-4 d-flex align-items-center">
+                <a href="/" class="mb-3 me-2 mb-md-0 text-muted text-decoration-none lh-1">
+                    <h:graphicImage library="img" name="filmicon.png" styleClass="img_icon me-3"  />
+                </a>
+                <span class="mb-3 mb-md-0 text-muted">&copy; 2022 Company, Inc</span>
+            </div>
+
+            <ul class="nav col-md-4 justify-content-end list-unstyled d-flex">
+                <li class="ms-3"><a class="text-muted" href="#"> <i class="pi pi-facebook"/> </a></li>
+                <li class="ms-3"><a class="text-muted" href="#"><i class="pi pi-twitter"/></a></li>
+                <li class="ms-3"><a class="text-muted" href="#"><i class="pi pi-instagram"/></a></li>
+            </ul>
+        </footer>
+    </div>
+
+
+
+</h:body>
+</html>

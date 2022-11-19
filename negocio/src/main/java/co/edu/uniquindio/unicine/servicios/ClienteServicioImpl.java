@@ -6,6 +6,7 @@ import co.edu.uniquindio.unicine.repo.*;
 import org.springframework.stereotype.Service;
 
 import javax.swing.*;
+import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
 
@@ -336,5 +337,25 @@ public class ClienteServicioImpl implements ClienteServicio {
         codigoVerificacion = (int) Math.floor(Math.random() * (111111 - 999999 + 1) + 999999);
         cliente.setPassword(String.valueOf(codigoVerificacion));
         emailServicio.enviarEmail("Nueva contraseña", "Hola ingrese esta contraseña para validar acceso :" + codigoVerificacion, cliente.getCorreo());
+    }
+
+    @Override
+    public Compra hacerCompra(Cliente cliente, Funcion funcion, MedioPago medioPagoSeleccionado, List<CompraConfiteria> lista, Integer codigoCupon) {
+        return null;
+    }
+
+    @Override
+    public List<Teatro> listarTeatrosPeliculaDia(Integer codigoCiudad, Integer codigoPelicula, LocalDate fecha) {
+        return funcionRepo.listarTeatrosPeliculaDia(codigoCiudad, codigoPelicula, fecha);
+    }
+
+    @Override
+    public List<Funcion> listarFuncionesPeliculaDia(Integer codigoCiudad, Integer codigoPelicula, LocalDate fecha) {
+        return funcionRepo.listarFuncionesPeliculaDia(codigoCiudad, codigoPelicula, fecha); // diaSemana ???
+    }
+
+    @Override
+    public Compra obtenerCompra(Integer codigo) throws Exception {
+        return compraRepo.findById(codigo).orElseThrow(() -> new Exception("No se encontro la compra"));
     }
 }

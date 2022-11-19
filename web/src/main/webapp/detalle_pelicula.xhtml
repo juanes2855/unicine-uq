@@ -6,62 +6,84 @@
       xmlns:h="http://xmlns.jcp.org/jsf/html"
       xmlns:p="http://primefaces.org/ui"
       xmlns:f="http://xmlns.jcp.org/jsf/core">
-<h:head>
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-    <h:outputStylesheet name="bootstrap.min.css" library="css"/>
-    <h:outputScript name="bootstrap.bundle.min.js" library="js" />
-    <h:outputStylesheet name="styles.css" library="css"/>
-    <title>Detalle Pelicula</title>
-</h:head>
 
-<h:body>
-    <div class="container">
-        <div class="row">
-            <div class="col-4 detalle-infopelicula" >
-                <div class="shadow p-3" >
-                    <img class="poster-peli"  src="#{detallePeliculaBean.pelicula.obtenerImagenPrincipal}" alt="#{pelicula.nombre}" >
-                        <h4>Titulo de la pelicula</h4>
-                        <p>#{detallePeliculaBean.pelicula.nombre}</p>
-                        <h4>Reparto</h4>
-                        <p>#{detallePeliculaBean.pelicula.reparto}</p>
-                        <h4>Sinopsis</h4>
-                        <p>#{detallePeliculaBean.pelicula.sinopsis}</p>
-                        <h4>Generos</h4>
-                        <div class="d-inline-block mb-2 "><p:repeat value="#{detallePeliculaBean.pelicula.generos}" var="genero">
-                            <p:chip label="#{genero}" styleClass="me-2" /> </p:repeat></div>
-                    </img>
 
-                </div>
-            </div>
-            <div class="col-8"  >
-                <div class="shadow p-3" >
-                    <iframe class="video-tamano" src="#{detallePeliculaBean.pelicula.urlTrailer}" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen="true"></iframe>
-                    <h:form>
-                        <h:panelGrid columns="3" cellpadding="5">
-                            <p:outputLabel for="ciudad_origen" value="Ciudad: "/>
-                            <p:selectOneMenu id="ciudad_origen" value="#{detallePeliculaBean.ciudad}" converter="#{ciudadConverter}" >
-                                <f:selectItem itemLabel="Seleccione una ciudad" noSelectionOption="true" itemValue="#{null}"/>
-                                <f:selectItems value="#{detallePeliculaBean.ciudades}" var="ciudad" itemLabel="#{ciudad.nombre}" itemValue="#{ciudad}" />
-                                <p:ajax event="change" listener="#{detallePeliculaBean.actulizarFunciones}" update="@form"></p:ajax>
-                            </p:selectOneMenu>
-                        </h:panelGrid>
-                    </h:form>
-                    <div class="lista-funciones">
-                        <h:form styleClass="mt-3">
-                            <p:repeat value="#{detallePeliculaBean.fechas}" var="fecha" varStatus="f">
-                                <p:commandButton value="#{fecha}" ></p:commandButton>
-                            </p:repeat>
-                        </h:form>
+<ui:composition template="/WEB-INF/template.xhtml">
+    <ui:define name="title">#{detallePeliculaBean.pelicula.nombre}</ui:define>
+    <ui:define name="content">
+        <div class="container">
+            <div class="row mt-4 mb-4">
+                <div class="col-4 detalle-infopelicula" >
+                    <div class="shadow p-3" >
+                        <img class="poster-peli"  src="#{detallePeliculaBean.pelicula.obtenerImagenPrincipal}" alt="Poster pelicula" >
+
+                            <h4>Titulo de la pelicula</h4>
+                            <p>#{detallePeliculaBean.pelicula.nombre}</p>
+
+                            <h4>Reparto</h4>
+                            <p>#{detallePeliculaBean.pelicula.reparto}</p>
+
+                            <h4>Sinopsis</h4>
+
+                            <p>#{detallePeliculaBean.pelicula.sinopsis}</p>
+                            <h4>Generos</h4>
+
+                            <div class="d-inline-block mb-2 "><p:repeat value="#{detallePeliculaBean.pelicula.generos}" var="genero">
+                                <p:chip label="#{genero}" styleClass="me-2" /> </p:repeat></div>
+                        </img>
+
                     </div>
                 </div>
+                <div class="col-8 funciones-peli"  >
+                    <div class="shadow p-3" >
+                        <iframe class="video-tamano" src="#{detallePeliculaBean.pelicula.urlTrailer}" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen="true"></iframe>
+                        <h:form>
+                            <h:panelGrid columns="3" cellpadding="5">
+                                <p:outputLabel for="ciudad_origen" value="Ciudad: "/>
+                                <p:selectOneMenu id="ciudad_origen" value="#{detallePeliculaBean.ciudad}" converter="#{ciudadConverter}" >
+                                    <f:selectItem itemLabel="Seleccione una ciudad" noSelectionOption="true" itemValue="#{null}"/>
+                                    <f:selectItems value="#{detallePeliculaBean.ciudades}" var="ciudad" itemLabel="#{ciudad.nombre}" itemValue="#{ciudad}" />
+                                    <p:ajax event="change" listener="#{detallePeliculaBean.actulizarFunciones}" update="lista-teatros"></p:ajax>
+                                </p:selectOneMenu>
+                            </h:panelGrid>
+                        </h:form>
+                        <div class="lista-funciones">
+                            <h:form styleClass="mt-3">
+                                <p:repeat value="#{detallePeliculaBean.fechas}" var="fecha" varStatus="f">
+                                    <p:commandButton value="#{fecha}" ></p:commandButton>
+                                </p:repeat>
+                            </h:form>
+
+                            <div class="mt-3">
+                                <p:accordionPanel id="lista-teatros" value="#{detallePeliculaBean.teatros}" var="teatro">
+                                    <p:tab title="#{teatro.direccion}">
+
+                                        <p:repeat value="${teatro.salas}" var="sala">
+                                            <div class="item-fun mb-4">
+                                                <h:form>
+                                                    <div class="shadow-sm p-4" >
+                                                        <p>#{sala.nombre}:</p>
+                                                        <p:repeat value="#{sala.funciones}" var="funcion">
+                                                            <p:commandButton value="#{funcion.horario.hora}" action="#{detallePeliculaBean.irAProcesoCompra(funcion)}"></p:commandButton>
+                                                        </p:repeat>
+                                                    </div>
+                                                </h:form>
+                                            </div>
+                                        </p:repeat>
+
+                                    </p:tab>
+                                </p:accordionPanel>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
             </div>
 
         </div>
 
-    </div>
 
 
-
-</h:body>
+    </ui:define>
+</ui:composition>
 </html>

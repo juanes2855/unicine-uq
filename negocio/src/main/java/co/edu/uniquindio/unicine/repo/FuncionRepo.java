@@ -1,14 +1,12 @@
 package co.edu.uniquindio.unicine.repo;
 
 import co.edu.uniquindio.unicine.dto.FuncionDTO;
-import co.edu.uniquindio.unicine.entidades.EstadoPelicula;
-import co.edu.uniquindio.unicine.entidades.Funcion;
-import co.edu.uniquindio.unicine.entidades.Horario;
-import co.edu.uniquindio.unicine.entidades.Pelicula;
+import co.edu.uniquindio.unicine.entidades.*;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.List;
 
@@ -41,4 +39,16 @@ public interface FuncionRepo extends JpaRepository<Funcion, Integer> {
 
     @Query("select distinct f.pelicula from Funcion f where f.sala.teatro.ciudad.codigo= :codigoCiudad and f.pelicula.estado= :estadoPelicula")
     List<Pelicula> buscarPeliculaEstadoCiudad(EstadoPelicula estadoPelicula, Integer codigoCiudad);
+/*
+    @Query("select f from Funcion f where f.sala.teatro.ciudad.codigo = :codigoCiudad and f.pelicula.codigo = :codigoPelicula ")
+    List<Funcion> listarFuncionesPeliculaDia(Integer codigoCiudad, Integer codigoPelicula, LocalDate fecha);
+
+    @Query("select t from Funcion f join f.sala.teatro t where t.ciudad.codigo= :codigoCiudad ")
+    List<Teatro> listarTeatrosPeliculaDia(Integer codigoCiudad, Integer codigoPelicula, LocalDate fecha);
+*/
+    @Query("select f from Funcion f ")
+    List<Funcion> listarFuncionesPeliculaDia(Integer codigoCiudad, Integer codigoPelicula, LocalDate fecha);
+
+    @Query("select t from Teatro  t")
+    List<Teatro> listarTeatrosPeliculaDia(Integer codigoCiudad, Integer codigoPelicula, LocalDate fecha);
 }

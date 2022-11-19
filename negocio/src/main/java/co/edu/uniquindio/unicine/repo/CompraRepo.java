@@ -28,4 +28,7 @@ public interface CompraRepo extends JpaRepository<Compra, Integer> {
 
     @Query("select c.funcion.pelicula, count (c) from Compra c where c.funcion.sala.teatro.ciudad.codigo= :codigoCiudad group by c.funcion.pelicula")
     List<Object[]> obtenerPeliculaMasVista(Integer codigoCiudad);
+
+
+
 }

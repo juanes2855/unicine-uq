@@ -1,9 +1,8 @@
 package co.edu.uniquindio.unicine.bean;
 
-import co.edu.uniquindio.unicine.entidades.Ciudad;
-import co.edu.uniquindio.unicine.entidades.EstadoPelicula;
-import co.edu.uniquindio.unicine.entidades.Pelicula;
+import co.edu.uniquindio.unicine.entidades.*;
 import co.edu.uniquindio.unicine.servicios.AdminServicio;
+import co.edu.uniquindio.unicine.servicios.AdminTeatroServicio;
 import lombok.Getter;
 import lombok.Setter;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,6 +22,8 @@ import java.util.List;
 @ViewScoped
 public class DetallePeliculaBean implements Serializable {
 
+    @Autowired
+    private AdminTeatroServicio adminTeatroServicio;
 
     @Autowired
     private AdminServicio adminServicio;
@@ -45,10 +46,14 @@ public class DetallePeliculaBean implements Serializable {
     @Getter @Setter
     private List<Ciudad> ciudades;
 
+    @Getter @Setter
+    private List<Teatro> teatros;
+
     @PostConstruct
     public void init(){
         try {
             ciudades = adminServicio.listarCiudades();
+            teatros = adminTeatroServicio.listarTeatros();
             fechas = new ArrayList<>();
             llenarDias();
             if(peliculaCodigo != null && !peliculaCodigo.isEmpty()){
@@ -74,11 +79,15 @@ public class DetallePeliculaBean implements Serializable {
     public void actulizarFunciones(){
         try {
             if(ciudad != null){
-
+                adminTeatroServicio.listarFuncionesCiudad(ciudad.getCodigo());
             }
         }catch (Exception e){
             throw  new RuntimeException(e);
         }
+    }
+
+    public void irAProcesoCompra(Funcion funcion){
+
     }
 
 }

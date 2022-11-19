@@ -3,6 +3,7 @@ package co.edu.uniquindio.unicine.servicios;
 import co.edu.uniquindio.unicine.dto.PeliculaFuncionDTO;
 import co.edu.uniquindio.unicine.entidades.*;
 
+import java.time.LocalDate;
 import java.util.List;
 
 public interface ClienteServicio {
@@ -43,4 +44,12 @@ public interface ClienteServicio {
 
     void enviarCorreoDetalleCompra(Compra compra);
     void enviarCorreoContraNueva(Cliente cliente);
+
+    Compra hacerCompra(Cliente cliente, Funcion funcion, MedioPago medioPagoSeleccionado, List<CompraConfiteria> lista, Integer codigoCupon);
+
+    List<Teatro> listarTeatrosPeliculaDia(Integer codigoCiudad, Integer codigoPelicula, LocalDate fecha);
+
+    List<Funcion> listarFuncionesPeliculaDia(Integer codigoCiudad, Integer codigoPelicula, LocalDate fecha);
+
+    Compra obtenerCompra(Integer codigo)throws Exception;
 }
