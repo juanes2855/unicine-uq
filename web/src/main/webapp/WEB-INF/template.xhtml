@@ -74,9 +74,14 @@
                     </h:form>
 
                     <div class="text-end">
-
-                        <p:linkButton styleClass="me-3" value="Login" href="/cliente/login.xhtml"/>
-                        <p:linkButton value="Registrarse" href="registro.xhtml"/>
+                        <h:form rendered="#{seguridadBean.autenticado}">
+                            <p:commandButton  value="Cerrar sesión" action="#{seguridadBean.cerrarSesion}" styleClass="ui-button-outlined ui-button-primary me-2"/>
+                            <p:outputLabel  value="Hola, #{seguridadBean.persona.nombre}"/>
+                        </h:form>
+                        <h:form rendered="#{!seguridadBean.autenticado}">
+                            <p:commandButton  value="login" oncomplete="PF('login').show()" styleClass="ui-button-outlined ui-button-secondary me-2"/>
+                            <p:linkButton  value="Registrarse" href="registro.xhtml"/>
+                        </h:form>
                     </div>
                 </div>
             </div>
@@ -103,7 +108,23 @@
             </ul>
         </footer>
     </div>
-
+    <p:dialog header="Iniciar sesión" showEffect="fade" widgetVar="login" modal="true"
+              rendered="#{!seguridadBean.autenticado}" >
+        <h:form >
+            <h:panelGrid columns="3" cellpadding="5">
+                <p:outputLabel for="email_login" value="Email:" />
+                <p:inputText id="email_login" value="#{seguridadBean.email}" required="true" />
+                <p:message for="email_login" />
+                <p:outputLabel for="password_login" value="Password:" />
+                <p:password id="password_login" value="#{seguridadBean.password}" required="true"
+                />
+                <p:message for="password_login" />
+            </h:panelGrid>
+            <p:commandButton value="Iniciar Sesión" action="#{seguridadBean.iniciarSesionCliente}"
+                             styleClass="mt-4" update="@form" icon="pi pi-sign-in" iconPos="left" />
+            <p:growl for="login-bean" showDetail="true" />
+        </h:form>
+    </p:dialog>
 
 
 </h:body>

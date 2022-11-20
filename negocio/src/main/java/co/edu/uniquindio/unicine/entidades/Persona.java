@@ -9,13 +9,14 @@ import javax.validation.constraints.NotNull;
 import java.io.Serializable;
 
 
-@Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
 @MappedSuperclass
+@ToString
 @Getter
 @Setter
 @NoArgsConstructor
+@Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
-@ToString
+
 public class Persona implements Serializable {
     @NotNull
     @Id

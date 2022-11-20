@@ -97,8 +97,8 @@
             </div>
 
 
-            <p:dialog id="dialogo_ciudad" widgetVar="dialogo_ciudad" modal="true" visible="true" header="Seleccionar Ciudad" >
-                <h:form>
+            <p:dialog id="dialogo_ciudad" widgetVar="dialogo_ciudad" modal="true" visible="#{seguridadBean.ciudadSeleccionada == null ? 'true' : 'false'}" header="Seleccionar Ciudad" >
+                <h:form >
                     <h:panelGrid columns="3" cellpadding="5">
 
 
@@ -107,11 +107,12 @@
                         <p:selectOneMenu id="ciudad_origen" value="#{inicioBean.ciudad}" converter="#{ciudadConverter}" >
                             <f:selectItem itemLabel="Seleccione una ciudad" noSelectionOption="true" itemValue="#{null}"/>
                             <f:selectItems value="#{inicioBean.ciudades}" var="ciudad" itemLabel="#{ciudad.nombre}" itemValue="#{ciudad}" />
+                            <p:ajax event="change" listener="#{inicioBean.elegirCiudad}" update="@form, listas_peliculas" />
                         </p:selectOneMenu>
                         <p:message for="ciudad_origen" />
 
                     </h:panelGrid>
-                    <p:commandButton value="Seleccionar ciudad" action="#{inicioBean.elegirCiudad}" styleClass="mt-4" icon="pi pi-check" update="@form, listas_peliculas" oncomplete="PF('dialogo_ciudad').hide()" />
+                    <p:commandButton  value="Seleccionar ciudad" action="#{seguridadBean.seleccionarCiudad(inicioBean.ciudad)}" styleClass="mt-4" icon="pi pi-check"  oncomplete="PF('dialogo_ciudad').hide()" />
                     <p:growl for="mensaje_bean"  showDetail="true"/>
                 </h:form>
             </p:dialog>
