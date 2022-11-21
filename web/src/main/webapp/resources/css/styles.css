@@ -75,3 +75,10 @@
 #sillas td table{
     border: 1px solid;
 }
+
+.img-carousel {
+    max-width: 2000px;
+}
+.img-carousel img{
+    max-height: 100%;
+}

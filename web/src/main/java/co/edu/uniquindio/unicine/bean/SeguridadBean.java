@@ -69,15 +69,19 @@ public class SeguridadBean implements Serializable {
 
     public String iniciarSesionAdmins(){
 
-        if(!email.isEmpty() && password.isEmpty()){
+        if(!email.isEmpty() && !password.isEmpty()){
             try {
-                persona =  clienteServicio.login(email, password);
-                if (persona instanceof Administrador) {
-                    tipoSession = "admin";
-                }else if (persona instanceof AdministradorTeatro) {
-                    tipoSession = "admin_teatro";
+                persona =  adminServicio.login(email, password);
+
+                if (persona == null) {
+                    persona =  adminTeatroServicio.login(email, password);
+                    tipoSession= "admin_teatro";
+                }else{
+                    tipoSession= "admin";
                 }
-                return "/index?faces-redirect=true";
+                autenticado = true;
+
+                return "/index_admin?faces-redirect=true";
             } catch (Exception e) {
                 FacesMessage fm = new FacesMessage(FacesMessage.SEVERITY_ERROR, "Alerta", e.getMessage());
                 FacesContext.getCurrentInstance().addMessage("login-bean", fm);
@@ -89,8 +93,14 @@ public class SeguridadBean implements Serializable {
         return null;
     }
     public String cerrarSesion() {
+        String tipo = tipoSession;
         FacesContext.getCurrentInstance().getExternalContext().invalidateSession();
-        return "/index?faces-redirect=true";
+        if (tipo.equals("cliente")){
+            return "/index?faces-redirect=true";
+        }
+
+        return "/index_admin?faces-redirect=true";
+
     }
 
     public void seleccionarCiudad(Ciudad ciudad){

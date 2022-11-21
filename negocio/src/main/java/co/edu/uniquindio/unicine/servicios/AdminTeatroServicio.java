@@ -31,6 +31,8 @@ public interface AdminTeatroServicio {
     Teatro actualizarTeatro(Teatro teatro) throws Exception;
     void eliminarTeatro(Integer codigoTeatro) throws Exception;
     List<Teatro> listarTeatros();
+
+    List<Teatro> listarTeatrosCiudad(Ciudad ciudad);
     Teatro obtenerTeatro(Integer codigoTeatro) throws Exception;
 
     AdministradorTeatro login(String correo , String password) throws Exception;

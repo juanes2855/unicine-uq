@@ -3,6 +3,7 @@ package co.edu.uniquindio.unicine.servicios;
 import co.edu.uniquindio.unicine.dto.PeliculaFuncionDTO;
 import co.edu.uniquindio.unicine.entidades.*;
 import co.edu.uniquindio.unicine.repo.*;
+import org.jasypt.util.password.StrongPasswordEncryptor;
 import org.springframework.stereotype.Service;
 
 import javax.swing.*;
@@ -72,18 +73,21 @@ public class ClienteServicioImpl implements ClienteServicio {
     @Override
     public Cliente login(String correo, String password) throws Exception {
 
-        Cliente cliente = clienteRepo.comprobarAutenticacion(correo, password);
+        Cliente cliente = clienteRepo.findByCorreo(correo).orElse(null);
 
-        if (cliente != null) {
-            if (cliente.getEstado()) {
-                return cliente;
-            }else{
-                throw new Exception("Por favor active su cuenta");
+        if (cliente == null) {
+            throw new Exception("EL correo no existe");
             }
-        }else{
-            throw new Exception("Los datos de autenticación son incorrectos");
+
+        if(!cliente.getEstado()){
+            throw new Exception("La cuenta no esta activada");
         }
 
+        StrongPasswordEncryptor spe = new StrongPasswordEncryptor();
+        if(!spe.checkPassword(password, cliente.getPassword())){
+            throw new Exception("La contraseña es incorrecta");
+        }
+        return  cliente;
 
     }
 
@@ -110,11 +114,13 @@ public class ClienteServicioImpl implements ClienteServicio {
         if (correoExiste) {
             throw new Exception("El correo ya está en uso");
         }
+        StrongPasswordEncryptor spe = new StrongPasswordEncryptor();
+        cliente.setPassword(spe.encryptPassword(cliente.getPassword()));
 
         Cliente registro = clienteRepo.save(cliente);
         cliente.setEstado(false);
         asignarCuponRegistro(cliente);
-        enviarCorreo(cliente);
+        //enviarCorreo(cliente);
 
         return registro;
     }

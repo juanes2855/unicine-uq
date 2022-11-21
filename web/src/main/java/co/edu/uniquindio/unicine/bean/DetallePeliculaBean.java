@@ -53,7 +53,6 @@ public class DetallePeliculaBean implements Serializable {
     public void init(){
         try {
             ciudades = adminServicio.listarCiudades();
-            teatros = adminTeatroServicio.listarTeatros();
             fechas = new ArrayList<>();
             llenarDias();
             if(peliculaCodigo != null && !peliculaCodigo.isEmpty()){
@@ -80,6 +79,7 @@ public class DetallePeliculaBean implements Serializable {
         try {
             if(ciudad != null){
                 adminTeatroServicio.listarFuncionesCiudad(ciudad.getCodigo());
+                teatros = adminTeatroServicio.listarTeatrosCiudad(ciudad);
             }
         }catch (Exception e){
             throw  new RuntimeException(e);

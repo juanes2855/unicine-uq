@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:jsf="http://xmlns.jcp.org/jsf">
+
+
+<ui:composition template="/WEB-INF/template_admin.xhtml">
+    <ui:define name="content">
+        <p:panel header="Iniciar admim" styleClass="mt-3 mb-3" >
+            <h:form rendered="#{!seguridadBean.autenticado}" >
+                <h:panelGrid columns="3" cellpadding="5">
+                    <p:outputLabel for="email_login" value="Email:" />
+                    <p:inputText id="email_login" value="#{seguridadBean.email}" required="true" />
+                    <p:message for="email_login" />
+                    <p:outputLabel for="password_login" value="Password:" />
+                    <p:password id="password_login" value="#{seguridadBean.password}" required="true"
+                    />
+                    <p:message for="password_login" />
+                </h:panelGrid>
+                <p:commandButton value="Iniciar Sesión" action="#{seguridadBean.iniciarSesionAdmins()}"
+                                 styleClass="mt-4" update="@form" icon="pi pi-sign-in" iconPos="left" />
+                <p:growl for="login-bean" showDetail="true" />
+            </h:form>
+            <h:form rendered="#{seguridadBean.autenticado}">
+                <p:outputLabel  value="Hola, #{seguridadBean.persona.nombre}" styleClass="me-3"/>
+                <p:commandButton  value="Cerrar sesión" action="#{seguridadBean.cerrarSesion}" styleClass="ui-button-outlined ui-button-primary me-2"/>
+            </h:form>
+        </p:panel>
+    </ui:define>
+</ui:composition>
+</html>

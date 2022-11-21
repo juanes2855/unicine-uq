@@ -23,22 +23,46 @@
             <div class="text-bg-dark">
                 <div class="container">
                     <div class="d-flex flex-wrap align-items-center justify-content-center justify-content-md-between py-3">
-                        <a href="/" class="d-flex align-items-center col-md-3  mb-md-0 text-white text-decoration-none">
+                        <a href="/index_admin.xhtml" class="d-flex align-items-center col-md-3  mb-md-0 text-white text-decoration-none">
                             <h:graphicImage library="img" name="filmicon.png" styleClass="img_icon me-3"  />
                             <span class="fs-4">Unicine</span>
                         </a>
 
                         <ul class="nav col-12 col-md-auto mb-2 justify-content-center mb-md-0">
                             <li>
-                                <a href="/" class="nav-link text-secondary text-center" >
+                                <a href="/index_admin.xhtml" class="nav-link text-secondary text-center" >
                                     <i class="pi pi-home"/> <br/>
                                     Inicio
                                 </a>
                             </li>
+                            <li jsf:rendered = "#{seguridadBean.autenticado and seguridadBean.tipoSession == 'admin'}">
+                                <a href="/admin/gestionar_pelicula.xhtml" class="nav-link text-white text-center">
+                                    <i class="pi pi-image"/> <br/>
+                                    Gestionar Peliculas
+                                </a>
+                            </li>
                             <li jsf:rendered = "#{seguridadBean.autenticado}">
-                                <a href="#" class="nav-link text-white text-center">
-                                    <i class="pi pi-wallet"/> <br/>
-                                    Historial de compras
+                                <a href="/admin_teatro/gestionar_funciones.xhtml" class="nav-link text-white text-center">
+                                    <i class="pi pi-pencil"/> <br/>
+                                    Gestionar Funciones
+                                </a>
+                            </li >
+                            <li jsf:rendered = "#{seguridadBean.autenticado}">
+                                <a href="/admin_teatro/gestionar_sala.xhtml" class="nav-link text-white text-center">
+                                    <i class="pi pi-pencil"/> <br/>
+                                    Crear Sala
+                                </a>
+                            </li>
+                            <li jsf:rendered = "#{seguridadBean.autenticado and seguridadBean.tipoSession == 'admin'}">
+                                <a href="/admin/gestionar_teatro.xhtml" class="nav-link text-white text-center">
+                                    <i class="pi pi-box"/> <br/>
+                                    Gestionar teatros
+                                </a>
+                            </li>
+                            <li jsf:rendered = "#{seguridadBean.autenticado}">
+                                <a href="/admin_teatro/gestionar_horarios.xhtml" class="nav-link text-white text-center">
+                                    <i class="pi pi-box"/> <br/>
+                                    Gestionar horarios
                                 </a>
                             </li>
                             <li jsf:rendered = "#{seguridadBean.autenticado}">
@@ -51,33 +75,14 @@
                     </div>
                 </div>
             </div>
-            <div class="px-3 py-2 border-bottom mb-3">
-                <div class="container d-flex flex-wrap justify-content-center">
 
-                    <h:form styleClass="col-12 col-lg-auto mb-2 mb-lg-0 me-lg-auto" >
-                        <div class="input-search ui-inputgroup">
-                            <p:inputText placeholder="¿Qué película está buscando?" required="true" value="#{busquedaBean.busqueda}" styleClass="form_busqueda"/>
-                            <p:commandButton update="@form" icon="pi pi-search" action="#{busquedaBean.buscar}" />
-                        </div>
-                    </h:form>
-
-                    <div class="text-end">
-                        <h:form rendered="#{seguridadBean.autenticado}">
-                            <p:commandButton  value="Cerrar sesión" action="#{seguridadBean.cerrarSesion}" styleClass="ui-button-outlined ui-button-primary me-2"/>
-                            <p:outputLabel  value="Hola, #{seguridadBean.persona.nombre}"/>
-                        </h:form>
-                        <h:form rendered="#{!seguridadBean.autenticado}">
-                            <p:commandButton  value="login" oncomplete="PF('login').show()" styleClass="ui-button-outlined ui-button-secondary me-2"/>
-                            <p:linkButton  value="Registrarse" href="registro.xhtml"/>
-                        </h:form>
-                    </div>
-                </div>
-            </div>
         </header>
     </div>
 
     <div id="contenido" class="cuerpo_pagina">
+        <div class="container">
         <ui:insert name="content"></ui:insert>
+        </div>
     </div>
 
     <div class="container">
@@ -96,23 +101,7 @@
             </ul>
         </footer>
     </div>
-    <p:dialog header="Iniciar sesión" showEffect="fade" widgetVar="login" modal="true"
-              rendered="#{!seguridadBean.autenticado}" >
-        <h:form >
-            <h:panelGrid columns="3" cellpadding="5">
-                <p:outputLabel for="email_login" value="Email:" />
-                <p:inputText id="email_login" value="#{seguridadBean.email}" required="true" />
-                <p:message for="email_login" />
-                <p:outputLabel for="password_login" value="Password:" />
-                <p:password id="password_login" value="#{seguridadBean.password}" required="true"
-                />
-                <p:message for="password_login" />
-            </h:panelGrid>
-            <p:commandButton value="Iniciar Sesión" action="#{seguridadBean.iniciarSesionCliente}"
-                             styleClass="mt-4" update="@form" icon="pi pi-sign-in" iconPos="left" />
-            <p:growl for="login-bean" showDetail="true" />
-        </h:form>
-    </p:dialog>
+
 
 
 </h:body>

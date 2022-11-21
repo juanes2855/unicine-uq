@@ -1,16 +1,16 @@
 
-insert into administrador values (1094899, "jf@uqvirtual.co", "John", "12345");
-insert into administrador values (1094599, "Jm@uqvirtual.co", "Julian", "1234");
-insert into administrador values (1093845, "Jh@uqvirtual.co", "Juan", "123");
-insert into administrador values (1091003, "ch@uqvirtual.co", "Ana", "12345a");
-insert into administrador values (1078954, "chil@uqvirtual.co", "Carolina", "12345b");
+insert into administrador values (1094899, "jf@uqvirtual.co", "John", "0CCMOpEYewYPMFF4Iisf7HiTFCt8ThWs4ZDJYNFLV+mwzsRXS3nDfEToofBqUomP");
+insert into administrador values (1094599, "Jm@uqvirtual.co", "Julian", "0CCMOpEYewYPMFF4Iisf7HiTFCt8ThWs4ZDJYNFLV+mwzsRXS3nDfEToofBqUomP");
+insert into administrador values (1093845, "Jh@uqvirtual.co", "Juan", "0CCMOpEYewYPMFF4Iisf7HiTFCt8ThWs4ZDJYNFLV+mwzsRXS3nDfEToofBqUomP");
+insert into administrador values (1091003, "ch@uqvirtual.co", "Ana", "0CCMOpEYewYPMFF4Iisf7HiTFCt8ThWs4ZDJYNFLV+mwzsRXS3nDfEToofBqUomP");
+insert into administrador values (1078954, "chil@uqvirtual.co", "Carolina", "0CCMOpEYewYPMFF4Iisf7HiTFCt8ThWs4ZDJYNFLV+mwzsRXS3nDfEToofBqUomP");
 
 
-insert into administrador_teatro values (1091899, "jfmd@uqvirtual.co", "Fredy", "12345a");
-insert into administrador_teatro values (1092599, "Jaml@uqvirtual.co", "Andres", "1234b");
-insert into administrador_teatro values (1093846, "Jeh@uqvirtual.co", "Esteban", "123c");
-insert into administrador_teatro values (1094003, "chap@uqvirtual.co", "Lucia", "12345d");
-insert into administrador_teatro values (1075954, "chilin@uqvirtual.co", "Laura", "12345be");
+insert into administrador_teatro values (1091899, "jfmd@uqvirtual.co", "Fredy", "0CCMOpEYewYPMFF4Iisf7HiTFCt8ThWs4ZDJYNFLV+mwzsRXS3nDfEToofBqUomP");
+insert into administrador_teatro values (1092599, "Jaml@uqvirtual.co", "Andres", "0CCMOpEYewYPMFF4Iisf7HiTFCt8ThWs4ZDJYNFLV+mwzsRXS3nDfEToofBqUomP");
+insert into administrador_teatro values (1093846, "Jeh@uqvirtual.co", "Esteban", "0CCMOpEYewYPMFF4Iisf7HiTFCt8ThWs4ZDJYNFLV+mwzsRXS3nDfEToofBqUomP");
+insert into administrador_teatro values (1094003, "chap@uqvirtual.co", "Lucia", "0CCMOpEYewYPMFF4Iisf7HiTFCt8ThWs4ZDJYNFLV+mwzsRXS3nDfEToofBqUomP");
+insert into administrador_teatro values (1075954, "chilin@uqvirtual.co", "Laura", "0CCMOpEYewYPMFF4Iisf7HiTFCt8ThWs4ZDJYNFLV+mwzsRXS3nDfEToofBqUomP");
 
 
 insert into ciudad values (1,"Armenia");
@@ -20,12 +20,12 @@ insert into ciudad values (4,"Montenegro");
 insert into ciudad values (5,"Filandia");
 
 
-insert into cliente values (1078954, "chil@uqvirtual.co", "Carolina", "12345b", 0, "http");
-insert into cliente values (1091003, "ch@uqvirtual.co", "Ana", "12345a", 1, "http");
-insert into cliente values (1093845, "Jh@uqvirtual.co", "Juan", "123", 0, "http:2");
-insert into cliente values (1094599, "Jm@uqvirtual.co", "Julian", "1234", 0, "http:1");
-insert into cliente values (1094899, "jfmunozd@uqvirtual.edu.co", "John", "12345", 0, "http:");
-insert into cliente values (1004917021, "juajaja@uqvirtual.co", "Juanes", "12345", 0, "http:");
+insert into cliente values (1078954, "chil@uqvirtual.co", "Carolina", "0CCMOpEYewYPMFF4Iisf7HiTFCt8ThWs4ZDJYNFLV+mwzsRXS3nDfEToofBqUomP", 0, "http");
+insert into cliente values (1091003, "ch@uqvirtual.co", "Ana", "0CCMOpEYewYPMFF4Iisf7HiTFCt8ThWs4ZDJYNFLV+mwzsRXS3nDfEToofBqUomP", 1, "http");
+insert into cliente values (1093845, "Jh@uqvirtual.co", "Juan", "0CCMOpEYewYPMFF4Iisf7HiTFCt8ThWs4ZDJYNFLV+mwzsRXS3nDfEToofBqUomP", 0, "http:2");
+insert into cliente values (1094599, "Jm@uqvirtual.co", "Julian", "0CCMOpEYewYPMFF4Iisf7HiTFCt8ThWs4ZDJYNFLV+mwzsRXS3nDfEToofBqUomP", 0, "http:1");
+insert into cliente values (1094899, "jfmunozd@uqvirtual.edu.co", "0CCMOpEYewYPMFF4Iisf7HiTFCt8ThWs4ZDJYNFLV+mwzsRXS3nDfEToofBqUomP", "12345", 0, "http:");
+insert into cliente values (1004917021, "juajaja@uqvirtual.co", "Juanes", "0CCMOpEYewYPMFF4Iisf7HiTFCt8ThWs4ZDJYNFLV+mwzsRXS3nDfEToofBqUomP", 0, "http:");
 
 
 

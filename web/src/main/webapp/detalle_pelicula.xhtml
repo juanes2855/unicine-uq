@@ -64,7 +64,7 @@
                                                     <div class="shadow-sm p-4" >
                                                         <p>#{sala.nombre}:</p>
                                                         <p:repeat value="#{sala.funciones}" var="funcion">
-                                                            <p:commandButton value="#{funcion.horario.hora}" action="#{detallePeliculaBean.irAProcesoCompra(funcion)}"></p:commandButton>
+                                                            <p:commandButton disabled="#{!seguridadBean.autenticado}" rendered="#{funcion.pelicula.codigo == detallePeliculaBean.pelicula.codigo}" value="#{funcion.horario.hora}" action="#{detallePeliculaBean.irAProcesoCompra(funcion)}"></p:commandButton>
                                                         </p:repeat>
                                                     </div>
                                                 </h:form>
