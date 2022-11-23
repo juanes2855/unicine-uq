@@ -133,7 +133,7 @@ public class ClienteServicioImpl implements ClienteServicio {
         String paramet2 = tx.encrypt(""+zd.toInstant().toEpochMilli());
         //enviarCorreo(cliente);
 
-        
+
         emailServicio.enviarEmail("Registro en unicine", "Hola debe ir al siguiente enlace para activar la cuenta : unicine-prueba2.herokuapp.com/activar_cuenta.xhtml?p1="+paramet1+"&p2="+paramet2, cliente.getCorreo());
 
 
