@@ -56,9 +56,9 @@ public class TeatroBean implements Serializable {
     public void crearTeatro(){
         try {
             if (!editar) {
-                AdministradorTeatro administradorTeatro = adminServicio.obtenerAdministradorTeatro(1075954);
+                //AdministradorTeatro administradorTeatro = adminServicio.obtenerAdministradorTeatro(1075954);
 
-                teatro.setAdministradorTeatro(administradorTeatro);
+                //teatro.setAdministradorTeatro(administradorTeatro);
                 Teatro registro = adminTeatroServicio.crearTeatro(teatro);
                 teatros.add(registro);
                 teatro = new Teatro();
