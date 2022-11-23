@@ -57,7 +57,7 @@ public class PeliculaBean implements Serializable {
                 pelicula.setImagenes(imagenes);
                 pelicula.setEstado(EstadoPelicula.CARTELERA);
                 adminServicio.crearPelicula(pelicula);
-                FacesMessage fm = new FacesMessage(FacesMessage.SEVERITY_ERROR, "Alerta", "Pelicula creada correctamente");
+                FacesMessage fm = new FacesMessage(FacesMessage.SEVERITY_INFO, "Alerta", "Pelicula creada correctamente");
                 FacesContext.getCurrentInstance().addMessage("mensaje_bean", fm);
             }else{
                 FacesMessage fm = new FacesMessage(FacesMessage.SEVERITY_ERROR, "Alerta", "Es necesario subir al menos una imagen");

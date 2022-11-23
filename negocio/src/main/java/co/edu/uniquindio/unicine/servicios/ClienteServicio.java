@@ -24,6 +24,8 @@ public interface ClienteServicio {
 
     Compra hacerCompra(Compra compra) throws Exception;
 
+    void activarCliente(String correo, String fecha)throws Exception;
+
     boolean redimirCupon(Cliente cliente,Compra compra,Integer codigoCupon) throws Exception;
 
     List<Pelicula> buscarPelicula (String nombre);

@@ -23,10 +23,11 @@
 
 .imagen-pelicula {
     width: 200px;
+    height: 300px;
 }
 .imagen-pelicula img{
     width: 100%;
-    height: auto;
+    height: 100%;
 }
 .container{
     max-width: 1320px;

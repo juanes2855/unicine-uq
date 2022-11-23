@@ -37,6 +37,9 @@ public class CompraBean implements Serializable {
     @Value("#{param['d']}")
     private String diaSeleccionado;
 
+    @Value("#{param['funcion']}")
+    private String codigoFuncion;
+
     @Value("#{param['m']}")
     private String mesSeleccionado;
 
@@ -108,8 +111,8 @@ public class CompraBean implements Serializable {
                 cliente = (Cliente) personaSesion;
             }
 
-             if (funcionCodigo != null && !funcionCodigo.isEmpty()){
-                 funcion = adminTeatroServicio.obtenerFuncion(Integer.parseInt(funcionCodigo));
+             if (codigoFuncion != null && !codigoFuncion.isEmpty()){
+                 funcion = adminTeatroServicio.obtenerFuncion(Integer.parseInt(codigoFuncion));
                  crearDistribucionSala();
              }
              if(diaSeleccionado != null && mesSeleccionado != null & anioSeleccionado != null){
@@ -141,13 +144,12 @@ public class CompraBean implements Serializable {
     private void seleccionarSilla(Integer fila, Integer col){
 
     }
-
-    private void restarUnidades(Integer cantidad){
-
-    }
-
-    private void sumarUnidades(Integer cantidad){
-
+    public void cargarFuncion(){
+        try {
+            funcion = adminTeatroServicio.obtenerFuncion(Integer.parseInt(codigoFuncion));
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
     }
 
     private String hacerCompra(){

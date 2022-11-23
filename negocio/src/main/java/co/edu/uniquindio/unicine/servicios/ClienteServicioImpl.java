@@ -4,10 +4,14 @@ import co.edu.uniquindio.unicine.dto.PeliculaFuncionDTO;
 import co.edu.uniquindio.unicine.entidades.*;
 import co.edu.uniquindio.unicine.repo.*;
 import org.jasypt.util.password.StrongPasswordEncryptor;
+import org.jasypt.util.text.AES256TextEncryptor;
 import org.springframework.stereotype.Service;
 
 import javax.swing.*;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.ZoneId;
+import java.time.ZonedDateTime;
 import java.util.List;
 import java.util.Optional;
 
@@ -120,7 +124,16 @@ public class ClienteServicioImpl implements ClienteServicio {
         Cliente registro = clienteRepo.save(cliente);
         cliente.setEstado(false);
         asignarCuponRegistro(cliente);
+
+
+        ZonedDateTime zd = LocalDateTime.now().atZone(ZoneId.of("America/Bogota"));
+        AES256TextEncryptor tx = new AES256TextEncryptor();
+        tx.setPassword("teclado");
+        String paramet1 = tx.encrypt(registro.getCorreo());
+        String paramet2 = tx.encrypt(""+zd.toInstant().toEpochMilli());
         //enviarCorreo(cliente);
+        emailServicio.enviarEmail("Registro en unicine", "Hola debe ir al siguiente enlace para activar la cuenta : http://localhost:8081/activar_cuenta.xhtml?p1="+paramet1+"&p2="+paramet2, cliente.getCorreo());
+
 
         return registro;
     }
@@ -196,6 +209,28 @@ public class ClienteServicioImpl implements ClienteServicio {
         Compra registro = compraRepo.save(compra);
         enviarCorreoDetalleCompra(compra);
         return registro;
+    }
+
+    @Override
+    public void activarCliente(String correo, String fecha) throws Exception{
+
+        correo = correo.replaceAll(" ", "+");
+        fecha = fecha.replaceAll(" ", "+");
+
+        ZonedDateTime zd = LocalDateTime.now().atZone(ZoneId.of("America/Bogota"));
+        AES256TextEncryptor tx = new AES256TextEncryptor();
+        tx.setPassword("teclado");
+
+        String correoDes = tx.decrypt(correo);
+        String fechaDes = tx.decrypt(fecha);
+
+        Cliente guardado = clienteRepo.findByCorreo(correoDes).orElse(null);
+
+        if (guardado == null){
+            throw  new Exception("El cliente no existe");
+        }
+        guardado.setEstado(true);
+        clienteRepo.save(guardado);
     }
 
     @Override

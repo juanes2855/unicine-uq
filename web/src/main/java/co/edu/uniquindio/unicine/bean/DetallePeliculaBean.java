@@ -86,8 +86,8 @@ public class DetallePeliculaBean implements Serializable {
         }
     }
 
-    public void irAProcesoCompra(Funcion funcion){
-
+    public String irAProcesoCompra(Funcion funcion){
+        return "/cliente/proceso_compra.xhtml?faces-redirect=true&amp;funcion=" + funcion.getPelicula().getCodigo();
     }
 
 }

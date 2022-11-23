@@ -14,22 +14,7 @@
     <ui:define name="content">
         <div class="container mt-4 mb-4">
 
-            <p:panel header="Seleccionar sillas">
-                <h:form id="sillas">
 
-                    <div class="text-center"> <h5>Pantalla</h5></div>
-
-                    <p:dataTable id="mat-sillas" value="#{compraBean.filas}" var="fila" rows="#{compraBean.distribucionSillas.filas}" editable="true" editMode="cell" ></p:dataTable>
-
-                    <p:columns id="columna" var="col" value="#{compraBean.columnas}" >
-                        <h:panelGrid id="item-sillas" columns="1" styleClass="ui-noborder text-center #{compraBean.buscar(fila, col)} eq 'true' ? 'silla-elegida'">
-                            <p:ajax event="click" listener="#{compraBean.seleccionarSilla(fila,col)}" update="sillas:mat-sillas:#{fila}:columnas:#{col}:"></p:ajax>
-                            <p class="mb-0">#{fila}#{col}</p>
-                            <i class="pi pi-box"/>
-                        </h:panelGrid>
-                    </p:columns>
-                </h:form>
-            </p:panel>
 
             <p:panel header="Elije los snacks" styleClass="mt-3">
                 <div class="row">
@@ -38,12 +23,13 @@
                             <div class="shadow-sm p-3">
                                 <h:form id="form_confite">
                                     <img src="/resources/img/crispetas.png" alt="Imagen"/>
+                                    <p>#{confite.confiteria.nombre}</p>
                                     <p>#{confite.precio}</p>
                                     <div class="text-center">
                                         <div class="d-inline-flex">
-                                            <p:commandButton icon="pi pi-minus" styleClass="rounded-button ui-button-outlined" action="#{compraBean.restarUnidades(cantidad)}" ></p:commandButton>
+                                            <p:commandButton icon="pi pi-minus" styleClass="rounded-button ui-button-outlined" action="#{confite.restar()}" update="cantidad" ></p:commandButton>
                                             <p jsf:id="cantidad" class="mb-0 ms-3 mt-2">#{confite.unidades}</p>
-                                            <p:commandButton icon="pi pi-plus" styleClass="rounded-button ui-button-outlined" action="#{compraBean.sumarUnidades(cantidad)}" ></p:commandButton>
+                                            <p:commandButton icon="pi pi-plus" styleClass="rounded-button ui-button-outlined me-2" action="#{confite.sumar()}" update="cantidad" ></p:commandButton>
                                         </div>
                                     </div>
                                 </h:form>
@@ -65,13 +51,6 @@
                     </div>
                     <hr />
                     <div>
-                        <strong> Entrada: </strong>
-                        <p:repeat value="#{compraBean.entradas}" var="entrada">
-                            <div >
-                                <p:outputLabel styleClass="d-inline-block me-3" value="#{entrada.fila}-#{entrada.columna}" />
-                                <p:outputLabel styleClass="d-inline-block" value="$#{compraBean.funcion.precio}"/>
-                            </div>
-                        </p:repeat>
                     </div>
                     <hr />
                     <div class="mt-3">
@@ -84,7 +63,7 @@
                         </p:repeat>
                     </div>
                     <hr />
-                    <h4 class="mt-3" >Total: #{compraBean.precioCompra}</h4>
+                    <h4 class="mt-3" >Total: #{compraBean.funcion.precio}</h4>
                 </div>
             </p:panel>
 
@@ -110,7 +89,7 @@
                                 <p:message for="medio_pago" />
 
                                 <p:outputLabel for="cupon_cliente" value="Redimir cupón: " />
-                                <p:inputText id="cupon_cliente" value="#{compraBean}" />
+                                <p:inputText id="cupon_cliente" value="#{compraBean.codigoCupon}" />
                                 <p:message for="cupon_cliente" />
 
                             </h:panelGrid>

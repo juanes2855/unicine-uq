@@ -18,7 +18,7 @@ public class CompraConfiteria implements Serializable{
     private Integer codigo;
 
     private Float precio;
-
+    @Getter @Setter
     private Integer unidades;
 
     @ManyToOne
@@ -35,4 +35,12 @@ public class CompraConfiteria implements Serializable{
         this.compra = compra;
         this.confiteria = confiteria;
     }
+
+    public void sumar(){
+        unidades = unidades + 1;
+    }
+    public void restar(){
+        unidades = unidades - 1;
+    }
+
 }
