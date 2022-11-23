@@ -42,6 +42,6 @@ public class DatosIniciales implements CommandLineRunner {
             adminServicio.crearAdmin(Administrador.builder().cedula(1234).nombre("Super Admin").correo("admin@email.com").password("1234").build());
         }
 
-        
+
     }
 }
