@@ -38,6 +38,7 @@ public class Persona implements Serializable {
     @Column(length = 200, nullable = false)
     private String password;
 
+
     public Persona(Integer cedula, String nombre, String correo, String password) {
         this.cedula = cedula;
         this.nombre = nombre;

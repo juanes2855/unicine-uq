@@ -164,6 +164,10 @@ public class AdminServicioImpl implements AdminServicio{
             throw new Exception("El administrador  ya está registrado");
 
 
+
+        StrongPasswordEncryptor spe = new StrongPasswordEncryptor();
+        administradorTeatro.setPassword(spe.encryptPassword(administradorTeatro.getPassword()));
+
             return administradorTeatroRepo.save(administradorTeatro);
     }
 
@@ -249,5 +253,12 @@ public class AdminServicioImpl implements AdminServicio{
             throw new Exception("La confiteria no existe");
 
         return guardado.get();
+    }
+
+    @Override
+    public Administrador crearAdmin(Administrador admin) throws Exception {
+        StrongPasswordEncryptor spe = new StrongPasswordEncryptor();
+        admin.setPassword(spe.encryptPassword(admin.getPassword()));
+        return administradorRepo.save(admin) ;
     }
 }

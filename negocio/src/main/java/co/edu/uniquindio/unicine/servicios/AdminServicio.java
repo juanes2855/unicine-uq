@@ -39,6 +39,6 @@ public interface AdminServicio {
     List<Confiteria> listarConfiterias();
     Confiteria obtenerConfiteria(Integer codigoConfiteria) throws Exception;
 
-
+    Administrador crearAdmin(Administrador admin)throws Exception;
     
 }
