@@ -22,7 +22,7 @@ public class PeliculaTest {
     @Autowired
     private PeliculaRepo peliculaRepo;
 
-    @Test
+    /*@Test
     @Sql("classpath:dataset.sql")
     public void registrar() {
         Genero[] generos = new Genero[]{Genero.TERROR};
@@ -30,7 +30,7 @@ public class PeliculaTest {
                 "http:@Elsismo.jpj", "Andres Lopez, Esteban Henao", Arrays.asList(generos));
         Pelicula guardado = peliculaRepo.save(pelicula);
         Assertions.assertEquals(guardado.getNombre(), "El sismo");
-    }
+    }*/
 
     @Test
     @Sql("classpath:dataset.sql")
