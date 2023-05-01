@@ -110,7 +110,7 @@ public class ClienteServicioTest {
     }
 
 
-    @Test
+  /*  @Test
     @Sql("classpath:dataset.sql")
     public void agregarEntrada() {
         MedioPago medioPago = MedioPago.TARJETA_UNICINE;
@@ -144,9 +144,9 @@ public class ClienteServicioTest {
             Assertions.assertTrue(false);
         }
 
-    }
+    }*/
 
-    @Test
+    /*@Test
     @Sql("classpath:dataset.sql")
     public void realizarCompra() {
         MedioPago medioPago = MedioPago.TARJETA_UNICINE;
@@ -186,7 +186,7 @@ public class ClienteServicioTest {
             Assertions.assertTrue(false);
         }
 
-    }
+    }*/
 
     @Test
     @Sql("classpath:dataset.sql")

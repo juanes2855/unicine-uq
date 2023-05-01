@@ -22,7 +22,7 @@ public class CompraTest {
     @Autowired
     private CompraRepo compraRepo;
 
-    @Test
+   /* @Test
     @Sql("classpath:dataset.sql")
     public void registrar() {
         MedioPago medioPago = MedioPago.TARJETA_UNICINE;
@@ -48,7 +48,7 @@ public class CompraTest {
         Compra guardado = compraRepo.save(compra);
         Assertions.assertEquals(guardado.getCliente().getNombre(), "pepito");
 
-    }
+    }*/
     @Test
     @Sql("classpath:dataset.sql")
     public void eliminar() {

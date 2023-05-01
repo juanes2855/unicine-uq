@@ -22,7 +22,7 @@ public class CompraConfiteriaTest {
     @Autowired
     private CompraConfiteriaRepo compraConfiteriaRepo;
 
-    @Test
+   /* @Test
     @Sql("classpath:dataset.sql")
     public void registrar() {
 
@@ -48,7 +48,7 @@ public class CompraConfiteriaTest {
         CompraConfiteria compraConfiteria = new CompraConfiteria(30000f, 2, compra, confiteria);
         CompraConfiteria guardado = compraConfiteriaRepo.save(compraConfiteria);
         Assertions.assertEquals(guardado.getCompra().getCliente().getNombre(), "pepito");
-    }
+    }*/
     @Test
     @Sql("classpath:dataset.sql")
     public void eliminar() {

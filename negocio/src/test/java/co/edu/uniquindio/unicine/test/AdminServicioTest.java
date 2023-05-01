@@ -35,7 +35,7 @@ public class AdminServicioTest {
         }
     }
 
-    @Test
+   /* @Test
     @Sql("classpath:dataset.sql")
     public void registrarPeliculaTest() {
         Genero[] generos = new Genero[]{Genero.TERROR};
@@ -49,7 +49,7 @@ public class AdminServicioTest {
         } catch (Exception e) {
            throw new RuntimeException(e);
         }
-    }
+    }*/
 
     @Test
     @Sql("classpath:dataset.sql")

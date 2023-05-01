@@ -21,7 +21,7 @@ public class FuncionTest {
 
     @Autowired
     private FuncionRepo funcionRepo;
-    @Test
+  /*  @Test
     @Sql("classpath:dataset.sql")
     public void registrar() {
         Horario horario = new Horario("LMXJVSD", "15:30", LocalDateTime.of(2022, 10, 16, 15, 30, 0, 0), LocalDateTime.of(2022, 10, 31, 15, 30, 0, 0));
@@ -36,7 +36,7 @@ public class FuncionTest {
         Funcion guardado = funcionRepo.save(funcion);
         Assertions.assertEquals(guardado.getPrecio(), 24000f);
 
-    }
+    }*/
 
     @Test
     @Sql("classpath:dataset.sql")

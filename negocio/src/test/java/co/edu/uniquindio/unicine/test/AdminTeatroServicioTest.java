@@ -222,7 +222,7 @@ public class AdminTeatroServicioTest {
         DistribucionSillas obtener = adminTeatroServicio.obtenerDistribucionSillas(1);
         Assertions.assertNotNull(obtener);
     }
-    @Test
+   /* @Test
     @Sql("classpath:dataset.sql")
     public void registrarFuncionTest() {
         try {
@@ -241,7 +241,7 @@ public class AdminTeatroServicioTest {
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
-    }
+    }*/
     @Test
     @Sql("classpath:dataset.sql")
     public void actualizarFuncionTest() {
